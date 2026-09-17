@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haikal Riyadh Romadhon — Web & Mobile Developer</title>
+    <meta name="description"
+        content="Portofolio Haikal Riyadh Romadhon - Mahasiswa Teknik Informatika Jakarta Global University, Web & Mobile Developer.">
+    <meta name="keywords"
+        content="Haikal Riyadh Romadhon, Web Developer, Mobile Developer, Jakarta Global University, React, TypeScript, Flutter, Laravel">
+    <meta name="author" content="Haikal Riyadh Romadhon">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Haikal Riyadh Romadhon — Web & Mobile Developer">
+    <meta property="og:description"
+        content="Portofolio Web & Mobile Developer — Informatic Student Jakarta Global University.">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        space: {
+                            950: '#070A12',
+                            900: '#0B0F19',
+                            800: '#131A2A',
+                            700: '#1E293B',
+                        },
+                        accent: {
+                            cyan: '#06B6D4',
+                            indigo: '#6366F1',
+                        }
+                    },
+                    animation: {
+                        'pendulum': 'pendulumSwing 6s ease-in-out infinite',
+                        'float-slow': 'float 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pendulumSwing: {
+                            '0%, 100%': { transform: 'rotate(-2.5deg)' },
+                            '50%': { transform: 'rotate(2.5deg)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4' },
+                            '50%': { opacity: '0.8' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- External Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body
+    class="bg-space-950 text-slate-200 font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-200 min-h-screen relative overflow-x-hidden transition-colors duration-300">
+
+    <!-- Constella Infinitum Particle Canvas -->
+    <canvas id="constella-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <header
+        class="sticky top-0 z-50 backdrop-blur-md bg-space-950/80 border-b border-slate-800/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+            <!-- Pure Text Brand Name -->
+            <a href="#"
+                class="text-lg sm:text-xl font-bold tracking-tight text-white hover:text-cyan-400 transition-colors">
+                Haikal Riyadh Romadhon
+            </a>
+
+            <!-- Desktop Menu Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
+                <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Trigger -->
+            <div class="flex items-center">
+                <button id="mobile-menu-btn" aria-label="Open Menu"
+                    class="md:hidden p-2.5 rounded-xl bg-space-900 border border-slate-800 text-slate-300 focus:outline-none hover:text-cyan-400 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Drawer -->
+        <div id="mobile-menu"
+            class="hidden md:hidden border-b border-slate-800 bg-space-900/95 backdrop-blur-lg px-6 py-4 space-y-3">
+            <a href="#about"
+                class="block text-slate-300 hover:text-cyan-400 py-1 font-medium transition-colors">About</a>
+            <a href="#skills"
+                class="block text-slate-300 hover:text-cyan-400 py-1 font-medium transition-colors">Skills</a>
+            <a href="#projects"
+                class="block text-slate-300 hover:text-cyan-400 py-1 font-medium transition-colors">Projects</a>
+            <a href="#experience"
+                class="block text-slate-300 hover:text-cyan-400 py-1 font-medium transition-colors">Experience</a>
+            <a href="#contact"
+                class="block text-slate-300 hover:text-cyan-400 py-1 font-medium transition-colors">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28 pt-8 pb-20">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero"
+            class="min-h-[85vh] flex flex-col lg:flex-row items-center justify-between gap-12 pt-6 lg:pt-0">
+
+            <!-- Left Headline & Copywriting -->
+            <div class="flex-1 space-y-6 text-center lg:text-left">
+
+            
+
+                <!-- Headline -->
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
+                    Halo, I'm <br class="hidden sm:inline" />
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-indigo-500">
+                        Haikal Riyadh Romadhon.
+                    </span>
+                </h1>
+
+                <!-- Sub-Headline -->
+                <p class="text-lg sm:text-xl font-medium text-slate-300">
+                    Informatic Student | Web & Mobile Developer.
+                </p>
+
+                <!-- Tagline -->
+                <p class="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
+                    Mengubah kompleksitas sistem menjadi aplikasi web & mobile yang efisien, terstruktur, dan mudah
+                    digunakan.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#projects"
+                        class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold text-sm hover:opacity-90 transition-all duration-300 shadow-lg shadow-cyan-500/20 active:scale-95">
+                        View Projects
+                    </a>
+                    <a href="#contact"
+                        class="px-6 py-3.5 rounded-xl bg-space-900 border border-slate-700/80 text-slate-200 hover:text-white hover:border-cyan-500/50 font-semibold text-sm transition-all duration-300 active:scale-95">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Interactive 3D Tilt Magnetic Avatar Card -->
+            <div class="flex-1 flex justify-center w-full max-w-sm">
+                <div id="hero-tilt-card"
+                    class="glass-card rounded-3xl overflow-hidden border border-slate-800/80 shadow-2xl relative w-full aspect-[4/5] transition-transform duration-200 ease-out cursor-pointer group">
+
+                    <!-- Decorative subtle glow backdrop -->
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 rounded-3xl blur-xl opacity-30 group-hover:opacity-70 transition duration-500">
+                    </div>
+
+                    <!-- Full Card User Photo (Edge-to-Edge) -->
+                    <img src="./Images/Haikal.jpeg" alt="Haikal Riyadh Romadhon"
+                        class="relative z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onerror="this.src='https://placehold.co/500x650/0F172A/06B6D4?text=Haikal+Riyadh'">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT ME & CV DOWNLOAD SECTION -->
+        <section id="about" class="pt-8">
+            <div class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+
+                <div class="flex flex-col lg:flex-row gap-10 items-center">
+
+                    <!-- Visual Element: Hanging Photo Frame Feature with Physics Pendulum -->
+                    <div class="flex-shrink-0 flex flex-col items-center">
+
+                        <!-- String Graphics SVG -->
+                        <svg class="w-24 h-16 text-slate-600 stroke-current" viewBox="0 0 100 60" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <!-- Nail/Pivot dot -->
+                            <circle cx="50" cy="8" r="4" class="fill-cyan-400 stroke-none" />
+                            <!-- Strings extending to frame -->
+                            <line x1="50" y1="8" x2="15" y2="58" stroke-width="2" />
+                            <line x1="50" y1="8" x2="85" y2="58" stroke-width="2" />
+                        </svg>
+
+                        <!-- Swinging Photo Frame Container -->
+                        <div id="hanging-frame"
+                            class="hanging-wrapper animate-pendulum hover:pause transition-transform duration-300 cursor-pointer">
+                            <div
+                                class="w-48 sm:w-56 bg-slate-900/90 border border-slate-700/80 rounded-2xl shadow-2xl backdrop-blur-md overflow-hidden">
+                                <img src="./Images/About Me.jpeg" alt="Haikal Riyadh Romadhon"
+                                    class="w-full h-60 sm:h-72 object-cover hover:scale-105 transition-transform duration-500"
+                                    onerror="this.src='https://placehold.co/400x500/0F172A/6366F1?text=Haikal+Photo'">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Narrative & Copywriting -->
+                    <div class="flex-1 space-y-6">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Profile &
+                                Background</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">About Me</h2>
+                        </div>
+
+                        <p class="text-slate-300 leading-relaxed text-sm sm:text-base text-justify sm:text-left">
+                            Informatics Engineering student at Jakarta Global University with a builder mindset focused on high-impact web and mobile solutions. 
+                            I bridge the gap between robust system logic and intuitive user experiences using modern stacks—spanning React, Flutter, Laravel, Express.js, and relational databases (MySQL/SQLite). 
+                            Committed to writing clean, structured code that optimizes performance and scales gracefully.
+                        </p>
+
+                        <!-- CV Action Area (Google Drive Style Viewer) -->
+                        <div class="pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-4">
+                            <button type="button" id="open-cv-modal-btn"
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-space-950 font-semibold text-xs transition-all duration-200 shadow-sm shadow-cyan-500/20 active:scale-95 cursor-pointer">
+                                <svg class="w-3.5 h-3.5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.3">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                                <span>CV</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. UNIFIED BENTO SKILLS GRID (All 21 Technologies) -->
+        <section id="skills" class="space-y-6">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Tech Stack & Tools</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white">Technologies & Frameworks</h2>
+            </div>
+
+            <!-- Single Unified Bento Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
+
+                <!-- 1. React -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="-11.5 -10.23 23 20.46">
+                            <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+                            <g stroke="#61DAFB" stroke-width="1" fill="none">
+                                <ellipse rx="11" ry="4.2" />
+                                <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+                                <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">React</span>
+                </div>
+
+                <!-- 2. Expo -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path d="M20.7 18.1L13.8 5.4a2 2 0 0 0-3.5 0L3.3 18.1a2 2 0 0 0 1.8 3h13.9a2 2 0 0 0 1.7-3zM12.9 8.1l5.4 10H5.7l5.4-10a1 1 0 0 1 1.8 0z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Expo</span>
+                </div>
+
+                <!-- 3. Flutter -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="#47C5FB" d="M14.314 0L2.3 12 6 15.7 21.686 0h-7.372z" />
+                            <path fill="#47C5FB" d="M14.314 11.996l-7.37 7.377 3.686 3.686L21.686 11.996h-7.372z" />
+                            <path fill="#00569E" d="M10.63 19.373L14.314 23.059h7.372l-7.372-7.372-3.684 3.686z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Flutter</span>
+                </div>
+
+                <!-- 4. Dart -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="#00B4AB" d="M4.2 4.2L12 0l7.8 4.2-3.6 3.6-4.2-1.8L4.2 4.2z" />
+                            <path fill="#01579B" d="M19.8 4.2L24 12l-4.2 7.8-3.6-3.6 1.8-4.2 1.8-7.8z" />
+                            <path fill="#29B6F6" d="M4.2 19.8L0 12l4.2-7.8L12 12l-7.8 7.8z" />
+                            <path fill="#0277BD" d="M19.8 19.8L12 24l-7.8-4.2 7.8-7.8 7.8 7.8z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Dart</span>
+                </div>
+
+                <!-- 5. Node.js -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center text-[#5FA04E] group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 0a1.18 1.18 0 0 0-.59.16l-9.98 5.76A1.18 1.18 0 0 0 .84 6.94v11.53c0 .42.23.8.59 1.01l9.98 5.76c.36.21.82.21 1.18 0l9.98-5.76c.36-.21.59-.59.59-1.01V6.94c0-.42-.23-.8-.59-1.01L12.59.16A1.18 1.18 0 0 0 12 0zm0 2.37l8.76 5.06v10.12L12 22.61l-8.76-5.06V7.43L12 2.37zm-.17 3.52c-2.73 0-4.14 1.3-4.14 3.48 0 2.25 1.51 3.12 3.53 3.49l.66.12c1.23.23 1.83.61 1.83 1.34 0 .84-.74 1.39-2.02 1.39-1.27 0-2.2-.55-2.61-1.39l-1.63.95c.74 1.5 2.26 2.34 4.24 2.34 2.92 0 4.38-1.4 4.38-3.56 0-2.18-1.48-3.07-3.64-3.47l-.66-.12c-1.12-.2-1.72-.56-1.72-1.3 0-.76.68-1.27 1.87-1.27 1.13 0 1.95.45 2.37 1.18l1.62-.96c-.69-1.33-2.06-2.22-3.72-2.22z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Node.js</span>
+                </div>
+
+                <!-- 6. Express.js -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center text-slate-100 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path d="M24 18.588l-6.525-4.457c-.822.42-1.622.78-2.4.981-1.007.262-2.007.404-3.002.427-.995.023-1.928-.088-2.798-.334a6.452 6.452 0 0 1-2.257-1.183c-.636-.543-1.11-1.246-1.423-2.11-.313-.863-.448-1.898-.404-3.104.044-1.206.27-2.22.678-3.04.408-.82.956-1.488 1.644-2.003.687-.516 1.484-.88 2.39-1.092.906-.213 1.874-.32 2.905-.32 1.031 0 2.02.107 2.966.32a9.144 9.144 0 0 1 2.502 1.092c.732.515 1.306 1.182 1.722 2.002.416.82.656 1.834.72 3.041h-9.98c-.023.778.118 1.444.423 1.998.305.553.738.98 1.298 1.28.56.3 1.226.479 1.997.536.772.057 1.61-.016 2.516-.219.905-.202 1.777-.52 2.614-.954L24 18.588zm-5.06-8.986c-.046-.777-.246-1.427-.6-1.95a3.83 3.83 0 0 0-1.28-1.258c-.542-.314-1.17-.506-1.884-.576-.714-.07-1.464-.02-2.25.15a6.458 6.458 0 0 0-1.97.873c-.56.404-.985.952-1.275 1.644-.29.692-.44 1.547-.45 2.564l9.709-1.447z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Express.js</span>
+                </div>
+
+                <!-- 7. Laravel -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 stroke-[#FF2D20] fill-none" viewBox="0 0 100 100" stroke-width="5.5" stroke-linejoin="round" stroke-linecap="round">
+                            <!-- Left Pillar Top Face -->
+                            <polygon points="22,6 42,17 22,28 2,17" />
+                            <!-- Left Pillar Body & Edges -->
+                            <line x1="2" y1="17" x2="2" y2="72" />
+                            <line x1="2" y1="72" x2="42" y2="94" />
+                            <line x1="22" y1="28" x2="22" y2="94" />
+                            <line x1="42" y1="17" x2="42" y2="48" />
+
+                            <!-- Right Cube Top Face -->
+                            <polygon points="78,17 98,28 78,39 58,28" />
+                            <!-- Right Cube Edges -->
+                            <line x1="58" y1="28" x2="58" y2="52" />
+                            <line x1="78" y1="39" x2="78" y2="63" />
+                            <line x1="98" y1="28" x2="98" y2="52" />
+                            <line x1="58" y1="52" x2="78" y2="63" />
+                            <line x1="78" y1="63" x2="98" y2="52" />
+
+                            <!-- Connecting Base Arm -->
+                            <line x1="22" y1="53" x2="58" y2="33" />
+                            <line x1="22" y1="69" x2="78" y2="38" />
+                            <line x1="42" y1="80" x2="78" y2="59" />
+                            <line x1="42" y1="94" x2="78" y2="74" />
+                            <line x1="78" y1="74" x2="78" y2="63" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Laravel</span>
+                </div>
+
+                <!-- 8. PHP -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-10 h-7" viewBox="0 0 64 38">
+                            <ellipse cx="32" cy="19" rx="31" ry="17" fill="#777BB4" />
+                            <ellipse cx="32" cy="19" rx="29" ry="15" fill="none" stroke="#8892BF" stroke-width="1.2" />
+                            <path fill="#FFFFFF" d="M13 11h6.5c3 0 4.5 1.5 4.5 4s-1.5 4-4.5 4H16l-1.5 7H10.5l3.5-15zm3.5 5.5h2.5c1 0 1.5-.5 1.5-1.5s-.5-1.5-1.5-1.5H17l-.5 3z" />
+                            <path fill="#FFFFFF" d="M24 11h3.5l-1 4.5c.8-.8 1.8-1.2 2.8-1.2 2.2 0 3.2 1.3 2.8 3.5l-1.8 7.2h-3.5l1.6-6.2c.2-.9-.3-1.5-1.2-1.5-.9 0-1.6.6-1.9 1.5L23.5 26H20l4-15z" />
+                            <path fill="#FFFFFF" d="M36 11h6.5c3 0 4.5 1.5 4.5 4s-1.5 4-4.5 4H39l-1.5 7H33.5l3.5-15zm3.5 5.5h2.5c1 0 1.5-.5 1.5-1.5s-.5-1.5-1.5-1.5H40l-.5 3z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">PHP</span>
+                </div>
+
+                <!-- 9. MySQL -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-9 h-9" viewBox="0 0 100 100" fill="none">
+                            <!-- MySQL Sakila Dolphin Leaping Up-Left (Image 3) -->
+                            <path fill="#00618A" d="M21 9c-2.8 1.4-5.2 4.2-5.7 7.5-.7 4.2 1.3 8.3 4.2 11.3 5.4 5.6 12.3 9.7 19.5 13.5 7.3 3.9 14.8 7.5 20.8 13.3 6.3 6.1 10.2 14.1 14.2 22 1.2 2.3 2.6 4.7 4.8 6.2 1.8 1.2 4.1 1.4 6.2.7-1.4-2.5-3.2-4.8-5.3-6.8-4.2-4.1-8.7-7.8-13.4-11.4-6.4-4.8-13.1-9.2-20-13.3-7.2-4.3-14.7-8.3-21.2-13.8-3.4-2.9-6.3-6.6-6.8-11.1-.3-2.6.5-5.3 2.7-6.8 0-.4 0-.8 0-1.2V9z"/>
+                            <path fill="#00618A" d="M46.5 28.5c-1.8 4.2-2.8 8.8-2.6 13.4.1 3.5 1.2 7 3.3 9.8 1.8-3.2 2.8-6.9 2.9-10.6.1-4.3-1.1-8.5-3.6-12.6z"/>
+                            <path fill="#00618A" d="M33 38.5c-3.2 4.2-5.4 9.2-6.2 14.5-.7 4.5.3 9.3 3 13 2.8-3.5 4.3-7.9 4.7-12.4.5-5.1-.3-10.2-1.5-15.1z"/>
+                            <path fill="#00618A" d="M83.5 73.5c2.8 3.5 6.4 6.3 10.5 8 1.8.8 4 1.2 5.8.3-2.2-2.1-4.7-3.9-7.4-5.2-2.7-1.3-5.7-2.3-8.9-3.1z"/>
+                            <circle cx="28" cy="18" r="1.8" fill="#FFFFFF"/>
+                            <!-- Wordmark: My (Blue) + SQL (Orange) -->
+                            <text x="50" y="96" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="16" letter-spacing="-0.5" text-anchor="middle">
+                                <tspan fill="#00618A">My</tspan><tspan fill="#E48E00">SQL</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">MySQL</span>
+                </div>
+
+                <!-- 10. SQLite -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none">
+                            <defs>
+                                <linearGradient id="sqlite-blue-tile" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#38BDF8" />
+                                    <stop offset="100%" stop-color="#0284C7" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Blue Rounded Square Tile (Image 4) -->
+                            <rect x="14" y="14" width="72" height="72" rx="16" fill="url(#sqlite-blue-tile)" />
+                            <!-- Dark Navy Feather Quill Cutting Diagonally -->
+                            <path fill="#072B4A" d="M30 84c-1.5 1-2.5 1.5-3.5 1.5.5-3 2.5-8 5-13 4-8 10-18 17-26 7-8 15-16 23-23 2-2 4.5-4 6.5-5.5 2-1.5 4-2.5 5-2.5-.5 2-2 5-4.5 8.5C70 30 63 39 56 47c-7 8-14 17-20 25-3 4-5 8-6 12z" />
+                            <path fill="#072B4A" d="M83 15c-1 3-3 7-6 11-4 6-9 12-14 17-6 6-12 11-18 16-4 3-7 5-9 6.5 2-5 5-11 9-17 5-7 11-14 17-20 4-4 8-8 12-11 3-2 6-3 9-2.5z" />
+                            <!-- White Center Spine / Rachis Line -->
+                            <path stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" d="M29 83C45 62 62 40 82 16" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">SQLite</span>
+                </div>
+
+                <!-- 11. JavaScript -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 rounded-lg overflow-hidden shadow-sm" viewBox="0 0 100 100">
+                            <rect width="100" height="100" fill="#F7DF1E" />
+                            <!-- Bold Black JS Typography Centered (Image 2) -->
+                            <path fill="#000000" d="M38 20v43c0 9.5-5 15.5-15 15.5-8 0-14-4-16.5-9.5l8.5-5c1.8 3.5 4.5 5.5 8 5.5 4.5 0 7-3 7-7.5V20h8z" />
+                            <path fill="#000000" d="M72.5 42c-7.5-2.8-10.5-4.5-10.5-8.5 0-3.5 3-6 8-6 5.5 0 9.5 2.5 12 7l7.5-5.5C84 22.5 77.5 19 69.5 19c-10.5 0-17.5 6.5-17.5 16 0 10 7.5 14 16.5 17.5 8.5 3.5 11.5 6 11.5 10 0 4.5-4 7.5-9.5 7.5-7 0-12-3.5-15-9.5L38 65.5c4 8.5 12 13 23 13 12 0 19.5-7 19.5-17.5 0-11-8-15.5-18-19z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">JavaScript</span>
+                </div>
+
+                <!-- 12. TypeScript -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 rounded-lg overflow-hidden shadow-sm" viewBox="0 0 24 24">
+                            <rect width="24" height="24" fill="#3178C6" />
+                            <path fill="#FFFFFF" d="M3.375 9.938h9.563v2.166H9.506v9.646H6.789v-9.646H3.375z" />
+                            <path fill="#FFFFFF" d="M18.488 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.717-.26 5.453 5.453 0 0 0-1.426-.2c-.3 0-.573.028-.819.086a2.1 2.1 0 0 0-.623.242c-.17.104-.3.229-.393.374a.888.888 0 0 0-.14.49c0 .196.053.373.156.529.104.156.252.304.443.444s.423.276.696.41c.273.135.582.274.926.416.47.197.892.407 1.266.628.374.222.695.473.963.753.268.279.472.598.614.957.142.359.214.776.214 1.253 0 .657-.125 1.21-.373 1.656a3.033 3.033 0 0 1-1.012 1.085 4.38 4.38 0 0 1-1.487.596c-.566.12-1.163.18-1.79.18a9.916 9.916 0 0 1-1.84-.164 5.544 5.544 0 0 1-1.512-.493v-2.63a5.033 5.033 0 0 0 3.237 1.2c.333 0 .624-.03.872-.09.249-.06.456-.144.623-.25.166-.108.29-.234.373-.38a1.023 1.023 0 0 0-.074-1.089 2.12 2.12 0 0 0-.537-.5 5.597 5.597 0 0 0-.807-.444 27.72 27.72 0 0 0-1.007-.436c-.918-.383-1.602-.852-2.053-1.405-.45-.553-.676-1.222-.676-2.005 0-.614.123-1.141.369-1.582.246-.441.58-.804 1.004-1.089a4.494 4.494 0 0 1 1.47-.629 7.536 7.536 0 0 1 1.77-.201z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">TypeScript</span>
+                </div>
+
+                <!-- 13. Java -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                            <path d="M8.851 18.56s-.917.534 1.1 0c1.472-.39 3.865-.79 5.308-2.22 0 0-1.288.39-2.887.534-2.585.234-4.821-.118-3.521-1.687 0 0-3.13 1.288 0 3.373zm-1.85-5.11s-1.288.683 1.05 0c1.852-.535 4.839-1.073 7.027-2.923 0 0-1.852.535-3.801.731-3.218.341-6.14.048-4.276-2.192 0 0-3.996 1.754 0 4.384z" fill="#EA2D2E" />
+                            <path d="M10.835 15.688c-1.472 0-3.13-.195-4.417-.683 0 0-.293.439.439.634 1.61.439 4.34.488 6.44.146.634-.1.78-.34.78-.34-1.12.195-2.24.243-3.242.243zm5.66-4.634c.976-.634 1.707-1.463 1.707-2.488 0-1.853-2.39-3.073-5.366-3.073-1.61 0-3.073.341-4.049.927.732-.244 1.658-.39 2.683-.39 2.488 0 4.488.927 4.488 2.146 0 .829-.976 1.61-2.439 2.098.927.244 2.146.488 2.976.78zm-11.854 2.878c.976.439 2.683.732 4.488.732 3.122 0 5.805-.829 5.805-1.951 0-.488-.488-.927-1.317-1.22.488.244.732.537.732.878 0 .829-2.244 1.512-4.976 1.512-1.707 0-3.268-.293-4.146-.683-.439-.195-.585-.39-.585-.39s.439.732 2.683 1.122zM12 21.5c-4.488 0-8.098-.78-8.098-1.756 0-.683 1.805-1.317 4.488-1.561-1.171.195-2.049.488-2.049.878 0 .683 2.537 1.22 5.659 1.22 3.122 0 5.659-.537 5.659-1.22 0-.39-.878-.683-2.049-.878 2.683.244 4.488.878 4.488 1.561 0 .976-3.61 1.756-8.098 1.756z" fill="#5382A1" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Java</span>
+                </div>
+
+                <!-- 14. C++ -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="#00599C" d="M12 1.5l9.5 5.5v10l-9.5 5.5-9.5-5.5V7L12 1.5z" />
+                            <path fill="#FFFFFF" d="M11.5 8.2c-2.3 0-4 1.7-4 3.8s1.7 3.8 4 3.8c1.3 0 2.4-.6 3.1-1.5l-1.3-1.1c-.5.6-1.1 1-1.8 1-1.2 0-2.2-.9-2.2-2.2s1-2.2 2.2-2.2c.7 0 1.3.4 1.8 1l1.3-1.1c-.7-.9-1.8-1.5-3.1-1.5z" />
+                            <path fill="#659AD2" d="M15.5 11.2h-.7v-.7h-.8v.7h-.7v.8h.7v.7h.8v-.7h.7v-.8z" />
+                            <path fill="#659AD2" d="M18.8 11.2h-.7v-.7h-.8v.7h-.7v.8h.7v.7h.8v-.7h.7v-.8z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">C++</span>
+                </div>
+
+                <!-- 15. HTML5 -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="#E44D26" d="M1.5 0h21l-1.9 21.6L12 24l-8.6-2.4L1.5 0z" />
+                            <path fill="#F16529" d="M12 22.2l7.2-2 1.6-18.2H12v20.2z" />
+                            <path fill="#EBEBEB" d="M12 9.8H8.5l-.2-2.7H12V4.4H5.4l.7 8.1H12V9.8zm0 6.6l-3.3-.9-.2-2.4H6l.4 4.5 5.6 1.6V16.4z" />
+                            <path fill="#FFFFFF" d="M12 9.8v2.7h3.4l-.3 3.7-3.1.9v2.8l5.6-1.6.8-8.5H12zm0-5.4v2.7h6.3l.2-2.7H12z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">HTML5</span>
+                </div>
+
+                <!-- 16. CSS3 -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="#1572B6" d="M1.5 0h21l-1.9 21.6L12 24l-8.6-2.4L1.5 0z" />
+                            <path fill="#33A9DC" d="M12 22.2l7.2-2 1.6-18.2H12v20.2z" />
+                            <path fill="#EBEBEB" d="M12 4.4H5.4l.2 2.7H12V4.4zm0 5.4H8.5l.2 2.7H12V9.8zm0 6.6l-3.3-.9-.2-2.4H6l.4 4.5 5.6 1.6V16.4z" />
+                            <path fill="#FFFFFF" d="M12 4.4v2.7h6.3l-.2 2.7H12v2.7h3.4l-.3 3.7-3.1.9v2.8l5.6-1.6.6-7.5.3-3.7.2-2.7H12z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">CSS3</span>
+                </div>
+
+                <!-- 17. Tailwind CSS -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center text-[#38BDF8] group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.127 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.876 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.638 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.876 12 6.001 12z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Tailwind CSS</span>
+                </div>
+
+                <!-- 18. Git -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="#F05032" d="M23.546 10.93L13.067.452a1.55 1.55 0 0 0-2.188 0L.454 10.93a1.55 1.55 0 0 0 0 2.188l10.425 10.43c.604.603 1.582.603 2.188 0l10.48-10.43a1.55 1.55 0 0 0 0-2.188z" />
+                            <path fill="#FFFFFF" d="M8.708 2.627l2.76 2.76a1.37 1.37 0 0 1 1.89.44c.515.516.657 1.26.437 1.9l2.66 2.66c.644-.223 1.386-.078 1.9.436.72.72 1.005 2.01.284 2.73-.72.72-2.01.435-2.73-.286-.513-.513-.658-1.255-.436-1.9L12.81 8.71v6.58c.214.103.411.248.57.408.72.72 1.006 2.01.285 2.73-.72.722-2.01.436-2.73-.285-.515-.515-.658-1.258-.438-1.9V8.625a1.27 1.27 0 0 0-.475-.32 1.38 1.38 0 0 1-.438-1.9L6.818 3.618l1.89-1z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Git</span>
+                </div>
+
+                <!-- 19. GitHub -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">GitHub</span>
+                </div>
+
+                <!-- 20. VS Code -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24">
+                            <path fill="#0065A9" d="M18.21.21a1.494 1.494 0 0 0-1.705.29L8.745 7.6 4.625 4.48a.75.75 0 0 0-.96.04L.27 7.55a.75.75 0 0 0-.03 1.03l3.52 3.91-3.52 3.91a.75.75 0 0 0 .03 1.03l3.395 3.03a.75.75 0 0 0 .96.04l4.12-3.12 7.76 7.1a1.49 1.49 0 0 0 1.7.29l4.95-2.38a1.5 1.5 0 0 0 .86-1.35V3.94a1.5 1.5 0 0 0-.86-1.35L18.21.21z" />
+                            <path fill="#007ACC" d="M18.5 4.5l-9.75 7.5 9.75 7.5V4.5z" />
+                            <path fill="#1F8AD2" d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29L8.745 7.6l9.755 4.4 4.65-2.1v-6a1.5 1.5 0 0 0-.86-1.35z" />
+                            <path fill="#0098FF" d="M18.5 12l-9.755 4.4 7.76 7.1a1.49 1.49 0 0 0 1.7.29l4.95-2.38a1.5 1.5 0 0 0 .86-1.35v-6l-5.52-2.06z" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">VS Code</span>
+                </div>
+
+                <!-- 21. Android Studio -->
+                <div
+                    class="glass-card p-4 rounded-2xl glow-hover flex flex-col items-center justify-center text-center space-y-2 group cursor-pointer">
+                    <div class="w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                            <line x1="6.5" y1="4" x2="8.5" y2="7.5" stroke="#3DDC84" stroke-width="1.8" stroke-linecap="round" />
+                            <line x1="17.5" y1="4" x2="15.5" y2="7.5" stroke="#3DDC84" stroke-width="1.8" stroke-linecap="round" />
+                            <path fill="#3DDC84" d="M3.5 17h17A8.5 8.5 0 0 0 12 7a8.5 8.5 0 0 0-8.5 10z" />
+                            <circle cx="8" cy="12" r="1.3" fill="#070A12" />
+                            <circle cx="16" cy="12" r="1.3" fill="#070A12" />
+                        </svg>
+                    </div>
+                    <span class="text-xs font-semibold text-slate-200">Android Studio</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. FEATURED PROJECTS SECTION -->
+        <section id="projects" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Portfolio Showcase</span>
+                    <h2 class="text-2xl sm:text-4xl font-bold text-white mt-1">Featured Projects</h2>
+                </div>
+
+                <!-- Filter Category Buttons -->
+                <div
+                    class="flex flex-wrap gap-2 p-1.5 rounded-xl bg-space-900 border border-slate-800 self-start md:self-auto">
+                    <button data-filter="all"
+                        class="project-filter-btn px-4 py-2 rounded-lg text-xs font-semibold bg-cyan-500 text-space-950 transition-all">All</button>
+                    <button data-filter="web"
+                        class="project-filter-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Web
+                        App</button>
+                    <button data-filter="mobile"
+                        class="project-filter-btn px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Mobile
+                        App</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Project Card 1: Web App -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group border border-slate-800/80 transition-all duration-300 hover:-translate-y-1.5"
+                    data-category="web">
+                    <div class="h-52 sm:h-60 overflow-hidden relative">
+                        <img src="./Images/Apotek.png"
+                            alt="Apotek Management System"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.src='https://placehold.co/800x500/0F172A/06B6D4?text=Apotek+Management+System'">
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 rounded-full bg-space-950/80 backdrop-blur-md border border-slate-700/60 text-[11px] font-medium text-cyan-400">
+                            Web App
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+                            Apotek Management System
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                          Developed a web-based pharmacy management system using Laravel and MySQL to streamline drug inventory, transaction processing, and user data management. 
+                          Implemented secure authentication, seamless CRUD operations, and a responsive user interface powered by Laravel Breeze, Livewire, and Tailwind CSS. 
+                          Collaborated effectively within a team environment using GitHub for version control and smooth code integration.
+                        </p>
+                        <!-- Tech Badges -->
+                        <div class="flex flex-wrap gap-2 text-[11px]">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Laravel</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">JavaScript</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">MySQL</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Tailwind CSS</span>
+                        </div>
+                        <!-- Links -->
+                        <div class="pt-2 flex items-center gap-4 text-xs font-medium">
+                            <a href="https://your-demo-link.com" target="_blank" rel="noopener noreferrer"
+                                class="text-cyan-400 hover:underline flex items-center gap-1">
+                                Live Demo ↗
+                            </a>
+                            <a href="https://github.com/HaikalRiyadh/Apotek-System" target="_blank" rel="noopener noreferrer"
+                                class="text-slate-400 hover:text-white flex items-center gap-1">
+                                GitHub Repo ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: Mobile App -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group border border-slate-800/80 transition-all duration-300 hover:-translate-y-1.5"
+                    data-category="mobile">
+                    <div class="h-52 sm:h-60 overflow-hidden relative">
+                        <img src="./Images/Scrum.png"
+                            alt="Scrum Management App"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.src='https://placehold.co/800x500/0F172A/6366F1?text=Scrum+Management+App'">
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 rounded-full bg-space-950/80 backdrop-blur-md border border-slate-700/60 text-[11px] font-medium text-indigo-400">
+                            Mobile App
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+                            Scrum Management App
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                          Developed a full-stack project management application utilizing Flutter (Dart) for the frontend and PHP with MySQL for the backend. 
+                          Built a responsive, user-friendly UI seamless for sprint and task tracking in multi-user environments. 
+                          Integrated real-time notification systems and account management features to enhance team collaboration and overall workflow efficiency.
+                        </p>
+                        <!-- Tech Badges -->
+                        <div class="flex flex-wrap gap-2 text-[11px]">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Flutter</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Dart</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">PHP</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">MySQL</span>
+                        </div>
+                        <!-- Links -->
+                        <div class="pt-2 flex items-center gap-4 text-xs font-medium">
+                            <a href="https://your-demo-link.com" target="_blank" rel="noopener noreferrer"
+                                class="text-cyan-400 hover:underline flex items-center gap-1">
+                                Live Demo ↗
+                            </a>
+                            <a href="https://github.com/HaikalRiyadh/Manajemen-kolaborasi-Scrum" target="_blank" rel="noopener noreferrer"
+                                class="text-slate-400 hover:text-white flex items-center gap-1">
+                                GitHub Repo ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: Web App -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group border border-slate-800/80 transition-all duration-300 hover:-translate-y-1.5"
+                    data-category="web">
+                    <div class="h-52 sm:h-60 overflow-hidden relative">
+                        <img src="./Images/Shop.png"
+                            alt="Smart Inventory Dashboard"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.src='https://placehold.co/800x500/0F172A/06B6D4?text=Shop+Management+System'">
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 rounded-full bg-space-950/80 backdrop-blur-md border border-slate-700/60 text-[11px] font-medium text-cyan-400">
+                            Web App
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+                            Shop Management System | 28Speedshop
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                           Designed and implemented a web-based inventory management system using PHP and MySQL to optimize operational efficiency. 
+                           The project features secure user authentication and structured data workflows. 
+                           As a result, it significantly enhanced operational productivity through faster,
+                           more organized tracking and transaction processes.
+                        </p>
+                        <!-- Tech Badges -->
+                        <div class="flex flex-wrap gap-2 text-[11px]">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">PHP</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">MySQL</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">CSS</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">JavaScript</span>
+                        </div>
+                        <!-- Links -->
+                        <div class="pt-2 flex items-center gap-4 text-xs font-medium">
+                            <a href="https://your-demo-link.com" target="_blank" rel="noopener noreferrer"
+                                class="text-cyan-400 hover:underline flex items-center gap-1">
+                                Live Demo ↗
+                            </a>
+                            <a href="https://github.com/HaikalRiyadh/28speedshop" target="_blank" rel="noopener noreferrer"
+                                class="text-slate-400 hover:text-white flex items-center gap-1">
+                                GitHub Repo ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 4: Mobile App -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group border border-slate-800/80 transition-all duration-300 hover:-translate-y-1.5"
+                    data-category="mobile">
+                    <div class="h-52 sm:h-60 overflow-hidden relative">
+                        <img src="./Images/Project4.png"
+                            alt="Cross-Platform E-Commerce Mobile App"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.src='https://placehold.co/800x500/0F172A/6366F1?text=Project+4+Image'">
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 rounded-full bg-space-950/80 backdrop-blur-md border border-slate-700/60 text-[11px] font-medium text-indigo-400">
+                            Mobile App
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+                            1money financial apps
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            Aplikasi mobile financial apps dengan fitur keranjang lokal offline SQLite, integrasi
+                            katalog produk cepat, dan UI/UX yang dinamis.
+                        </p>
+                        <!-- Tech Badges -->
+                        <div class="flex flex-wrap gap-2 text-[11px]">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Typescript</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Expo</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">SQLite</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">React Native</span>
+                        </div>
+                        <!-- Links -->
+                        <div class="pt-2 flex items-center gap-4 text-xs font-medium">
+                            <a href="https://your-demo-link.com" target="_blank" rel="noopener noreferrer"
+                                class="text-cyan-400 hover:underline flex items-center gap-1">
+                                Live Demo ↗
+                            </a>
+                            <a href="https://github.com/HaikalRiyadh/1money" target="_blank" rel="noopener noreferrer"
+                                class="text-slate-400 hover:text-white flex items-center gap-1">
+                                GitHub Repo ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- Project Card 5: Web App -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden group border border-slate-800/80 transition-all duration-300 hover:-translate-y-1.5"
+                    data-category="web">
+                    <div class="h-52 sm:h-60 overflow-hidden relative">
+                        <img src="./Images/Hris.png"
+                            alt="Human Resource Information System"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.src='https://placehold.co/800x500/0F172A/06B6D4?text=HRIS'">
+                        <div
+                            class="absolute top-3 left-3 px-3 py-1 rounded-full bg-space-950/80 backdrop-blur-md border border-slate-700/60 text-[11px] font-medium text-cyan-400">
+                            Web App
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+                            Human Resource Information System
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                          Developed a web-based Human Resource Information System using Laravel and MySQL to streamline employee data management, HR administrative tasks, and reporting processes. 
+                          Implemented core HR functionalities including employee data tracking, leave management, performance evaluation, and payroll preparation with secure user authentication and role-based access control. 
+                          Utilized Laravel Breeze for rapid scaffolding, Livewire for dynamic user interactions, and Tailwind CSS for a modern, responsive interface. 
+                          This system was successfully developed within a collaborative team environment, leveraging GitHub for version control and integrated development workflows.
+                        </p>
+                        <!-- Tech Badges -->
+                        <div class="flex flex-wrap gap-2 text-[11px]">
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Laravel Blade</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">JavaScript</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">MySQL</span>
+                            <span
+                                class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800 text-slate-300">Tailwind CSS</span>
+                        </div>
+                        <!-- Links -->
+                        <div class="pt-2 flex items-center gap-4 text-xs font-medium">
+                            <a href="https://your-demo-link.com" target="_blank" rel="noopener noreferrer"
+                                class="text-cyan-400 hover:underline flex items-center gap-1">
+                                Live Demo ↗
+                            </a>
+                            <a href="https://github.com/HaikalRiyadh/HRIS" target="_blank" rel="noopener noreferrer"
+                                class="text-slate-400 hover:text-white flex items-center gap-1">
+                                GitHub Repo ↗
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. EXPERIENCE & EDUCATION TIMELINE -->
+        <section id="experience" class="space-y-8">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Background Journey</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white mt-1">Experience & Education</h2>
+            </div>
+
+            <div class="relative border-l-2 border-slate-800/80 ml-3 sm:ml-6 space-y-10 pl-6 sm:pl-10">
+
+                <!-- Timeline Item 1: Education -->
+                <div class="relative group">
+                    <!-- Dot Marker -->
+                    <div
+                        class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-space-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-2 border border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white">Jakarta Global University (JGU)</h3>
+                            <span
+                                class="text-xs font-semibold px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">2024
+                                — Present</span>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-300">S1 Teknik Informatika</p>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                            Software Engineer specializing in full-cycle web and mobile application development, backed by strong fundamentals in data structures, 
+                            algorithms, and relational database systems (SQL). Proven collaborator who thrives in cross-functional, agile teams to deliver scalable digital solutions.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2: Web-Based Inventory & Shop Management System / Independent Projects -->
+                <div class="relative group">
+                    <div
+                        class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-space-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-2 border border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white">Web-Based Inventory & Shop Management System</h3>
+                            <span
+                                class="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">Sep
+                                2024 — Jan 2025</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                           Designed and implemented a web-based inventory management system using PHP and MySQL to optimize operational efficiency. 
+                           The project features secure user authentication and structured data workflows. 
+                           As a result, it significantly enhanced operational productivity through faster,
+                           more organized tracking and transaction processes.
+                        </p>
+                    </div>
+                </div>
+
+                 <!-- Timeline Item 3:Apotek Management System | Web Development Project -->
+                <div class="relative group">
+                    <div
+                        class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-space-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-2 border border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white">Apotek Management System</h3>
+                            <span
+                                class="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">Mei
+                                2025 — Jul 2025</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                          I conceptualized and developed a comprehensive web-based pharmacy management system using Laravel, MySQL, Livewire, and Tailwind CSS. 
+                          The system streamlines core pharmacy operations, including secure user authentication with role-based access control, detailed drug inventory management, and efficient transaction processing with receipt generation. 
+                          Key features include intuitive data management, responsive UI powered by Livewire and Tailwind CSS, and robust backend integration with Laravel. 
+                          This project strengthened my technical skills in full-stack development, database management, and modern web technologies, while also enhancing my collaboration and project management abilities through teamwork and version control using GitHub.
+                        </p>
+                    </div>
+                </div>
+             
+                 <!-- Timeline Item 4: Education Airlangga University -->
+                <div class="relative group">
+                    <!-- Dot Marker -->
+                    <div
+                        class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-space-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-2 border border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white">Airlangga University</h3>
+                            <span
+                                class="text-xs font-semibold px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">Agu 2025
+                                — Des 2025</span>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-300">S1 Sistem Informasi (Student Exchange)</p>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                          Actively collaborated within a cross-functional software development team using Agile methodologies. 
+                          Utilized Git and GitHub for version control, efficient code review processes, and seamless feature integration across the development lifecycle.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5: Scrum Management App -->
+                <div class="relative group">
+                    <div
+                        class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-space-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-2 border border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white">Scrum Management App</h3>
+                            <span
+                                class="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">Agu
+                                2025 — Des 2025</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                          Developed a full-stack project management application utilizing Flutter (Dart) for the frontend and PHP with MySQL for the backend. 
+                          Built a responsive, user-friendly UI seamless for sprint and task tracking in multi-user environments. 
+                          Integrated real-time notification systems and account management features to enhance team collaboration and overall workflow efficiency.
+                        </p>
+                    </div>
+                </div>
+
+        <!-- Timeline Item 6:Hris-->
+                <div class="relative group">
+                    <div
+                        class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-indigo-500 ring-4 ring-space-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-2 border border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white">Human Resource Information System</h3>
+                            <span
+                                class="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">April
+                                2026 — June 2026</span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                          Developed a web-based Human Resource Information System using Laravel and MySQL to streamline employee data management, HR administrative tasks, and reporting processes. 
+                          Implemented core HR functionalities including employee data tracking, leave management, performance evaluation, and payroll preparation with secure user authentication and role-based access control.
+                        </p>
+                    </div>
+                </div>
+
+                   <!-- Timeline Item 7: Intern at Telkominfra  -->
+                <div class="relative group">
+                    <!-- Dot Marker -->
+                    <div
+                        class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-cyan-400 ring-4 ring-space-950 group-hover:scale-125 transition-transform">
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl space-y-2 border border-slate-800">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-bold text-white">Intern at Telkominfra</h3>
+                            <span
+                                class="text-xs font-semibold px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">Agu 2026
+                                — Present</span>
+                        </div>
+                        <p class="text-sm font-semibold text-slate-300">Intern</p>
+                        <p class="text-xs text-slate-400 leading-relaxed pt-1">
+                             As an IT & Operations Intern at PT Telkominfra, I focused on enterprise IT governance and system analysis. 
+                             My role involved contributing to pre-development workflow architecture, auditing IT General Controls (ITGC) and SOPs, and producing internal cybersecurity awareness modules to support compliance standards.
+                        </p>
+                    </div>
+                </div>
+            
+            </div>
+        </section>
+
+        <!-- 6. CONTACT SECTION -->
+        <section id="contact" class="space-y-8 pt-6">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Get In Touch</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white">Mari Berdiskusi & Berkolaborasi</h2>
+                <p class="text-sm text-slate-400">Tertarik untuk berkolaborasi atau membutuhkan pengembang Web & Mobile?
+                    Kirim pesan secara langsung melalui formulir berikut.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Contact Info Side Cards -->
+                <div class="space-y-4">
+                    <!-- Email Card -->
+                    <div
+                        class="glass-card card-glow-cyan p-5 rounded-2xl flex items-center gap-4 group cursor-pointer">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500/20 group-hover:border-cyan-500/40 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-cyan-500/20 transition-all duration-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium group-hover:text-cyan-300/80 transition-colors">Email Direct</p>
+                            <a href="mailto:haikalriyadh.work@gmail.com"
+                                class="text-sm font-semibold text-white group-hover:text-cyan-400 transition-colors flex items-center gap-1.5 mt-0.5">
+                                <span>haikalriyadhr@gmail.com</span>
+                                <span class="text-xs text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Card -->
+                    <div
+                        class="glass-card card-glow-blue p-5 rounded-2xl flex items-center gap-4 group cursor-pointer">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-500/20 group-hover:border-blue-500/40 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-blue-500/20 transition-all duration-300">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.222 0h.003z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium group-hover:text-blue-300/80 transition-colors">LinkedIn</p>
+                            <a href="https://www.linkedin.com/in/haikalriyadhr" target="_blank" rel="noopener noreferrer"
+                                class="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors flex items-center gap-1.5 mt-0.5">
+                                <span>Haikal Riyadh Romadhon</span>
+                                <span class="text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div
+                        class="glass-card card-glow-indigo p-5 rounded-2xl flex items-center gap-4 group cursor-default">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500/20 group-hover:border-indigo-500/40 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-indigo-500/20 transition-all duration-300">
+                            <svg class="w-6 h-6 fill-none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium group-hover:text-indigo-300/80 transition-colors">Domisili / Lokasi</p>
+                            <p class="text-sm font-semibold text-white group-hover:text-indigo-200 transition-colors mt-0.5">Jakarta / Depok, Indonesia</p>
+                        </div>
+                    </div>
+
+                    <!-- GitHub Card -->
+                    <div
+                        class="glass-card card-glow-sky p-5 rounded-2xl flex items-center gap-4 group cursor-pointer">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-200 group-hover:bg-slate-700 group-hover:border-sky-500/40 group-hover:text-sky-400 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-sky-500/20 transition-all duration-300">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium group-hover:text-sky-300/80 transition-colors">GitHub Profile</p>
+                            <a href="https://github.com/HaikalRiyadh" target="_blank" rel="noopener noreferrer"
+                                class="text-sm font-semibold text-white group-hover:text-sky-400 transition-colors flex items-center gap-1.5 mt-0.5">
+                                <span>github.com/HaikalRiyadh</span>
+                                <span class="text-xs text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Interactive Form -->
+                <div class="lg:col-span-2 glass-card rounded-2xl p-6 sm:p-8 relative">
+                    <form id="contact-form" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Name Field -->
+                            <div class="space-y-1.5">
+                                <label for="contact-name" class="text-xs font-medium text-slate-300">Nama
+                                    Lengkap</label>
+                                <input type="text" id="contact-name" required placeholder="Masukkan nama Anda"
+                                    class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-cyan-500 transition-colors placeholder:text-slate-600">
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="space-y-1.5">
+                                <label for="contact-email" class="text-xs font-medium text-slate-300">Alamat
+                                    Email</label>
+                                <input type="email" id="contact-email" required placeholder="nama@email.com"
+                                    class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-cyan-500 transition-colors placeholder:text-slate-600">
+                            </div>
+                        </div>
+
+                        <!-- Subject Field -->
+                        <div class="space-y-1.5">
+                            <label for="contact-subject" class="text-xs font-medium text-slate-300">Subjek Pesan</label>
+                            <input type="text" id="contact-subject" required placeholder="Subjek atau topik diskusi"
+                                class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-cyan-500 transition-colors placeholder:text-slate-600">
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="space-y-1.5">
+                            <label for="contact-message" class="text-xs font-medium text-slate-300">Isi Pesan</label>
+                            <textarea id="contact-message" rows="4" required
+                                placeholder="Tuliskan detail pesan Anda di sini..."
+                                class="w-full px-4 py-3 rounded-xl bg-space-900 border border-slate-800 text-slate-200 text-sm focus:outline-none focus:border-cyan-500 transition-colors placeholder:text-slate-600 resize-none"></textarea>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submit-btn"
+                            class="btn-whatsapp w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:opacity-95 text-space-950 font-extrabold text-sm shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2 cursor-pointer transition-all duration-300">
+                            <span id="btn-content" class="flex items-center justify-center gap-2 pointer-events-none transition-all duration-300">
+                                <svg id="btn-icon" class="w-4 h-4 fill-current transition-transform duration-300" viewBox="0 0 24 24">
+                                    <path
+                                        d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.275-.1-.475-.15-.675.15-.2.3-.775.98-.95 1.18-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.49-1.077-.96-1.804-2.148-2.016-2.51-.212-.363-.023-.558.128-.707.135-.134.301-.35.451-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.244-.583-.492-.504-.675-.513l-.575-.01c-.2 0-.525.075-.8.375s-1.05 1.025-1.05 2.5 1.075 2.9 1.225 3.1c.15.2 2.115 3.23 5.124 4.53 3.01 1.3 3.01.867 3.56.813.55-.054 1.78-.727 2.03-1.43.25-.703.25-1.303.175-1.43-.075-.127-.275-.202-.575-.352zm-5.419 7.426h-.004c-1.82 0-3.605-.489-5.163-1.413l-.37-.22-3.839 1.007 1.025-3.742-.242-.385a10.024 10.024 0 0 1-1.536-5.36c0-5.55 4.516-10.065 10.071-10.065 2.689 0 5.216 1.048 7.118 2.95 1.902 1.903 2.95 4.43 2.95 7.12 0 5.553-4.516 10.068-10.01 10.068zM20.52 3.449C18.243 1.171 15.213-.001 11.996 0 5.437 0 .092 5.345.09 11.906c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.742.95 3.699 1.45 5.661 1.45h.005c6.554 0 11.9-5.345 11.902-11.907 0-3.177-1.237-6.166-3.383-8.432z" />
+                                </svg>
+                                <span>Kirim Pesan ke WhatsApp</span>
+                            </span>
+                        </button>
+                        <p class="text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5 pt-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                Pesan otomatis terisi dan diteruskan ke WhatsApp Haikal
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-space-950 relative z-10 py-10">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+            <p>© 2026 Haikal Riyadh Romadhon. Hak Cipta Dilindungi.</p>
+            <div class="flex items-center space-x-6">
+                <a href="#hero" class="hover:text-cyan-400 transition-colors">Kembali ke Atas ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Google Drive Style CV Preview Modal -->
+    <div id="cv-modal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-2 sm:p-4 md:p-6" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+        <!-- Backdrop with blur -->
+        <div id="cv-modal-backdrop" class="fixed inset-0 bg-space-950/85 backdrop-blur-md transition-opacity cursor-pointer"></div>
+
+        <!-- Modal Window (Google Drive style dark viewer) -->
+        <div id="cv-modal-content" class="relative w-full max-w-5xl h-[92vh] max-h-[920px] bg-space-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col z-10 transform scale-95 transition-all duration-300">
+            
+            <!-- Google Drive Top Toolbar -->
+            <div class="h-16 px-4 sm:px-6 bg-space-950/95 border-b border-slate-800 flex items-center justify-between flex-shrink-0 gap-3">
+                
+                <!-- Left: File Icon & Name -->
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-9 h-9 rounded-lg bg-red-500/15 border border-red-500/30 flex items-center justify-center flex-shrink-0 text-red-400">
+                        <!-- PDF Icon -->
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2 5 5h-5V4zM8.5 13.5c0-.83.67-1.5 1.5-1.5h1.5v5H10v-1.5h-.5c-.83 0-1.5-.67-1.5-1.5v-0.5zm3.5-0.5h1v4h-1v-4zm2.5 0h2v1h-2v1h1.5v1H14.5v1h-1v-4h1v-1z"/>
+                        </svg>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="flex items-center gap-2">
+                            <h3 id="cv-modal-title" class="text-sm sm:text-base font-semibold text-white truncate max-w-[150px] sm:max-w-md">
+                                CV-Haikal Riyadh R.pdf
+                            </h3>
+                            <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-slate-800 text-cyan-400 border border-slate-700">PDF</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 hidden sm:block">Pratinjau Dokumen &bull; Google Drive Style</p>
+                    </div>
+                </div>
+
+                <!-- Right: Actions (Open New Tab, Download, Close) -->
+                <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                    <!-- Open in New Tab -->
+                    <a href="./cv/CV-Haikal Riyadh R.pdf" target="_blank" rel="noopener noreferrer"
+                        title="Buka di Tab Baru"
+                        class="px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all flex items-center gap-1.5 text-xs font-medium border border-transparent hover:border-slate-700">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        <span class="hidden sm:inline">Tab Baru</span>
+                    </a>
+
+                    <!-- Download Button -->
+                    <a href="./cv/CV-Haikal Riyadh R.pdf" download="CV-Haikal Riyadh R.pdf" id="modal-download-cv-btn"
+                        class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-space-950 font-bold text-xs sm:text-sm transition-all shadow-md shadow-cyan-500/20 active:scale-95 cursor-pointer">
+                        <svg class="w-4 h-4 stroke-current" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        <span>Download</span>
+                    </a>
+
+                    <!-- Close Button -->
+                    <button type="button" id="close-cv-modal-btn" aria-label="Tutup Pratinjau"
+                        class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition-all border border-transparent hover:border-slate-700 cursor-pointer">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Document Viewer Body (like Google Drive) -->
+            <div class="relative flex-1 w-full bg-slate-950/90 overflow-hidden flex items-center justify-center">
+                <iframe id="cv-iframe" src="" class="w-full h-full border-0 bg-slate-900" title="CV Haikal Riyadh Romadhon"></iframe>
+
+                <!-- Mobile & Quick Action Footer Bar -->
+                <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-slate-900/90 backdrop-blur-md border border-slate-700/70 px-4 py-2 rounded-xl text-xs text-slate-300 shadow-xl flex items-center gap-3">
+                    <span class="text-slate-400">Pilihan:</span>
+                    <a href="./cv/CV-Haikal Riyadh R.pdf" target="_blank" class="text-cyan-400 hover:underline font-semibold flex items-center gap-1">
+                        Buka Tab Penuh
+                    </a>
+                    <span class="text-slate-600">&bull;</span>
+                    <a href="./cv/CV-Haikal Riyadh R.pdf" download="CV-Haikal Riyadh R.pdf" class="text-cyan-400 hover:underline font-semibold flex items-center gap-1" id="fallback-download-btn">
+                        Download PDF
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Interactive Code -->
+    <script>
+        // --- 1. Toast Notification System ---
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto px-4 py-3 rounded-xl bg-slate-900/95 border border-cyan-500/40 text-slate-100 text-xs font-semibold shadow-2xl backdrop-blur-md transition-all duration-300 transform translate-y-2 opacity-0 flex items-center gap-2';
+            toast.innerHTML = `
+                <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // --- 2. Mobile Menu Toggle ---
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileBtn && mobileMenu) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // --- 3. Google Drive Style CV Viewer Modal ---
+        const openCvBtn = document.getElementById('open-cv-modal-btn');
+        const cvModal = document.getElementById('cv-modal');
+        const cvModalBackdrop = document.getElementById('cv-modal-backdrop');
+        const cvModalContent = document.getElementById('cv-modal-content');
+        const closeCvBtn = document.getElementById('close-cv-modal-btn');
+        const cvIframe = document.getElementById('cv-iframe');
+        const modalDownloadBtn = document.getElementById('modal-download-cv-btn');
+        const fallbackDownloadBtn = document.getElementById('fallback-download-btn');
+        const cvPdfPath = './cv/CV-Haikal Riyadh R.pdf';
+
+        function openCvModal() {
+            if (!cvModal) return;
+            if (cvIframe && !cvIframe.getAttribute('src')) {
+                cvIframe.setAttribute('src', cvPdfPath);
+            }
+            cvModal.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                cvModal.classList.remove('opacity-0');
+                if (cvModalContent) {
+                    cvModalContent.classList.remove('scale-95');
+                    cvModalContent.classList.add('scale-100');
+                }
+            });
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCvModal() {
+            if (!cvModal) return;
+            cvModal.classList.add('opacity-0');
+            if (cvModalContent) {
+                cvModalContent.classList.remove('scale-100');
+                cvModalContent.classList.add('scale-95');
+            }
+            setTimeout(() => {
+                cvModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        if (openCvBtn) {
+            openCvBtn.addEventListener('click', openCvModal);
+        }
+
+        if (closeCvBtn) {
+            closeCvBtn.addEventListener('click', closeCvModal);
+        }
+
+        if (cvModalBackdrop) {
+            cvModalBackdrop.addEventListener('click', closeCvModal);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && cvModal && !cvModal.classList.contains('hidden')) {
+                closeCvModal();
+            }
+        });
+
+        if (modalDownloadBtn) {
+            modalDownloadBtn.addEventListener('click', () => {
+                showToast('Mengunduh CV Haikal Riyadh Romadhon...');
+            });
+        }
+
+        if (fallbackDownloadBtn) {
+            fallbackDownloadBtn.addEventListener('click', () => {
+                showToast('Mengunduh CV Haikal Riyadh Romadhon...');
+            });
+        }
+
+        // --- 4. Interactive Projects Filter ---
+        const filterBtns = document.querySelectorAll('.project-filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update button styles
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-cyan-500', 'text-space-950');
+                    b.classList.add('text-slate-400');
+                });
+                btn.classList.add('bg-cyan-500', 'text-space-950');
+                btn.classList.remove('text-slate-400');
+
+                const filter = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'block';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // --- 5. Contact Form Submission (Direct to WhatsApp with Click Animation) ---
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnContent = document.getElementById('btn-content');
+
+        // Sparkle explosion helper around button
+        function triggerButtonSparkles(targetBtn) {
+            const rect = targetBtn.getBoundingClientRect();
+            const parent = targetBtn.parentElement;
+            const colors = ['#10B981', '#06B6D4', '#34D399', '#38BDF8', '#FFFFFF', '#A7F3D0'];
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('span');
+                sparkle.className = 'sparkle-particle';
+                sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.left = `${targetBtn.offsetLeft + targetBtn.offsetWidth / 2}px`;
+                sparkle.style.top = `${targetBtn.offsetTop + targetBtn.offsetHeight / 2}px`;
+                
+                const angle = (Math.PI * 2 / 20) * i + (Math.random() * 0.3 - 0.15);
+                const distance = 45 + Math.random() * 55;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                sparkle.style.setProperty('--tx', `${tx}px`);
+                sparkle.style.setProperty('--ty', `${ty}px`);
+                parent.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 900);
+            }
+        }
+
+        // Tactile ripple feedback on every button click
+        if (submitBtn) {
+            submitBtn.addEventListener('click', (e) => {
+                const rect = submitBtn.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.className = 'btn-ripple-wave';
+                const size = Math.max(rect.width, rect.height) * 1.5;
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+                ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+                submitBtn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 700);
+            });
+        }
+
+        if (contactForm && submitBtn) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('contact-name').value.trim();
+                const email = document.getElementById('contact-email').value.trim();
+                const subject = document.getElementById('contact-subject').value.trim();
+                const message = document.getElementById('contact-message').value.trim();
+
+                const phoneNumber = '6285210579025';
+                const formattedMessage = `Halo Haikal, saya menghubungi Anda melalui formulir website portofolio:
+
+                *Nama:* ${name}
+                *Email:* ${email}
+                *Subjek:* ${subject}
+
+                *Pesan:*
+                ${message}`;
+
+                const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(formattedMessage)}`;
+
+                // 1. Trigger Sparkle Burst & Submitting State
+                triggerButtonSparkles(submitBtn);
+                submitBtn.classList.add('is-submitting');
+
+                // Animate to loading state
+                btnContent.innerHTML = `
+                    <svg class="animate-spin h-4 w-4 text-space-950" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Menghubungkan ke WhatsApp...</span>
+                `;
+
+                // 2. Success State after 950ms
+                setTimeout(() => {
+                    submitBtn.classList.remove('is-submitting');
+                    submitBtn.classList.add('is-success');
+                    triggerButtonSparkles(submitBtn);
+
+                    btnContent.innerHTML = `
+                        <svg class="w-5 h-5 fill-none stroke-current" stroke-width="3" viewBox="0 0 24 24">
+                            <path class="checkmark-draw" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>Pesan Siap! Membuka WhatsApp...</span>
+                    `;
+
+                    showToast(`Terima kasih, ${name}! Mengalihkan ke WhatsApp...`);
+
+                    // 3. Open WhatsApp in new tab after showing success
+                    setTimeout(() => {
+                        window.open(waUrl, '_blank');
+                    }, 800);
+
+                    // 4. Reset button after 3.8 seconds
+                    setTimeout(() => {
+                        submitBtn.classList.remove('is-success');
+                        btnContent.innerHTML = `
+                            <svg id="btn-icon" class="w-4 h-4 fill-current transition-transform duration-300" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.275-.1-.475-.15-.675.15-.2.3-.775.98-.95 1.18-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.49-1.077-.96-1.804-2.148-2.016-2.51-.212-.363-.023-.558.128-.707.135-.134.301-.35.451-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.244-.583-.492-.504-.675-.513l-.575-.01c-.2 0-.525.075-.8.375s-1.05 1.025-1.05 2.5 1.075 2.9 1.225 3.1c.15.2 2.115 3.23 5.124 4.53 3.01 1.3 3.01.867 3.56.813.55-.054 1.78-.727 2.03-1.43.25-.703.25-1.303.175-1.43-.075-.127-.275-.202-.575-.352zm-5.419 7.426h-.004c-1.82 0-3.605-.489-5.163-1.413l-.37-.22-3.839 1.007 1.025-3.742-.242-.385a10.024 10.024 0 0 1-1.536-5.36c0-5.55 4.516-10.065 10.071-10.065 2.689 0 5.216 1.048 7.118 2.95 1.902 1.903 2.95 4.43 2.95 7.12 0 5.553-4.516 10.068-10.01 10.068zM20.52 3.449C18.243 1.171 15.213-.001 11.996 0 5.437 0 .092 5.345.09 11.906c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.742.95 3.699 1.45 5.661 1.45h.005c6.554 0 11.9-5.345 11.902-11.907 0-3.177-1.237-6.166-3.383-8.432z" />
+                            </svg>
+                            <span>Kirim Pesan ke WhatsApp</span>
+                        `;
+                        contactForm.reset();
+                    }, 3400);
+
+                }, 950);
+            });
+        }
+
+        // --- 6. Hero Card 3D Magnetic Tilt Effect ---
+        const tiltCard = document.getElementById('hero-tilt-card');
+        if (tiltCard) {
+            tiltCard.addEventListener('mousemove', (e) => {
+                const rect = tiltCard.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const rotateX = (-y / rect.height) * 15;
+                const rotateY = (x / rect.width) * 15;
+                tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            tiltCard.addEventListener('mouseleave', () => {
+                tiltCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        }
+
+        // --- 7. Constella Infinitum Interactive Particle Canvas ---
+        (function () {
+            const canvas = document.getElementById('constella-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let width, height;
+            let particles = [];
+            const particleCount = 70;
+            const connectionDistance = 150;
+            const mouseRadius = 180;
+
+            const mouse = {
+                x: null,
+                y: null,
+                radius: mouseRadius
+            };
+
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            window.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.baseVx = (Math.random() - 0.5) * 0.6;
+                    this.baseVy = (Math.random() - 0.5) * 0.6;
+                    this.vx = this.baseVx;
+                    this.vy = this.baseVy;
+                    this.radius = Math.random() * 2 + 1;
+                    this.baseRadius = this.radius;
+                }
+
+                update() {
+                    // Interaction with mouse
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const dx = mouse.x - this.x;
+                        const dy = mouse.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < mouse.radius) {
+                            const force = (mouse.radius - dist) / mouse.radius;
+                            const angle = Math.atan2(dy, dx);
+                            // Gentle attraction & displacement effect
+                            this.x -= Math.cos(angle) * force * 1.5;
+                            this.y -= Math.sin(angle) * force * 1.5;
+                            this.radius = this.baseRadius + force * 2;
+                        } else {
+                            this.radius = this.baseRadius;
+                        }
+                    } else {
+                        this.radius = this.baseRadius;
+                    }
+
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Bounce off walls
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(6, 182, 212, 0.6)';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = 'rgba(6, 182, 212, 0.4)';
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // reset
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Connect particles with each other
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < connectionDistance) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            const alpha = (1 - dist / connectionDistance) * 0.22;
+                            ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+                            ctx.lineWidth = 0.9;
+                            ctx.stroke();
+                        }
+                    }
+
+                    // Connect particles to mouse position
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mdx = particles[i].x - mouse.x;
+                        const mdy = particles[i].y - mouse.y;
+                        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+                        if (mdist < mouse.radius) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            const mAlpha = (1 - mdist / mouse.radius) * 0.35;
+                            ctx.strokeStyle = `rgba(99, 102, 241, ${mAlpha})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        })();
+    </script>
+</body>
+
+</html>

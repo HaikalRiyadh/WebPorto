@@ -1,0 +1,229 @@
+/* ==========================================================================
+   Haikal Riyadh Romadhon - Portfolio Stylesheet
+   ========================================================================== */
+
+/* 1. Custom Scrollbar Styling (Seamless Dark Aesthetic) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #070A12;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1E293B;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* 2. Glassmorphism Subtle Card Styling */
+.glass-card {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 3. Interactive Card Glow Effect */
+.glow-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glow-hover:hover {
+    box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
+    border-color: rgba(6, 182, 212, 0.4);
+    transform: translateY(-3px);
+}
+
+/* 4. Contact Cards Colored Glow & Elevation Animation */
+.card-glow-cyan {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-glow-cyan:hover {
+    border-color: rgba(6, 182, 212, 0.6) !important;
+    box-shadow: 0 12px 28px -5px rgba(6, 182, 212, 0.25), 0 0 18px 0 rgba(6, 182, 212, 0.15) !important;
+    transform: translateY(-4px);
+}
+
+.card-glow-emerald {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-glow-emerald:hover {
+    border-color: rgba(16, 185, 129, 0.6) !important;
+    box-shadow: 0 12px 28px -5px rgba(16, 185, 129, 0.25), 0 0 18px 0 rgba(16, 185, 129, 0.15) !important;
+    transform: translateY(-4px);
+}
+
+.card-glow-blue {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-glow-blue:hover {
+    border-color: rgba(10, 102, 194, 0.65) !important;
+    box-shadow: 0 12px 28px -5px rgba(10, 102, 194, 0.3), 0 0 18px 0 rgba(10, 102, 194, 0.2) !important;
+    transform: translateY(-4px);
+}
+
+.card-glow-indigo {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-glow-indigo:hover {
+    border-color: rgba(99, 102, 241, 0.6) !important;
+    box-shadow: 0 12px 28px -5px rgba(99, 102, 241, 0.25), 0 0 18px 0 rgba(99, 102, 241, 0.15) !important;
+    transform: translateY(-4px);
+}
+
+.card-glow-sky {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-glow-sky:hover {
+    border-color: rgba(14, 165, 233, 0.6) !important;
+    box-shadow: 0 12px 28px -5px rgba(14, 165, 233, 0.25), 0 0 18px 0 rgba(14, 165, 233, 0.15) !important;
+    transform: translateY(-4px);
+}
+
+/* 5. Hanging Photo Pivot Point */
+.hanging-wrapper {
+    transform-origin: top center;
+}
+
+/* 6. Canvas Background Overlay Fix */
+#constella-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 7. WhatsApp Submit Button Interactive & Click Animations */
+.btn-whatsapp {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-whatsapp:hover {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), 0 10px 25px -5px rgba(6, 182, 212, 0.35) !important;
+    transform: translateY(-2px);
+}
+
+.btn-whatsapp:active {
+    transform: scale(0.96) translateY(0);
+}
+
+/* Dynamic Ripple effect on click */
+.btn-ripple-wave {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: scale(0);
+    animation: btnRippleAnim 0.65s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes btnRippleAnim {
+    to {
+        transform: scale(4.5);
+        opacity: 0;
+    }
+}
+
+/* Light shimmer sheen across the button */
+.btn-whatsapp::after {
+    content: '';
+    position: absolute;
+    top: -60%;
+    left: -70%;
+    width: 50%;
+    height: 220%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-whatsapp:hover::after {
+    opacity: 1;
+    animation: btnShimmerSweep 1.8s infinite ease-in-out;
+}
+
+@keyframes btnShimmerSweep {
+    0% { left: -70%; }
+    100% { left: 150%; }
+}
+
+/* Submitting / Active Click State */
+.btn-whatsapp.is-submitting {
+    pointer-events: none;
+    box-shadow: 0 0 35px rgba(16, 185, 129, 0.8), 0 0 20px rgba(6, 182, 212, 0.6) !important;
+    animation: btnPulseGlow 1s infinite alternate ease-in-out;
+}
+
+@keyframes btnPulseGlow {
+    0% { transform: scale(0.98); filter: brightness(1); }
+    100% { transform: scale(1.02); filter: brightness(1.12); }
+}
+
+/* Success State */
+.btn-whatsapp.is-success {
+    pointer-events: none;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.85) !important;
+    transform: scale(1.02);
+    animation: btnSuccessPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes btnSuccessPop {
+    0% { transform: scale(0.92); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1.02); }
+}
+
+/* Sparkle particles bursting around the button */
+.sparkle-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 50;
+    animation: sparkleFly 0.85s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes sparkleFly {
+    0% {
+        transform: translate(0, 0) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Animated Checkmark Stroke */
+.checkmark-draw {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: checkmarkStroke 0.5s ease-in-out forwards;
+}
+
+@keyframes checkmarkStroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+
