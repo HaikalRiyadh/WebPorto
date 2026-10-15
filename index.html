@@ -1525,7 +1525,12 @@
                 *Pesan:*
                 ${message}`;
 
-                const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(formattedMessage)}`;
+                // Deteksi apakah pengguna mengakses dari perangkat mobile (iPhone, iPad, Android)
+                const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || 
+                                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+                // Gunakan endpoint resmi api.whatsapp.com untuk kompatibilitas penuh dengan Apple Universal Links
+                const waUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(formattedMessage)}`;
 
                 // 1. Trigger Sparkle Burst & Submitting State
                 triggerButtonSparkles(submitBtn);
@@ -1540,7 +1545,7 @@
                     <span>Menghubungkan ke WhatsApp...</span>
                 `;
 
-                // 2. Success State after 950ms
+                // 2. Success State after 850ms
                 setTimeout(() => {
                     submitBtn.classList.remove('is-submitting');
                     submitBtn.classList.add('is-success');
@@ -1555,10 +1560,16 @@
 
                     showToast(`Terima kasih, ${name}! Mengalihkan ke WhatsApp...`);
 
-                    // 3. Open WhatsApp in new tab after showing success
+                    // 3. Open WhatsApp:
+                    // Di iPhone / mobile, window.open() di dalam setTimeout DIBLOKIR oleh Pop-up Blocker Safari
+                    // dan tidak memicu Universal Link. Gunakan window.location.href agar langsung meluncurkan aplikasi WA.
                     setTimeout(() => {
-                        window.open(waUrl, '_blank');
-                    }, 800);
+                        if (isMobile) {
+                            window.location.href = waUrl;
+                        } else {
+                            window.open(waUrl, '_blank', 'noopener,noreferrer');
+                        }
+                    }, 600);
 
                     // 4. Reset button after 3.8 seconds
                     setTimeout(() => {
@@ -1573,7 +1584,7 @@
                         contactForm.reset();
                     }, 3400);
 
-                }, 950);
+                }, 850);
             });
         }
 
