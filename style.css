@@ -1,186 +1,729 @@
 /* ==========================================================================
    Haikal Riyadh Romadhon - Portfolio Stylesheet
+   Executive Dark Edition â€” Deep Space Atmosphere & Premium Glassmorphism
    ========================================================================== */
 
-
-/* 1. Custom Scrollbar Styling (Seamless Dark & Light Aesthetics) */
-::-webkit-scrollbar {
-    width: 8px;
+/* --------------------------------------------------------------------------
+   0. Root Design Tokens & Dynamic Theme Variables
+   -------------------------------------------------------------------------- */
+:root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Light Mode Tokens */
+    --bg-base: #eef2f7;
+    --bg-surface: rgba(255, 255, 255, 0.82);
+    --bg-surface-elevated: rgba(255, 255, 255, 0.96);
+    --border-subtle: rgba(15, 23, 42, 0.09);
+    --border-hover: rgba(6, 182, 212, 0.50);
+    --border-highlight: rgba(255, 255, 255, 0.92);
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    
+    --accent-cyan: #0891b2;
+    --accent-cyan-light: #06b6d4;
+    --accent-indigo: #4f46e5;
+    --accent-indigo-light: #6366f1;
+    --accent-emerald: #059669;
+    
+    --glow-cyan: rgba(6, 182, 212, 0.30);
+    --glow-indigo: rgba(99, 102, 241, 0.25);
+    --glow-emerald: rgba(16, 185, 129, 0.22);
+    
+    --depth-shadow-near: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+    --depth-shadow-mid: 0 12px 30px -6px rgba(15, 23, 42, 0.10);
+    --depth-shadow-far: 0 24px 50px -12px rgba(15, 23, 42, 0.14);
+    --depth-shadow-mega: 0 35px 80px -20px rgba(15, 23, 42, 0.20);
+    
+    --grid-line: rgba(15, 23, 42, 0.055);
+    --perspective: 1200px;
+    --card-transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-::-webkit-scrollbar-track {
-    background: #070A12;
+html.dark {
+    /* Dark Mode â€” Deep Obsidian Space Tokens */
+    --bg-base: #050b14;
+    --bg-surface: rgba(9, 15, 28, 0.75);
+    --bg-surface-elevated: rgba(13, 21, 38, 0.88);
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-hover: rgba(6, 182, 212, 0.45);
+    --border-highlight: rgba(255, 255, 255, 0.10);
+    
+    --text-primary: #f0f6ff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --accent-cyan: #06b6d4;
+    --accent-cyan-light: #22d3ee;
+    --accent-indigo: #6366f1;
+    --accent-indigo-light: #818cf8;
+    --accent-emerald: #10b981;
+    
+    --glow-cyan: rgba(6, 182, 212, 0.40);
+    --glow-indigo: rgba(99, 102, 241, 0.35);
+    --glow-emerald: rgba(16, 185, 129, 0.32);
+    
+    --depth-shadow-near: 0 4px 14px -2px rgba(0, 0, 0, 0.55);
+    --depth-shadow-mid: 0 12px 35px -8px rgba(0, 0, 0, 0.70);
+    --depth-shadow-far: 0 25px 60px -15px rgba(0, 0, 0, 0.82);
+    --depth-shadow-mega: 0 35px 90px -20px rgba(0, 0, 0, 0.90);
+    
+    --grid-line: rgba(100, 180, 255, 0.04);
 }
 
+/* --------------------------------------------------------------------------
+   1. Base Reset & Typography
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Deep Space Base Gradient */
+html.dark body {
+    background: 
+        radial-gradient(ellipse 120% 80% at 60% -20%, rgba(6, 182, 212, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 60% at -10% 40%, rgba(99, 102, 241, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 90% 70% at 80% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+        #050b14;
+}
+
+html:not(.dark) body {
+    background:
+        radial-gradient(ellipse 110% 70% at 65% -15%, rgba(6, 182, 212, 0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 55% at -5% 45%, rgba(99, 102, 241, 0.07) 0%, transparent 50%),
+        #eef2f7;
+}
+
+/* --------------------------------------------------------------------------
+   2. Custom Luxury Scrollbar
+   -------------------------------------------------------------------------- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
 ::-webkit-scrollbar-thumb {
-    background: #1E293B;
-    border-radius: 4px;
+    background: linear-gradient(180deg, rgba(6, 182, 212, 0.4), rgba(99, 102, 241, 0.4));
+    border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: linear-gradient(180deg, rgba(6, 182, 212, 0.7), rgba(99, 102, 241, 0.7));
 }
 
-html:not(.dark)::-webkit-scrollbar-track {
-    background: #F1F5F9;
-}
-
-html:not(.dark)::-webkit-scrollbar-thumb {
-    background: #CBD5E1;
-}
-
-html:not(.dark)::-webkit-scrollbar-thumb:hover {
-    background: #94A3B8;
-}
-
-/* 2. Glassmorphism Subtle Card Styling */
-.glass-card {
-    background: rgba(15, 23, 42, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-html:not(.dark) .glass-card {
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(226, 232, 240, 0.9);
-    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
-}
-
-/* 3. Interactive Card Glow Effect */
-.glow-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glow-hover:hover {
-    box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.25);
-    border-color: rgba(6, 182, 212, 0.4);
-    transform: translateY(-3px);
-}
-
-html:not(.dark) .glow-hover:hover {
-    box-shadow: 0 12px 25px -5px rgba(6, 182, 212, 0.22), 0 4px 12px -2px rgba(6, 182, 212, 0.12);
-    border-color: rgba(6, 182, 212, 0.5);
-    transform: translateY(-3px);
-}
-
-/* 4. Contact Cards Colored Glow & Elevation Animation */
-.card-glow-cyan {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.card-glow-cyan:hover {
-    border-color: rgba(6, 182, 212, 0.6) !important;
-    box-shadow: 0 12px 28px -5px rgba(6, 182, 212, 0.25), 0 0 18px 0 rgba(6, 182, 212, 0.15) !important;
-    transform: translateY(-4px);
-}
-html:not(.dark) .card-glow-cyan:hover {
-    box-shadow: 0 12px 28px -5px rgba(6, 182, 212, 0.2), 0 0 18px 0 rgba(6, 182, 212, 0.1) !important;
-}
-
-.card-glow-emerald {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.card-glow-emerald:hover {
-    border-color: rgba(16, 185, 129, 0.6) !important;
-    box-shadow: 0 12px 28px -5px rgba(16, 185, 129, 0.25), 0 0 18px 0 rgba(16, 185, 129, 0.15) !important;
-    transform: translateY(-4px);
-}
-html:not(.dark) .card-glow-emerald:hover {
-    box-shadow: 0 12px 28px -5px rgba(16, 185, 129, 0.2), 0 0 18px 0 rgba(16, 185, 129, 0.1) !important;
-}
-
-.card-glow-blue {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.card-glow-blue:hover {
-    border-color: rgba(10, 102, 194, 0.65) !important;
-    box-shadow: 0 12px 28px -5px rgba(10, 102, 194, 0.3), 0 0 18px 0 rgba(10, 102, 194, 0.2) !important;
-    transform: translateY(-4px);
-}
-html:not(.dark) .card-glow-blue:hover {
-    box-shadow: 0 12px 28px -5px rgba(10, 102, 194, 0.2), 0 0 18px 0 rgba(10, 102, 194, 0.1) !important;
-}
-
-.card-glow-indigo {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.card-glow-indigo:hover {
-    border-color: rgba(99, 102, 241, 0.6) !important;
-    box-shadow: 0 12px 28px -5px rgba(99, 102, 241, 0.25), 0 0 18px 0 rgba(99, 102, 241, 0.15) !important;
-    transform: translateY(-4px);
-}
-html:not(.dark) .card-glow-indigo:hover {
-    box-shadow: 0 12px 28px -5px rgba(99, 102, 241, 0.2), 0 0 18px 0 rgba(99, 102, 241, 0.1) !important;
-}
-
-.card-glow-sky {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.card-glow-sky:hover {
-    border-color: rgba(14, 165, 233, 0.6) !important;
-    box-shadow: 0 12px 28px -5px rgba(14, 165, 233, 0.25), 0 0 18px 0 rgba(14, 165, 233, 0.15) !important;
-    transform: translateY(-4px);
-}
-html:not(.dark) .card-glow-sky:hover {
-    box-shadow: 0 12px 28px -5px rgba(14, 165, 233, 0.2), 0 0 18px 0 rgba(14, 165, 233, 0.1) !important;
-}
-
-/* 5. Theme Toggle Button Styling & Micro-interactions */
-.theme-toggle-btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.theme-toggle-btn:hover {
-    transform: scale(1.06);
-}
-.theme-toggle-btn:active {
-    transform: scale(0.94);
-}
-.theme-toggle-btn .sun-icon,
-.theme-toggle-btn .moon-icon {
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-}
-html.dark .theme-toggle-btn .sun-icon {
-    transform: rotate(0deg) scale(1);
-    opacity: 1;
-}
-html.dark .theme-toggle-btn .moon-icon {
-    transform: rotate(90deg) scale(0);
-    opacity: 0;
-    position: absolute;
-    pointer-events: none;
-}
-html:not(.dark) .theme-toggle-btn .sun-icon {
-    transform: rotate(-90deg) scale(0);
-    opacity: 0;
-    position: absolute;
-    pointer-events: none;
-}
-html:not(.dark) .theme-toggle-btn .moon-icon {
-    transform: rotate(0deg) scale(1);
-    opacity: 1;
-}
-
-/* 5. Hanging Photo Pivot Point */
-.hanging-wrapper {
-    transform-origin: top center;
-}
-
-/* 6. Canvas Background Overlay Fix */
-#constella-canvas {
+/* --------------------------------------------------------------------------
+   3. Atmospheric Multi-Layer Background System
+   -------------------------------------------------------------------------- */
+.bg-scene {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     pointer-events: none;
     z-index: 0;
 }
 
-/* 7. WhatsApp Submit Button Interactive & Click Animations */
+/* High-Tech Blueprint Engineering Grid */
+.bg-grid-overlay {
+    display: none !important;
+}
+
+/* Interactive Cursor Spotlight Aura */
+.cursor-spotlight {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.07) 0%, rgba(99, 102, 241, 0.035) 40%, transparent 70%);
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    will-change: left, top;
+    opacity: 0;
+}
+
+html.dark .cursor-spotlight {
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, rgba(99, 102, 241, 0.07) 45%, transparent 70%);
+}
+
+/* Organic Floating Luminous Ambient Orbs */
+.ambient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(85px);
+    pointer-events: none;
+    will-change: transform;
+    animation: orbMorph 18s ease-in-out infinite alternate;
+}
+
+.orb-primary {
+    top: -8%;
+    right: -8%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.28) 0%, rgba(14, 165, 233, 0.10) 55%, transparent 78%);
+    animation-duration: 20s;
+}
+
+.orb-secondary {
+    top: 38%;
+    left: -12%;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(139, 92, 246, 0.08) 55%, transparent 78%);
+    animation-duration: 24s;
+    animation-delay: -6s;
+}
+
+.orb-accent {
+    top: 72%;
+    right: 3%;
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.20) 0%, rgba(6, 182, 212, 0.06) 55%, transparent 78%);
+    animation-duration: 22s;
+    animation-delay: -11s;
+}
+
+.orb-bottom {
+    top: 18%;
+    left: 28%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 68%);
+    animation-duration: 28s;
+    animation-delay: -15s;
+}
+
+html:not(.dark) .orb-primary {
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.16) 0%, rgba(14, 165, 233, 0.05) 55%, transparent 78%);
+}
+html:not(.dark) .orb-secondary {
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.13) 0%, rgba(139, 92, 246, 0.04) 55%, transparent 78%);
+}
+html:not(.dark) .orb-accent {
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(6, 182, 212, 0.04) 55%, transparent 78%);
+}
+
+@keyframes orbMorph {
+    0%   { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+    25%  { transform: translate(30px, -25px) scale(1.07) rotate(4deg); }
+    50%  { transform: translate(-20px, 20px) scale(0.95) rotate(-3deg); }
+    75%  { transform: translate(15px, 30px) scale(1.05) rotate(2deg); }
+    100% { transform: translate(-10px, -12px) scale(0.98) rotate(-1deg); }
+}
+
+/* Constella Canvas */
+#constella-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   4. Glassmorphism System & 3D Interactive Surfaces
+   -------------------------------------------------------------------------- */
+.glass-card {
+    background: var(--bg-surface);
+    backdrop-filter: blur(20px) saturate(1.9);
+    -webkit-backdrop-filter: blur(20px) saturate(1.9);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--depth-shadow-mid), inset 0 1px 0 var(--border-highlight);
+    transition: transform var(--card-transition), box-shadow var(--card-transition), border-color var(--card-transition);
+}
+
+html.dark .glass-card {
+    background: rgba(9, 16, 32, 0.72);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow: 
+        var(--depth-shadow-mid),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 0 0 0.5px rgba(255, 255, 255, 0.04);
+}
+
+.glass-card:hover { border-color: var(--border-hover); }
+
+html.dark .glass-card:hover {
+    border-color: rgba(6, 182, 212, 0.35);
+    box-shadow:
+        var(--depth-shadow-far),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10),
+        0 0 25px -5px rgba(6, 182, 212, 0.12);
+}
+
+html.dark .glass-card,
+html.dark .glass-panel {
+    box-shadow:
+        var(--depth-shadow-mid),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.20);
+}
+
+.glass-panel {
+    background: var(--bg-surface-elevated);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--depth-shadow-near);
+}
+
+/* --------------------------------------------------------------------------
+   5. Gradient Text & Accents
+   -------------------------------------------------------------------------- */
+.gradient-text {
+    background: linear-gradient(135deg, #0891b2 0%, #3b82f6 45%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+html.dark .gradient-text {
+    background: linear-gradient(135deg, #22d3ee 0%, #60a5fa 45%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.30));
+}
+
+.gradient-border-glow { position: relative; }
+
+.gradient-border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1.5px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.65) 0%, rgba(99, 102, 241, 0.55) 50%, rgba(16, 185, 129, 0.55) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.55;
+    transition: opacity 0.35s ease;
+}
+
+.gradient-border-glow:hover::before { opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   6. 3D Tilt Universal Card System
+   -------------------------------------------------------------------------- */
+.tilt-3d {
+    transform-style: preserve-3d;
+    transition: transform var(--card-transition), box-shadow var(--card-transition);
+    will-change: transform;
+}
+
+.tilt-3d:hover {
+    transform: perspective(var(--perspective)) translateY(-6px) translateZ(12px);
+    box-shadow: var(--depth-shadow-far), 0 0 35px -8px var(--glow-cyan);
+}
+
+/* --------------------------------------------------------------------------
+   7. Hero 3D Showcase & Floating Tech Chips
+   -------------------------------------------------------------------------- */
+#hero-tilt-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+    position: relative;
+    border-radius: 1.75rem;
+}
+
+#hero-tilt-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255,255,255,0.13) 0%, transparent 45%, transparent 65%, rgba(6,182,212,0.12) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+#hero-tilt-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    transition: left 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+    z-index: 20;
+}
+
+#hero-tilt-card:hover::before { left: 130%; }
+
+/* Floating Tech Chips */
+.floating-badge {
+    position: absolute;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 9999px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.73rem;
+    font-weight: 600;
+    box-shadow: var(--depth-shadow-mid);
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    pointer-events: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: floatLevitate 5s ease-in-out infinite alternate;
+}
+
+.floating-badge:hover {
+    transform: scale(1.1) translateZ(18px);
+    box-shadow: var(--depth-shadow-far), 0 0 22px -3px var(--glow-cyan);
+}
+
+.floating-badge-1 { top: -14px; left: -18px; animation-delay: 0s; }
+.floating-badge-2 { top: 26%; right: -22px; animation-delay: -1.8s; }
+.floating-badge-3 { bottom: -14px; left: 10%; animation-delay: -3.4s; }
+
+@keyframes floatLevitate {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    50%  { transform: translateY(-9px) rotate(1.5deg); }
+    100% { transform: translateY(3px) rotate(-1deg); }
+}
+
+/* --------------------------------------------------------------------------
+   7b. Hanging Lanyard Photo (Satu Tali & Drop-down Entrance)
+   -------------------------------------------------------------------------- */
+.hanging-lanyard-assembly {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transform-origin: 50% 0px;
+    will-change: transform, opacity;
+}
+
+/* Initial Hidden / Retracted State (Persis seperti Gambar 1) */
+.hanging-lanyard-assembly.is-hidden {
+    transform: translateY(-135%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s ease-in, opacity 0.3s ease-in;
+}
+
+/* Dropping Down Animation (Muncul meluncur ke bawah seperti Gambar 2) */
+.hanging-lanyard-assembly.drop-enter {
+    animation: lanyardDropIn 1.15s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards;
+}
+
+@keyframes lanyardDropIn {
+    0% {
+        transform: translateY(-135%);
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+    70% {
+        transform: translateY(14px) rotate(2.5deg);
+    }
+    85% {
+        transform: translateY(-6px) rotate(-1.5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Idle Natural Swing once appeared */
+.hanging-lanyard-assembly.is-active {
+    animation: lanyardIdleSwing 6.5s ease-in-out infinite alternate;
+}
+
+@keyframes lanyardIdleSwing {
+    0%   { transform: rotate(-2.8deg); }
+    50%  { transform: rotate(2.8deg); }
+    100% { transform: rotate(-2.8deg); }
+}
+
+.hanging-lanyard-assembly:hover {
+    animation-play-state: paused;
+}
+
+/* Lanyard Strap (Satu Tali Tunggal) */
+.lanyard-mount {
+    position: relative;
+    z-index: 25;
+}
+
+.lanyard-strap {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Clasp Assembly */
+.lanyard-clasp-assembly {
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+}
+
+/* Photo Card (Foto Haikal dengan Frame Bersih & Rounded Corners) */
+.hanging-photo-card {
+    border-radius: 1.25rem;
+    padding: 0.375rem;
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid rgba(6, 182, 212, 0.4);
+    box-shadow: 
+        0 20px 40px -10px rgba(0, 0, 0, 0.4),
+        0 0 25px -5px rgba(6, 182, 212, 0.25);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                box-shadow 0.3s ease, 
+                border-color 0.3s ease;
+}
+
+html.dark .hanging-photo-card {
+    background: rgba(11, 17, 33, 0.92);
+    border-color: rgba(6, 182, 212, 0.4);
+    box-shadow: 
+        0 24px 50px -10px rgba(0, 0, 0, 0.75),
+        0 0 30px -5px rgba(6, 182, 212, 0.3);
+}
+
+.hanging-photo-card:hover {
+    transform: scale(1.025);
+    border-color: rgba(6, 182, 212, 0.8);
+    box-shadow: 
+        0 28px 55px -10px rgba(0, 0, 0, 0.85),
+        0 0 35px 0px rgba(6, 182, 212, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   8. Navigation Bar Styles
+   -------------------------------------------------------------------------- */
+.nav-3d {
+    background: rgba(245, 248, 252, 0.82);
+    backdrop-filter: blur(24px) saturate(1.9);
+    -webkit-backdrop-filter: blur(24px) saturate(1.9);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 4px 20px -5px rgba(15, 23, 42, 0.06);
+}
+
+html.dark .nav-3d {
+    background: rgba(5, 11, 20, 0.82);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 
+        0 4px 30px -5px rgba(0, 0, 0, 0.60),
+        0 0 40px -15px rgba(6, 182, 212, 0.10),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.nav-link-item {
+    position: relative;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.25s ease;
+}
+
+.nav-link-item::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo));
+    border-radius: 9999px;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link-item:hover::after,
+.nav-link-item.active::after { width: 100%; left: 0; }
+
+/* --------------------------------------------------------------------------
+   9. Theme Toggle Button
+   -------------------------------------------------------------------------- */
+.theme-toggle-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toggle-btn:hover { transform: scale(1.06); box-shadow: var(--depth-shadow-near); }
+.theme-toggle-btn:active { transform: scale(0.94); }
+
+.theme-toggle-btn .sun-icon,
+.theme-toggle-btn .moon-icon {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+html.dark .theme-toggle-btn .sun-icon  { transform: rotate(0deg) scale(1); opacity: 1; }
+html.dark .theme-toggle-btn .moon-icon { transform: rotate(90deg) scale(0); opacity: 0; position: absolute; pointer-events: none; }
+html:not(.dark) .theme-toggle-btn .sun-icon  { transform: rotate(-90deg) scale(0); opacity: 0; position: absolute; pointer-events: none; }
+html:not(.dark) .theme-toggle-btn .moon-icon { transform: rotate(0deg) scale(1); opacity: 1; }
+
+/* --------------------------------------------------------------------------
+   10. Project Showcase Cards
+   -------------------------------------------------------------------------- */
+.project-card {
+    transform-style: preserve-3d;
+    transition: transform var(--card-transition), box-shadow var(--card-transition), border-color var(--card-transition);
+    will-change: transform;
+    position: relative;
+    border-radius: 1.25rem;
+}
+
+.project-card:hover {
+    transform: perspective(var(--perspective)) translateY(-8px) translateZ(18px);
+    box-shadow: var(--depth-shadow-far), 0 0 40px -10px var(--glow-cyan);
+    border-color: rgba(6, 182, 212, 0.50);
+}
+
+html.dark .project-card:hover {
+    box-shadow: var(--depth-shadow-far), 0 0 50px -12px rgba(6, 182, 212, 0.25);
+}
+
+.project-card .img-zoom {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .img-zoom { transform: scale(1.06); }
+
+/* Filter Buttons */
+.filter-btn-3d { transition: all 0.25s ease; }
+.filter-btn-3d:hover { transform: translateY(-2px); }
+
+.filter-btn-3d.active {
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    color: #ffffff !important;
+    box-shadow: 0 4px 18px -3px rgba(6, 182, 212, 0.55);
+    border-color: transparent !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. Unified Skills Bento Grid (Centered Layout)
+   -------------------------------------------------------------------------- */
+.skills-flex-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    width: 100%;
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.skills-flex-grid .skill-card-3d {
+    flex: 0 1 calc(14.285% - 0.85rem);
+    min-width: 120px;
+    max-width: 155px;
+}
+
+@media (max-width: 1024px) {
+    .skills-flex-grid .skill-card-3d {
+        flex: 0 1 calc(25% - 0.85rem);
+        min-width: 110px;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-flex-grid .skill-card-3d {
+        flex: 0 1 calc(33.333% - 0.75rem);
+        min-width: 95px;
+    }
+}
+
+@media (max-width: 480px) {
+    .skills-flex-grid .skill-card-3d {
+        flex: 0 1 calc(50% - 0.6rem);
+        min-width: 85px;
+    }
+}
+.skill-card-3d {
+    transform-style: preserve-3d;
+    transition: all var(--card-transition);
+    will-change: transform;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.skill-card-3d::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6, 182, 212, 0.18) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 1;
+}
+
+.skill-card-3d:hover::before { opacity: 1; }
+
+.skill-card-3d:hover {
+    transform: perspective(600px) translateY(-5px) translateZ(18px) scale(1.04);
+    box-shadow: var(--depth-shadow-mid), 0 0 24px -3px var(--glow-cyan);
+    border-color: rgba(6, 182, 212, 0.45);
+    z-index: 5;
+}
+
+/* --------------------------------------------------------------------------
+   12. Buttons & Micro-interactions
+   -------------------------------------------------------------------------- */
+.btn-primary {
+    background: linear-gradient(135deg, #06b6d4 0%, #4f46e5 100%);
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 0.9rem;
+    box-shadow: 0 4px 18px -2px rgba(6, 182, 212, 0.45), inset 0 1px 0 rgba(255,255,255,0.28);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.01em;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px -4px rgba(6, 182, 212, 0.60), 0 0 25px -5px rgba(99, 102, 241, 0.40);
+    filter: brightness(1.06);
+}
+
+.btn-primary:active { transform: translateY(1px) scale(0.98); }
+
+.btn-glass {
+    background: var(--bg-surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-weight: 600;
+    border-radius: 0.9rem;
+    box-shadow: var(--depth-shadow-near);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-glass:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+    box-shadow: var(--depth-shadow-mid), 0 0 18px -3px var(--glow-cyan);
+    color: var(--accent-cyan);
+}
+
+.btn-glass:active { transform: translateY(1px); }
+
+/* WhatsApp Submit Button */
 .btn-whatsapp {
     position: relative;
     overflow: hidden;
@@ -188,89 +731,23 @@ html:not(.dark) .theme-toggle-btn .moon-icon {
 }
 
 .btn-whatsapp:hover {
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.5), 0 10px 25px -5px rgba(6, 182, 212, 0.35) !important;
-    transform: translateY(-2px);
+    box-shadow: 0 0 35px rgba(16, 185, 129, 0.55), 0 12px 28px -5px rgba(6, 182, 212, 0.38) !important;
+    transform: perspective(800px) translateY(-3px) translateZ(12px);
 }
 
-.btn-whatsapp:active {
-    transform: scale(0.96) translateY(0);
-}
+.btn-whatsapp:active { transform: perspective(800px) scale(0.97) translateY(1px); }
 
-/* Dynamic Ripple effect on click */
 .btn-ripple-wave {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
     transform: scale(0);
     animation: btnRippleAnim 0.65s ease-out forwards;
     pointer-events: none;
 }
 
-@keyframes btnRippleAnim {
-    to {
-        transform: scale(4.5);
-        opacity: 0;
-    }
-}
+@keyframes btnRippleAnim { to { transform: scale(4.5); opacity: 0; } }
 
-/* Light shimmer sheen across the button */
-.btn-whatsapp::after {
-    content: '';
-    position: absolute;
-    top: -60%;
-    left: -70%;
-    width: 50%;
-    height: 220%;
-    background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.25) 50%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    transform: rotate(25deg);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.btn-whatsapp:hover::after {
-    opacity: 1;
-    animation: btnShimmerSweep 1.8s infinite ease-in-out;
-}
-
-@keyframes btnShimmerSweep {
-    0% { left: -70%; }
-    100% { left: 150%; }
-}
-
-/* Submitting / Active Click State */
-.btn-whatsapp.is-submitting {
-    pointer-events: none;
-    box-shadow: 0 0 35px rgba(16, 185, 129, 0.8), 0 0 20px rgba(6, 182, 212, 0.6) !important;
-    animation: btnPulseGlow 1s infinite alternate ease-in-out;
-}
-
-@keyframes btnPulseGlow {
-    0% { transform: scale(0.98); filter: brightness(1); }
-    100% { transform: scale(1.02); filter: brightness(1.12); }
-}
-
-/* Success State */
-.btn-whatsapp.is-success {
-    pointer-events: none;
-    background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
-    box-shadow: 0 0 40px rgba(16, 185, 129, 0.85) !important;
-    transform: scale(1.02);
-    animation: btnSuccessPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes btnSuccessPop {
-    0% { transform: scale(0.92); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1.02); }
-}
-
-/* Sparkle particles bursting around the button */
 .sparkle-particle {
     position: absolute;
     width: 6px;
@@ -282,27 +759,145 @@ html:not(.dark) .theme-toggle-btn .moon-icon {
 }
 
 @keyframes sparkleFly {
-    0% {
-        transform: translate(0, 0) scale(1.2);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--tx), var(--ty)) scale(0);
-        opacity: 0;
-    }
+    0%   { transform: translate(0, 0) scale(1.2); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
 }
 
-/* Animated Checkmark Stroke */
 .checkmark-draw {
     stroke-dasharray: 40;
     stroke-dashoffset: 40;
     animation: checkmarkStroke 0.5s ease-in-out forwards;
 }
 
-@keyframes checkmarkStroke {
-    100% {
-        stroke-dashoffset: 0;
-    }
+@keyframes checkmarkStroke { 100% { stroke-dashoffset: 0; } }
+
+/* --------------------------------------------------------------------------
+   13. Contact Info Cards Glow Accents
+   -------------------------------------------------------------------------- */
+.card-glow-cyan:hover {
+    border-color: rgba(6, 182, 212, 0.65) !important;
+    box-shadow: var(--depth-shadow-mid), 0 0 28px -5px rgba(6, 182, 212, 0.35) !important;
+    transform: translateY(-4px);
 }
 
+.card-glow-blue:hover {
+    border-color: rgba(10, 102, 194, 0.70) !important;
+    box-shadow: var(--depth-shadow-mid), 0 0 28px -5px rgba(10, 102, 194, 0.35) !important;
+    transform: translateY(-4px);
+}
+
+.card-glow-indigo:hover {
+    border-color: rgba(99, 102, 241, 0.65) !important;
+    box-shadow: var(--depth-shadow-mid), 0 0 28px -5px rgba(99, 102, 241, 0.35) !important;
+    transform: translateY(-4px);
+}
+
+.card-glow-sky:hover {
+    border-color: rgba(14, 165, 233, 0.65) !important;
+    box-shadow: var(--depth-shadow-mid), 0 0 28px -5px rgba(14, 165, 233, 0.35) !important;
+    transform: translateY(-4px);
+}
+
+/* --------------------------------------------------------------------------
+   14. Timeline Items
+   -------------------------------------------------------------------------- */
+.timeline-card-3d {
+    transform-style: preserve-3d;
+    transition: transform var(--card-transition), box-shadow var(--card-transition), border-color var(--card-transition);
+}
+
+.timeline-card-3d:hover {
+    transform: translateY(-4px) translateZ(12px);
+    box-shadow: var(--depth-shadow-mid), 0 0 22px -5px var(--glow-cyan);
+    border-color: rgba(6, 182, 212, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   15. Form Inputs Focus Glow
+   -------------------------------------------------------------------------- */
+.input-3d {
+    transition: all 0.25s ease;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+}
+
+.input-3d::placeholder { color: var(--text-muted); }
+
+.input-3d:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.22), 0 4px 14px -2px rgba(6, 182, 212, 0.15);
+    transform: translateY(-1px);
+}
+
+html.dark .input-3d {
+    background: rgba(9, 16, 32, 0.65);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #f0f6ff;
+}
+
+html.dark .input-3d:focus {
+    border-color: rgba(6, 182, 212, 0.70);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15), 0 4px 20px -4px rgba(6, 182, 212, 0.25);
+}
+
+/* --------------------------------------------------------------------------
+   16. Scroll-Reveal Animations
+   -------------------------------------------------------------------------- */
+.reveal-3d {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-3d.revealed { opacity: 1; transform: translateY(0); }
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+
+/* --------------------------------------------------------------------------
+   17. Status Indicator Pulse
+   -------------------------------------------------------------------------- */
+.status-dot-pulse {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-dot-pulse::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #10b981;
+    animation: pingDot 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    opacity: 0.75;
+}
+
+@keyframes pingDot { 75%, 100% { transform: scale(2.4); opacity: 0; } }
+
+/* --------------------------------------------------------------------------
+   18. Dark Mode Text Color Overrides for Readability
+   -------------------------------------------------------------------------- */
+html.dark .bg-slate-100\/80,
+html.dark .dark\:bg-space-900\/60 {
+    background-color: rgba(13, 21, 38, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* --------------------------------------------------------------------------
+   19. Mobile Optimizations
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    .floating-badge { font-size: 0.65rem; padding: 0.35rem 0.65rem; }
+    .floating-badge-1 { top: -8px; left: -8px; }
+    .floating-badge-2 { top: 25%; right: -10px; }
+    .floating-badge-3 { bottom: -8px; left: 5%; }
+}
 

@@ -1,0 +1,190 @@
+{
+  "communities": {
+    "0": [
+      "images_about_me_photo",
+      "index_about_section",
+      "index_experience_section",
+      "index_navigation_header",
+      "index_skills_grid",
+      "index_skills_highlight_controller",
+      "index_theme_controller"
+    ],
+    "1": [
+      "cv_cv_haikal_pdf",
+      "cv_haikal_riyadh_romadhon_resume_en_v2_pdf",
+      "index_cv_modal",
+      "index_cv_viewer_controller"
+    ],
+    "2": [
+      "images_apotek_preview",
+      "index_projects_filter_controller",
+      "index_projects_section",
+      "project_apotek_system"
+    ],
+    "3": [
+      "images_haikal_portrait",
+      "index_hero_section",
+      "index_hero_tilt_controller",
+      "index_scroll_reveal_observer"
+    ],
+    "4": [
+      "index_bg_scene",
+      "index_constella_particle_canvas",
+      "index_cursor_spotlight_controller"
+    ],
+    "5": [
+      "index_contact_section",
+      "index_toast_system",
+      "index_whatsapp_form_controller"
+    ],
+    "6": [
+      "images_1money_preview",
+      "project_1money"
+    ],
+    "7": [
+      "images_hris_preview",
+      "project_hris_enterprise"
+    ],
+    "8": [
+      "images_scrum_preview",
+      "project_scrum_collaboration"
+    ],
+    "9": [
+      "images_shop_preview",
+      "project_28speedshop"
+    ],
+    "10": [
+      "index_footer"
+    ],
+    "11": [
+      "index_mobile_menu_controller"
+    ]
+  },
+  "cohesion": {
+    "0": 0.3333333333333333,
+    "1": 0.5,
+    "2": 0.5,
+    "3": 0.5,
+    "4": 0.6666666666666666,
+    "5": 0.6666666666666666,
+    "6": 1.0,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0,
+    "10": 1.0,
+    "11": 1.0
+  },
+  "gods": [
+    {
+      "id": "index_navigation_header",
+      "label": "Header & 3D Navigation Bar",
+      "degree": 8
+    },
+    {
+      "id": "index_projects_section",
+      "label": "Featured Projects Showcase & Filter",
+      "degree": 8
+    },
+    {
+      "id": "index_cv_modal",
+      "label": "Google Drive Style CV Modal",
+      "degree": 5
+    },
+    {
+      "id": "index_hero_section",
+      "label": "Hero Showcase Section",
+      "degree": 5
+    },
+    {
+      "id": "index_about_section",
+      "label": "About Me & Bento Architecture",
+      "degree": 3
+    },
+    {
+      "id": "index_experience_section",
+      "label": "Experience & Education Timeline",
+      "degree": 2
+    },
+    {
+      "id": "index_skills_grid",
+      "label": "Unified Bento Skills Grid (20 Techs)",
+      "degree": 2
+    },
+    {
+      "id": "project_apotek_system",
+      "label": "Apotek Management System (Laravel + Livewire)",
+      "degree": 2
+    },
+    {
+      "id": "index_scroll_reveal_observer",
+      "label": "Scroll-Reveal Observer (Intersection)",
+      "degree": 2
+    },
+    {
+      "id": "index_bg_scene",
+      "label": "Atmospheric Background & Particle Scene",
+      "degree": 2
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Google Drive Style CV Modal",
+      "target": "Curriculum Vitae Haikal (ID)",
+      "source_files": [
+        "index.html",
+        "cv/CV-Haikal.pdf"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc \u2194 paper); connects across different repos/directories; peripheral node `Curriculum Vitae Haikal (ID)` unexpectedly reaches hub `Google Drive Style CV Modal`"
+    },
+    {
+      "source": "Google Drive Style CV Modal",
+      "target": "Resume Haikal Riyadh Romadhon (EN)",
+      "source_files": [
+        "index.html",
+        "cv/Haikal_Riyadh_Romadhon_Resume_EN-v2.pdf"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc \u2194 paper); connects across different repos/directories; peripheral node `Resume Haikal Riyadh Romadhon (EN)` unexpectedly reaches hub `Google Drive Style CV Modal`"
+    },
+    {
+      "source": "Hero Showcase Section",
+      "target": "Hero Profile Portrait (Haikal.jpeg)",
+      "source_files": [
+        "index.html",
+        "Images/Haikal.jpeg"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc \u2194 image); connects across different repos/directories; peripheral node `Hero Profile Portrait (Haikal.jpeg)` unexpectedly reaches hub `Hero Showcase Section`"
+    },
+    {
+      "source": "About Me & Bento Architecture",
+      "target": "About Me Profile Visual (About Me.jpeg)",
+      "source_files": [
+        "index.html",
+        "Images/About Me.jpeg"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc \u2194 image); connects across different repos/directories"
+    },
+    {
+      "source": "Apotek Management System (Laravel + Livewire)",
+      "target": "Apotek System Preview (Apotek.png)",
+      "source_files": [
+        "index.html",
+        "Images/Apotek.png"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc \u2194 image); connects across different repos/directories"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

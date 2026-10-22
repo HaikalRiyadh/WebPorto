@@ -1,0 +1,62 @@
+{
+  "index.html": {
+    "mtime": 1792478970.9554749,
+    "seen": 1792647566.4339914,
+    "ast_hash": "736c3c70a6b15cf318501c68f8e6fe6e",
+    "semantic_hash": "736c3c70a6b15cf318501c68f8e6fe6e"
+  },
+  "cv/CV-Haikal.pdf": {
+    "mtime": 1790052631.5956142,
+    "seen": 1792647566.433997,
+    "ast_hash": "80c0e65282a64614a66961b25a48c36d",
+    "semantic_hash": "80c0e65282a64614a66961b25a48c36d"
+  },
+  "cv/Haikal_Riyadh_Romadhon_Resume_EN-v2.pdf": {
+    "mtime": 1790051296.2489884,
+    "seen": 1792647566.433999,
+    "ast_hash": "67fc8fe79983822c952e74e4bbf64332",
+    "semantic_hash": "67fc8fe79983822c952e74e4bbf64332"
+  },
+  "Images/1money.png": {
+    "mtime": 1789799845.1029482,
+    "seen": 1792647566.4340005,
+    "ast_hash": "3f5317ad3b48e6f73d6245e0bf192dc9",
+    "semantic_hash": "3f5317ad3b48e6f73d6245e0bf192dc9"
+  },
+  "Images/About Me.jpeg": {
+    "mtime": 1789444434.1686103,
+    "seen": 1792647566.4340017,
+    "ast_hash": "2cf5b4bbe5e2b021192cad53d2bdadae",
+    "semantic_hash": "2cf5b4bbe5e2b021192cad53d2bdadae"
+  },
+  "Images/Apotek.png": {
+    "mtime": 1785684870.3258686,
+    "seen": 1792647566.4340026,
+    "ast_hash": "ffb6b623c0be58f74251d62c41e254bb",
+    "semantic_hash": "ffb6b623c0be58f74251d62c41e254bb"
+  },
+  "Images/Haikal.jpeg": {
+    "mtime": 1785678904.3093705,
+    "seen": 1792647566.4340038,
+    "ast_hash": "8f5e006285633105804562090629491d",
+    "semantic_hash": "8f5e006285633105804562090629491d"
+  },
+  "Images/Hris.png": {
+    "mtime": 1785851290.6160655,
+    "seen": 1792647566.4340048,
+    "ast_hash": "c0ba4135b44669133fcb7f391b3cf8aa",
+    "semantic_hash": "c0ba4135b44669133fcb7f391b3cf8aa"
+  },
+  "Images/Scrum.png": {
+    "mtime": 1785850448.5114112,
+    "seen": 1792647566.4340057,
+    "ast_hash": "a932baa703e18255a1ea334b23d1ee15",
+    "semantic_hash": "a932baa703e18255a1ea334b23d1ee15"
+  },
+  "Images/Shop.png": {
+    "mtime": 1785686411.2122462,
+    "seen": 1792647566.4340067,
+    "ast_hash": "7f1987ebb8943f01d743cbfbe3832d73",
+    "semantic_hash": "7f1987ebb8943f01d743cbfbe3832d73"
+  }
+}
