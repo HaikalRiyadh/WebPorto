@@ -294,7 +294,7 @@
                     </div>
 
                     <!-- Hanging Lanyard Assembly (Satu Tali Tunggal & Foto Haikal) -->
-                    <div class="hanging-lanyard-assembly is-hidden relative flex flex-col items-center select-none cursor-pointer pt-1" id="hanging-lanyard-assembly" title="Click to bounce photo">
+                    <div class="hanging-lanyard-assembly is-hidden group relative flex flex-col items-center select-none cursor-pointer pt-1" id="hanging-lanyard-assembly">
                         
                         <!-- Single Vertical Strap / Lanyard Ribbon (Satu Tali Tunggal) -->
                         <div class="lanyard-strap relative w-3.5 h-16 flex items-center justify-center z-20">
@@ -315,18 +315,26 @@
                         </div>
 
                         <!-- The Hanging Photo Card (Foto Haikal dengan Rounded Corners & Frame Bersih) -->
-                        <div class="hanging-photo-card relative z-10 w-56 aspect-[4/5] rounded-2xl p-1.5 -mt-1 bg-gradient-to-b from-white/90 to-slate-100/90 dark:from-space-900/90 dark:to-space-950/95 border-2 border-slate-200 dark:border-cyan-500/30 shadow-2xl backdrop-blur-md group hover:border-cyan-400/70 transition-all duration-300">
+                        <div class="hanging-photo-card group relative z-10 w-56 aspect-[4/5] rounded-2xl p-1.5 -mt-1 bg-gradient-to-b from-white/90 to-slate-100/90 dark:from-space-900/90 dark:to-space-950/95 border-2 border-slate-200 dark:border-cyan-500/30 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-cyan-400/60" id="hanging-photo-card">
                             
                             <!-- Top metal eyelet / punch hole for the clip -->
-                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 z-20 w-4 h-4 rounded-full bg-slate-200 dark:bg-space-950 border-2 border-slate-400 dark:border-cyan-400 shadow-md flex items-center justify-center">
+                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 z-20 w-4 h-4 rounded-full bg-slate-200 dark:bg-space-950 border-2 border-slate-400 dark:border-cyan-400 shadow-md flex items-center justify-center pointer-events-none">
                                 <div class="w-1.5 h-1.5 rounded-full bg-slate-900 dark:bg-cyan-300"></div>
                             </div>
 
                             <!-- Photo Container -->
                             <div class="w-full h-full rounded-xl overflow-hidden relative shadow-inner">
                                 <img src="./Images/About Me.jpeg" alt="Haikal Riyadh Romadhon"
-                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-600 ease-out"
+                                    class="w-full h-full object-cover select-none pointer-events-none group-hover:scale-105 transition-transform duration-600 ease-out"
                                     onerror="this.src='https://placehold.co/400x500/0F172A/06B6D4?text=Haikal'">
+
+                                <!-- Gradient Beam Sweep Layer (Only active on Click/Tap) -->
+                                <div class="photo-holo-overlay">
+                                    <div class="photo-holo-sweep"></div>
+                                </div>
+
+                                <!-- Ripple Injection Layer -->
+                                <div class="absolute inset-0 pointer-events-none z-20 overflow-hidden" id="photo-ripple-container"></div>
                             </div>
                         </div>
 
@@ -1614,21 +1622,26 @@
             });
         })();
 
-        // --- 9b. Hanging Lanyard Photo Drop-In Controller ---
+        // --- 9b. Hanging Lanyard Photo Drop-In & Holographic Interactive Controller ---
         (function () {
             const photoCard = document.getElementById('about-photo-card');
             const lanyardAssembly = document.getElementById('hanging-lanyard-assembly');
             if (!lanyardAssembly || !photoCard) return;
 
+            const photoBadge = lanyardAssembly.querySelector('.hanging-photo-card');
+            const rippleContainer = document.getElementById('photo-ripple-container');
+
             let isDropped = false;
             let isAnimating = false;
+            let tapTimeout = null;
+            let shineTimeout = null;
 
             function triggerDrop() {
                 if (isAnimating) return;
                 isAnimating = true;
 
                 // Reset classes to hidden
-                lanyardAssembly.classList.remove('is-active', 'drop-enter');
+                lanyardAssembly.classList.remove('is-active', 'drop-enter', 'is-tapped');
                 lanyardAssembly.classList.add('is-hidden');
 
                 // Force layout reflow
@@ -1647,12 +1660,104 @@
                 });
             }
 
-            // Click on photo to re-trigger playful bounce
-            lanyardAssembly.addEventListener('click', () => {
-                triggerDrop();
+            let isPhotoZoomed = false;
+
+            // Click & Tap Interactive Effect (FOTO KE ZOOM SEPERTI HAIKAL.PNG, TIDAK NAIK KE ATAS)
+            function triggerPhotoInteract(e) {
+                // If currently dropping in from ceiling, don't interrupt
+                if (isAnimating) return;
+
+                // 1. Zoom Photo In / Out Toggle (Persis seperti efek zoom halus pada foto Haikal.png)
+                const photoImg = photoBadge ? photoBadge.querySelector('img') : null;
+                if (photoImg) {
+                    isPhotoZoomed = !isPhotoZoomed;
+                    if (isPhotoZoomed) {
+                        photoImg.classList.add('is-zoomed');
+                    } else {
+                        photoImg.classList.remove('is-zoomed');
+                    }
+                }
+
+                // 2. Natural Physical Tap Sway (Berayun alami seperti lanyard disentuh di laptop/hp, tidak naik ke atas!)
+                lanyardAssembly.classList.remove('is-active', 'is-tapped');
+                void lanyardAssembly.offsetWidth; // force reflow
+                lanyardAssembly.classList.add('is-tapped');
+
+                clearTimeout(tapTimeout);
+                tapTimeout = setTimeout(() => {
+                    lanyardAssembly.classList.remove('is-tapped');
+                    lanyardAssembly.classList.add('is-active');
+                }, 1350);
+
+                // 3. Holographic Prismatic Gradient Beam & Glow Aura (Cyan / Sky Blue Sheen)
+                if (photoBadge) {
+                    photoBadge.classList.remove('is-shining');
+                    void photoBadge.offsetWidth; // force reflow
+                    photoBadge.classList.add('is-shining');
+
+                    clearTimeout(shineTimeout);
+                    shineTimeout = setTimeout(() => {
+                        photoBadge.classList.remove('is-shining');
+                    }, 1100);
+                }
+
+                // 4. Dynamic Click / Touch Gradient Ripple Wave at exact tap coordinates
+                if (rippleContainer && photoBadge) {
+                    const rect = photoBadge.getBoundingClientRect();
+                    let clientX = null;
+                    let clientY = null;
+
+                    if (e) {
+                        if (e.touches && e.touches.length > 0) {
+                            clientX = e.touches[0].clientX;
+                            clientY = e.touches[0].clientY;
+                        } else if (e.clientX !== undefined) {
+                            clientX = e.clientX;
+                            clientY = e.clientY;
+                        }
+                    }
+
+                    // Fallback to center if coords not available
+                    const x = (clientX !== null) ? Math.max(0, Math.min(rect.width, clientX - rect.left)) : rect.width / 2;
+                    const y = (clientY !== null) ? Math.max(0, Math.min(rect.height, clientY - rect.top)) : rect.height / 2;
+
+                    const ripple = document.createElement('span');
+                    ripple.className = 'photo-click-ripple';
+                    const size = Math.max(rect.width, rect.height) * 1.5;
+                    ripple.style.width = `${size}px`;
+                    ripple.style.height = `${size}px`;
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+
+                    rippleContainer.appendChild(ripple);
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 900);
+                }
+
+                // 5. Mobile Haptic Feedback (if supported on HP)
+                if (window.navigator && typeof window.navigator.vibrate === 'function') {
+                    try {
+                        window.navigator.vibrate(18);
+                    } catch (err) {}
+                }
+            }
+
+            // Bind click & pointer to the lanyard assembly (Laptop & HP)
+            lanyardAssembly.addEventListener('click', (e) => {
+                triggerPhotoInteract(e);
             });
 
-            // 1. Trigger when scrolling down into viewport (observe the container card)
+            // Click outside to smoothly unzoom
+            document.addEventListener('click', (e) => {
+                if (isPhotoZoomed && !lanyardAssembly.contains(e.target)) {
+                    isPhotoZoomed = false;
+                    const photoImg = photoBadge ? photoBadge.querySelector('img') : null;
+                    if (photoImg) photoImg.classList.remove('is-zoomed');
+                }
+            });
+
+            // 1. Trigger entrance when scrolling down into viewport
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1660,9 +1765,9 @@
                             setTimeout(triggerDrop, 200);
                         }
                     } else {
-                        // Reset when scrolled out of view so it drops again when returning
+                        // Reset when completely scrolled away
                         isDropped = false;
-                        lanyardAssembly.classList.remove('is-active', 'drop-enter');
+                        lanyardAssembly.classList.remove('is-active', 'drop-enter', 'is-tapped');
                         lanyardAssembly.classList.add('is-hidden');
                     }
                 });
@@ -1678,7 +1783,11 @@
             aboutNavLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     setTimeout(() => {
-                        triggerDrop();
+                        if (!isDropped) {
+                            triggerDrop();
+                        } else {
+                            triggerPhotoInteract();
+                        }
                     }, 280);
                 });
             });

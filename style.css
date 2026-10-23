@@ -471,8 +471,37 @@ html.dark .hero-card-bg {
     100% { transform: rotate(-2.8deg); }
 }
 
-.hanging-lanyard-assembly:hover {
-    animation-play-state: paused;
+/* Realistic Physics Tap Sway (TIDAK NAIK KE ATAS, BERAYUN ALAMI DI POROS GANTUNGAN) */
+.hanging-lanyard-assembly.is-tapped {
+    animation: lanyardTapPhysics 1.35s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+@keyframes lanyardTapPhysics {
+    0% {
+        transform: rotate(0deg) scale(0.975);
+    }
+    18% {
+        transform: rotate(7deg) scale(1.02);
+    }
+    38% {
+        transform: rotate(-5.2deg) scale(1.01);
+    }
+    58% {
+        transform: rotate(3deg) scale(1.005);
+    }
+    76% {
+        transform: rotate(-1.5deg) scale(1);
+    }
+    90% {
+        transform: rotate(0.8deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.hanging-lanyard-assembly.is-tapped {
+    animation: lanyardTapPhysics 1.35s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
 }
 
 /* Lanyard Strap (Satu Tali Tunggal) */
@@ -494,31 +523,141 @@ html.dark .hero-card-bg {
 .hanging-photo-card {
     border-radius: 1.25rem;
     padding: 0.375rem;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.88);
     border: 2px solid rgba(6, 182, 212, 0.4);
     box-shadow: 
         0 20px 40px -10px rgba(0, 0, 0, 0.4),
         0 0 25px -5px rgba(6, 182, 212, 0.25);
     backdrop-filter: blur(12px);
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
-                box-shadow 0.3s ease, 
-                border-color 0.3s ease;
+    transition: box-shadow 0.35s ease, border-color 0.35s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html.dark .hanging-photo-card {
-    background: rgba(11, 17, 33, 0.92);
+    background: rgba(11, 17, 33, 0.94);
     border-color: rgba(6, 182, 212, 0.4);
     box-shadow: 
         0 24px 50px -10px rgba(0, 0, 0, 0.75),
         0 0 30px -5px rgba(6, 182, 212, 0.3);
 }
 
-.hanging-photo-card:hover {
-    transform: scale(1.025);
-    border-color: rgba(6, 182, 212, 0.8);
+/* Photo Zoom (Rada nge-zoom halus saat kursor diarahkan, dan zoom lebih dalam saat diklik) */
+.hanging-photo-card img {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    will-change: transform;
+}
+
+.hanging-photo-card:hover img,
+.hanging-lanyard-assembly:hover .hanging-photo-card img {
+    transform: scale(1.06) !important;
+}
+
+.hanging-photo-card img.is-zoomed,
+.hanging-photo-card:hover img.is-zoomed,
+.hanging-lanyard-assembly:hover .hanging-photo-card img.is-zoomed {
+    transform: scale(1.1) !important;
+}
+
+/* Active Glowing Aura on Click / Tap (Cyan & Sky Blue, No Pink) */
+.hanging-photo-card.is-shining {
+    border-color: rgba(6, 182, 212, 0.95) !important;
     box-shadow: 
-        0 28px 55px -10px rgba(0, 0, 0, 0.85),
-        0 0 35px 0px rgba(6, 182, 212, 0.45);
+        0 28px 60px -10px rgba(0, 0, 0, 0.85),
+        0 0 35px 3px rgba(6, 182, 212, 0.8),
+        0 0 65px 6px rgba(56, 189, 248, 0.4),
+        inset 0 0 20px rgba(6, 182, 212, 0.3) !important;
+}
+
+/* Hologram Shimmer Layer */
+.photo-holo-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 15;
+}
+
+.photo-holo-sweep {
+    position: absolute;
+    top: -60%;
+    left: -60%;
+    width: 220%;
+    height: 220%;
+    background: linear-gradient(
+        115deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(6, 182, 212, 0.2) 44%,
+        rgba(56, 189, 248, 0.55) 52%,
+        rgba(255, 255, 255, 0.9) 60%,
+        rgba(6, 182, 212, 0.35) 68%,
+        transparent 78%,
+        transparent 100%
+    );
+    transform: rotate(-18deg) translateY(-140%);
+    opacity: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+/* Beam sweep ONLY triggers on click / tap (NOT on hover) */
+.hanging-photo-card.is-shining .photo-holo-sweep {
+    animation: holoBeamSweep 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes holoBeamSweep {
+    0% {
+        transform: rotate(-18deg) translateY(-140%);
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    85% {
+        opacity: 0.95;
+    }
+    100% {
+        transform: rotate(-18deg) translateY(140%);
+        opacity: 0;
+    }
+}
+
+/* Radial Gradient Click / Touch Ripple Wave (Cyan & Sky Blue, No Pink) */
+.photo-click-ripple {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    background: radial-gradient(
+        circle,
+        rgba(6, 182, 212, 0.65) 0%,
+        rgba(56, 189, 248, 0.35) 45%,
+        rgba(14, 165, 233, 0.15) 70%,
+        transparent 100%
+    );
+    border: 1.5px solid rgba(165, 243, 252, 0.85);
+    box-shadow: 
+        0 0 25px rgba(6, 182, 212, 0.7),
+        inset 0 0 15px rgba(56, 189, 248, 0.5);
+    animation: rippleWave 0.85s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    z-index: 25;
+}
+
+@keyframes rippleWave {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.8);
+        opacity: 0;
+    }
 }
 
 /* --------------------------------------------------------------------------
