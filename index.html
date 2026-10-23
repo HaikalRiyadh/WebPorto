@@ -257,10 +257,13 @@
                     <!-- Background gradient blur aura -->
                     <div class="absolute -inset-2 bg-gradient-to-tr from-cyan-500/30 via-indigo-500/20 to-emerald-500/30 rounded-3xl blur-2xl opacity-40 group-hover:opacity-75 transition-opacity duration-500"></div>
 
-                    <!-- User Photo -->
-                    <img src="./Images/Haikal.jpeg" alt="Haikal Riyadh Romadhon"
+                    <!-- Adaptive Ambient Card Background (Putih saat Light Mode, Gelap saat Dark Mode) -->
+                    <div class="hero-card-bg"></div>
+
+                    <!-- User Photo (Transparent PNG: Otomatis Menyesuaikan Putih saat Light Mode & Gelap saat Dark Mode) -->
+                    <img src="./Images/Haikal.png" alt="Haikal Riyadh Romadhon"
                         class="relative z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-600 ease-out"
-                        onerror="this.src='https://placehold.co/500x650/0F172A/06B6D4?text=Haikal+Riyadh'">
+                        onerror="this.src='./Images/Haikal.jpeg'">
                 </div>
             </div>
         </section>
