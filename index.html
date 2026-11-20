@@ -59,6 +59,9 @@
 
     <!-- External Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Spline 3D Web Component Viewer -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
 </head>
 
 <body
@@ -335,25 +338,26 @@
                 </div>
             </div>
 
-            <!-- Right Column: Interactive Robot Hero Card (Simetris & Nempel di Garis Bawah) -->
+            <!-- Right Column: Interactive 3D Spline Robot Card (Simetris & Nempel di Garis Bawah) -->
             <div class="flex-1 flex justify-center lg:justify-end w-full max-w-lg lg:max-w-xl relative py-4">
-                <!-- 3D Card with ibelick/spotlight & Subtle Tilt -->
+                <!-- 3D Card with ibelick/spotlight & Studio Backlight Halo -->
                 <div id="spline-card"
                     class="w-full h-[520px] sm:h-[560px] lg:h-[580px] rounded-3xl bg-black/[0.96] border border-neutral-800 shadow-2xl relative overflow-hidden group transition-all duration-300">
                     
                     <!-- Spotlight (ibelick/spotlight: fill="white") -->
                     <div id="spline-spotlight"
-                        class="pointer-events-none absolute rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.22),transparent_75%)] blur-2xl transition-opacity duration-300 opacity-0 -top-40 left-0 w-[380px] h-[380px] z-0"></div>
+                        class="pointer-events-none absolute rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.22),transparent_75%)] blur-2xl transition-opacity duration-300 opacity-0 -top-40 left-0 w-[380px] h-[380px] z-10"></div>
+
+                    <!-- Studio White Circular Backlight Halo (Matching the studio reference behind the robot) -->
+                    <div class="pointer-events-none absolute top-[28%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-72 sm:h-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.06)_45%,transparent_70%)] blur-2xl z-0"></div>
 
                     <!-- Ambient Glow Blur Aura -->
-                    <div class="absolute -inset-2 bg-gradient-to-tr from-cyan-500/20 via-indigo-500/20 to-emerald-500/20 rounded-3xl blur-2xl opacity-40 group-hover:opacity-75 transition-opacity duration-500 pointer-events-none"></div>
+                    <div class="absolute -inset-2 bg-gradient-to-tr from-cyan-500/15 via-indigo-500/15 to-emerald-500/15 rounded-3xl blur-2xl opacity-40 group-hover:opacity-75 transition-opacity duration-500 pointer-events-none"></div>
 
-                    <!-- Robot Image Viewport: Clean object-contain object-bottom with subtle hover scale -->
+                    <!-- 3D Spline Canvas Viewport: scaled to 90% & translated down so bottom of legs touches flush against bottom border line (zero gap, zero floating, zero top clipping) -->
                     <div class="w-full h-full relative z-10 flex items-center justify-center overflow-hidden">
-                        <img src="./Images/robot-hero.jpg" alt="Autonomous AI Robot"
-                            class="w-full h-full object-contain object-bottom select-none pointer-events-none transform scale-[0.98] sm:scale-100 transition-transform duration-500 ease-out group-hover:scale-105" />
-                        <!-- Soft Bottom Gradient Vignette for seamless card floor integration -->
-                        <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/[0.96] to-transparent pointer-events-none"></div>
+                        <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                            class="w-full h-full block transform scale-[0.89] sm:scale-[0.90] lg:scale-[0.90] translate-y-5 sm:translate-y-6 origin-center transition-transform duration-300"></spline-viewer>
                     </div>
                 </div>
             </div>
@@ -2407,49 +2411,114 @@ ${message}`;
             requestAnimationFrame(animate);
         })();
 
-        // --- Robot Card Spotlight & 3D Interactive Controller (ibelick/spotlight) ---
+        // --- 3D Spline Robot Card Spotlight & Controller ---
         (function () {
             const card = document.getElementById('spline-card');
             const spotlight = document.getElementById('spline-spotlight');
-            if (!card || !spotlight) return;
+            if (card && spotlight) {
+                let isHovered = false;
+                let mouseX = 0, mouseY = 0;
+                let currentX = 0, currentY = 0;
 
-            let isHovered = false;
-            let mouseX = 0, mouseY = 0;
-            let currentX = 0, currentY = 0;
+                card.addEventListener('mouseenter', () => {
+                    isHovered = true;
+                    spotlight.style.opacity = '1';
+                });
 
-            card.addEventListener('mouseenter', () => {
-                isHovered = true;
-                spotlight.style.opacity = '1';
-            });
+                card.addEventListener('mouseleave', () => {
+                    isHovered = false;
+                    spotlight.style.opacity = '0';
+                });
 
-            card.addEventListener('mouseleave', () => {
-                isHovered = false;
-                spotlight.style.opacity = '0';
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
-            });
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    mouseX = e.clientX - rect.left;
+                    mouseY = e.clientY - rect.top;
+                }, { passive: true });
 
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                mouseX = e.clientX - rect.left;
-                mouseY = e.clientY - rect.top;
-
-                // Smooth 3D tilt perspective
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((mouseY - centerY) / centerY) * -6;
-                const rotateY = ((mouseX - centerX) / centerX) * 6;
-                card.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
-            }, { passive: true });
-
-            function animateSpotlight() {
-                if (isHovered) {
-                    currentX += (mouseX - currentX) * 0.15;
-                    currentY += (mouseY - currentY) * 0.15;
-                    spotlight.style.transform = 'translate(' + (currentX - 190) + 'px, ' + (currentY - 190) + 'px)';
+                function animateSpotlight() {
+                    if (isHovered) {
+                        currentX += (mouseX - currentX) * 0.15;
+                        currentY += (mouseY - currentY) * 0.15;
+                        spotlight.style.transform = 'translate(' + (currentX - 190) + 'px, ' + (currentY - 190) + 'px)';
+                    }
+                    requestAnimationFrame(animateSpotlight);
                 }
-                requestAnimationFrame(animateSpotlight);
+                animateSpotlight();
             }
-            animateSpotlight();
+
+            // Prevent accidental mouse-wheel zooming on the 3D robot while scrolling the page
+            const viewerEl = document.querySelector('spline-viewer');
+            if (viewerEl) {
+                viewerEl.addEventListener('wheel', (e) => {
+                    if (!e.ctrlKey && !e.metaKey) {
+                        e.stopPropagation();
+                    }
+                }, { capture: true, passive: false });
+            }
+
+            // Spline Watermark Cleaner & Studio Visor Tuning
+            const eyeImg = new Image();
+            eyeImg.src = './Images/robot-eyes-led.png';
+
+            function tuneSplineVisor() {
+                const viewer = document.querySelector('spline-viewer');
+                if (!viewer) return;
+
+                // 1. Clean Spline watermark logo from Shadow DOM
+                if (viewer.shadowRoot && !viewer.shadowRoot.querySelector('#hide-spline-logo-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'hide-spline-logo-style';
+                    style.textContent = '#logo, a#logo, [href*="spline.design"] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }';
+                    viewer.shadowRoot.appendChild(style);
+                }
+
+                const app = viewer._spline || viewer.spline;
+                if (!app || !app._scene) return;
+
+                let headMesh = null;
+                app._scene.traverse((o) => {
+                    if (o.name === 'Head 2') headMesh = o;
+                });
+                if (!headMesh || !headMesh.material || !headMesh.material.layers) return;
+
+                const mat = headMesh.material;
+                const eyeLayer = mat.layers[1];
+                const tex = eyeLayer?.uniforms?.f3_texture?.value;
+
+                // Reduce reflection glare for obsidian glass look matching the studio render
+                if (mat.layers[2]?.uniforms?.f2_alpha) mat.layers[2].uniforms.f2_alpha.value = 0.08;
+                if (mat.layers[3]?.uniforms?.f1_alpha) mat.layers[3].uniforms.f1_alpha.value = 0.02;
+                if (mat.layers[4]?.uniforms?.f0_alpha) mat.layers[4].uniforms.f0_alpha.value = 0.02;
+
+                if (tex && eyeImg.complete && eyeImg.naturalWidth > 0) {
+                    if (tex.image && tex.image.tagName === 'VIDEO') {
+                        try { tex.image.pause(); } catch (e) {}
+                    }
+                    tex.image = eyeImg;
+                    if (tex.source) {
+                        tex.source.data = eyeImg;
+                        tex.source.needsUpdate = true;
+                    }
+                    tex.isVideoTexture = false;
+                    tex.update = function () {};
+                    tex.minFilter = 1006;
+                    tex.magFilter = 1006;
+                    tex.generateMipmaps = false;
+                    tex.needsUpdate = true;
+                }
+            }
+
+            let pollTicks = 0;
+            const visorPoll = setInterval(() => {
+                pollTicks++;
+                tuneSplineVisor();
+                if (pollTicks > 120) clearInterval(visorPoll);
+            }, 300);
+
+            ['load', 'pointermove', 'pointerdown'].forEach((evt) => {
+                window.addEventListener(evt, tuneSplineVisor, { passive: true });
+            });
         })();
     </script>
 </body>

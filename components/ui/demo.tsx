@@ -6,15 +6,15 @@ import { Spotlight } from "@/components/ui/spotlight"
  
 export function SplineSceneBasic() {
   return (
-    <Card className="w-full min-h-[580px] bg-black/[0.96] relative overflow-hidden">
+    <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="white"
       />
       
-      <div className="flex flex-col lg:flex-row h-full">
+      <div className="flex h-full">
         {/* Left content */}
-        <div className="flex-1 lg:max-w-[48%] p-8 relative z-10 flex flex-col justify-center">
+        <div className="flex-1 p-8 relative z-10 flex flex-col justify-center">
           <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
             Interactive 3D
           </h1>
@@ -25,13 +25,11 @@ export function SplineSceneBasic() {
         </div>
 
         {/* Right content */}
-        <div className="flex-1 relative min-h-[480px] lg:min-h-full flex items-center justify-center overflow-visible">
-          <div className="relative w-full lg:w-[155%] lg:-left-[55%] h-full flex items-center justify-center">
-            <SplineScene 
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
-            />
-          </div>
+        <div className="flex-1 relative">
+          <SplineScene 
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full"
+          />
         </div>
       </div>
     </Card>
