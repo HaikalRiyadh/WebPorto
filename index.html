@@ -409,8 +409,9 @@
                             <div class="w-2.5 h-4 -mt-1 bg-gradient-to-b from-cyan-400 to-cyan-600 rounded-b-sm shadow-sm"></div>
                         </div>
 
-                        <!-- The Hanging Photo Card (Foto Haikal dengan Rounded Corners & Frame Bersih) -->
-                        <div class="hanging-photo-card group relative z-10 w-56 aspect-[4/5] rounded-2xl p-1.5 -mt-1 bg-gradient-to-b from-space-900/90 to-space-950/95 border-2 border-cyan-500/30 shadow-2xl backdrop-blur-md transition-all duration-300 hover:border-cyan-400/60" id="hanging-photo-card">
+                        <!-- The Hanging Photo Card (Foto Haikal dengan Rounded Corners & Reactive Spotlight Glow) -->
+                        <div class="hanging-photo-card group relative z-10 w-56 aspect-[4/5] rounded-2xl p-1.5 -mt-1 shadow-2xl backdrop-blur-md transition-all duration-300" id="hanging-photo-card" data-glow>
+                            <div data-glow></div>
                             
                             <!-- Top metal eyelet / punch hole for the clip -->
                             <div class="absolute -top-2 left-1/2 -translate-x-1/2 z-20 w-4 h-4 rounded-full bg-space-950 border-2 border-cyan-400 shadow-md flex items-center justify-center pointer-events-none">
@@ -418,7 +419,7 @@
                             </div>
 
                             <!-- Photo Container -->
-                            <div class="w-full h-full rounded-xl overflow-hidden relative shadow-inner">
+                            <div class="w-full h-full rounded-xl overflow-hidden relative shadow-inner z-10">
                                 <img src="./Images/About Me.jpeg" alt="Haikal Riyadh Romadhon"
                                     class="w-full h-full object-cover select-none pointer-events-none group-hover:scale-105 transition-transform duration-600 ease-out"
                                     onerror="this.src='https://placehold.co/400x500/0F172A/06B6D4?text=Haikal'">
@@ -2519,6 +2520,27 @@ ${message}`;
             ['load', 'pointermove', 'pointerdown'].forEach((evt) => {
                 window.addEventListener(evt, tuneSplineVisor, { passive: true });
             });
+        })();
+
+        // --- Spotlight Card (GlowCard) Pointer Tracking Synchronization ---
+        (function () {
+            const glowCards = document.querySelectorAll('[data-glow]');
+            if (!glowCards.length) return;
+
+            const syncPointer = (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+                const xp = (x / window.innerWidth).toFixed(2);
+                const yp = (y / window.innerHeight).toFixed(2);
+                glowCards.forEach((card) => {
+                    card.style.setProperty('--x', x.toFixed(2));
+                    card.style.setProperty('--xp', xp);
+                    card.style.setProperty('--y', y.toFixed(2));
+                    card.style.setProperty('--yp', yp);
+                });
+            };
+
+            document.addEventListener('pointermove', syncPointer, { passive: true });
         })();
     </script>
 </body>
