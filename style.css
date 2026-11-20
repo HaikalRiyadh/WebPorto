@@ -1029,6 +1029,7 @@ spline-viewer::part(canvas) {
 
 /* =========================================================================
    SPOTLIGHT GLOW CARD (21st.dev / ibelick Dynamic Reactive Glow System)
+   Strictly Scoped ONLY to the Photo Card
    ========================================================================= */
 [data-glow] {
     --base: 220;
@@ -1037,7 +1038,7 @@ spline-viewer::part(canvas) {
     --border: 2.5;
     --backdrop: rgba(11, 17, 33, 0.94);
     --backup-border: var(--backdrop);
-    --size: 240;
+    --size: 220;
     --outer: 1;
     --border-size: calc(var(--border, 2) * 1px);
     --spotlight-size: calc(var(--size, 150) * 1px);
@@ -1049,9 +1050,7 @@ spline-viewer::part(canvas) {
         hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 70) * 1%) / var(--bg-spot-opacity, 0.12)), transparent
     );
     background-color: var(--backdrop, transparent);
-    background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
-    background-position: 50% 50%;
-    background-attachment: fixed;
+    background-size: 100% 100%;
     border: var(--border-size) solid var(--backup-border) !important;
     position: relative;
     touch-action: none;
@@ -1065,10 +1064,7 @@ spline-viewer::part(canvas) {
     inset: calc(var(--border-size) * -1);
     border: var(--border-size) solid transparent;
     border-radius: calc(var(--radius) * 1px);
-    background-attachment: fixed;
-    background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
     background-repeat: no-repeat;
-    background-position: 50% 50%;
     mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
     mask-clip: padding-box, border-box;
     mask-composite: intersect;
@@ -1076,6 +1072,13 @@ spline-viewer::part(canvas) {
     -webkit-mask-clip: padding-box, border-box;
     -webkit-mask-composite: source-out;
     z-index: 15;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+[data-glow]:hover::before,
+[data-glow]:hover::after {
+    opacity: 1;
 }
 
 [data-glow]::before {
@@ -1101,7 +1104,7 @@ spline-viewer::part(canvas) {
     position: absolute;
     inset: 0;
     will-change: filter;
-    opacity: var(--outer, 1);
+    opacity: 0;
     border-radius: calc(var(--radius) * 1px);
     border-width: calc(var(--border-size) * 20);
     filter: blur(calc(var(--border-size) * 10));
@@ -1109,6 +1112,11 @@ spline-viewer::part(canvas) {
     pointer-events: none;
     border: none;
     z-index: 5;
+    transition: opacity 0.35s ease;
+}
+
+[data-glow]:hover [data-glow] {
+    opacity: var(--outer, 1);
 }
 
 [data-glow] > [data-glow]::before {

@@ -2522,25 +2522,31 @@ ${message}`;
             });
         })();
 
-        // --- Spotlight Card (GlowCard) Pointer Tracking Synchronization ---
+        // --- Spotlight Card (GlowCard) Pointer Tracking: Strictly Scoped to the Photo Card ---
         (function () {
-            const glowCards = document.querySelectorAll('[data-glow]');
-            if (!glowCards.length) return;
+            const card = document.getElementById('hanging-photo-card');
+            if (!card) return;
 
-            const syncPointer = (e) => {
-                const x = e.clientX;
-                const y = e.clientY;
-                const xp = (x / window.innerWidth).toFixed(2);
-                const yp = (y / window.innerHeight).toFixed(2);
-                glowCards.forEach((card) => {
-                    card.style.setProperty('--x', x.toFixed(2));
-                    card.style.setProperty('--xp', xp);
-                    card.style.setProperty('--y', y.toFixed(2));
-                    card.style.setProperty('--yp', yp);
-                });
-            };
+            card.addEventListener('pointerenter', () => {
+                card.style.setProperty('--outer', '1');
+            });
 
-            document.addEventListener('pointermove', syncPointer, { passive: true });
+            card.addEventListener('pointerleave', () => {
+                card.style.setProperty('--outer', '0');
+            });
+
+            card.addEventListener('pointermove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xp = Math.max(0, Math.min(1, x / rect.width)).toFixed(2);
+                const yp = Math.max(0, Math.min(1, y / rect.height)).toFixed(2);
+
+                card.style.setProperty('--x', x.toFixed(2));
+                card.style.setProperty('--xp', xp);
+                card.style.setProperty('--y', y.toFixed(2));
+                card.style.setProperty('--yp', yp);
+            }, { passive: true });
         })();
     </script>
 </body>
