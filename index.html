@@ -375,54 +375,53 @@
 
             <!-- Unified About Card (Foto & Deskripsi Jadi Satu Kotak) -->
             <div class="glass-card rounded-3xl p-6 sm:p-8 lg:p-10 reveal-3d relative overflow-hidden flex flex-col lg:flex-row items-center lg:items-stretch gap-8 lg:gap-12" id="about-photo-card">
-                <!-- Subtle background glow -->
-                <div class="absolute -top-12 -left-12 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <!-- Subtle background ambient light -->
+                <div class="absolute -top-12 -left-12 w-60 h-60 bg-white/[0.03] rounded-full blur-3xl pointer-events-none"></div>
 
-                <!-- Left Column: Hanging Lanyard Photo -->
-                <div class="w-full sm:w-auto lg:w-72 xl:w-80 flex-shrink-0 flex flex-col items-center justify-start relative -mt-6 sm:-mt-8 lg:-mt-10 pt-6 sm:pt-8 lg:pt-10">
+                <!-- Left Column: Hanging Lanyard Photo (Crafted Developer Badge) -->
+                <div class="w-full sm:w-auto lg:w-72 xl:w-80 flex-shrink-0 flex flex-col items-center justify-start relative pt-2 sm:pt-4">
                     
-                    <!-- Permanent Ceiling Anchor at top border of the card -->
+                    <!-- Architectural Ceiling Anchor -->
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                        <div class="w-8 h-2.5 rounded-b-md bg-gradient-to-r from-slate-700 via-cyan-400 to-slate-700 shadow-md border-x border-b border-cyan-400/40 flex items-center justify-center">
-                            <div class="w-3 h-1 rounded-full bg-cyan-400 shadow-sm"></div>
-                        </div>
+                        <div class="w-6 h-1.5 rounded-b bg-neutral-800 border-x border-b border-neutral-700/80 shadow-sm"></div>
                     </div>
 
                     <!-- Hanging Lanyard Assembly (Satu Tali Tunggal & Foto Haikal) -->
-                    <div class="hanging-lanyard-assembly is-hidden group relative flex flex-col items-center select-none cursor-pointer pt-1" id="hanging-lanyard-assembly">
+                    <div class="hanging-lanyard-assembly is-hidden group relative flex flex-col items-center select-none cursor-pointer pt-0.5" id="hanging-lanyard-assembly">
                         
-                        <!-- Single Vertical Strap / Lanyard Ribbon (Satu Tali Tunggal) -->
-                        <div class="lanyard-strap relative w-3.5 h-16 flex items-center justify-center z-20">
-                            <!-- Woven lanyard fabric strap with stitches -->
-                            <div class="w-2.5 h-full bg-space-950 border-x border-cyan-400/50 shadow-md relative rounded-sm">
-                                <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-cyan-400/60"></div>
+                        <!-- Single Vertical Strap / Lanyard Ribbon (Matte Fabric Finish) -->
+                        <div class="lanyard-strap relative w-3.5 h-10 flex items-center justify-center z-20">
+                            <!-- Woven lanyard fabric strap with fine micro-stitch -->
+                            <div class="w-2.5 h-full bg-neutral-900 border-x border-neutral-800 shadow-sm relative rounded-sm">
+                                <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-neutral-700/50"></div>
                             </div>
                         </div>
 
-                        <!-- Metal Keyring & Swivel Clasp (Cincin & Kaitan Gantungan seperti di gambar) -->
-                        <div class="lanyard-clasp-assembly relative flex flex-col items-center -mt-1.5 z-20">
+                        <!-- Metal Keyring & Swivel Clasp (Gunmetal / Brushed Titanium Hardware) -->
+                        <div class="lanyard-clasp-assembly relative flex flex-col items-center -mt-1 z-20">
                             <!-- Keyring Circle -->
-                            <div class="w-5 h-5 rounded-full border-2 border-cyan-400 bg-space-950 shadow-md flex items-center justify-center">
-                                <div class="w-2 h-2 rounded-full border border-cyan-500/40"></div>
+                            <div class="w-4 h-4 rounded-full border-[1.5px] border-neutral-500 bg-neutral-900 shadow-sm flex items-center justify-center">
+                                <div class="w-1.5 h-1.5 rounded-full border border-neutral-700"></div>
                             </div>
                             <!-- Swivel Clip / Carabiner -->
-                            <div class="w-2.5 h-4 -mt-1 bg-gradient-to-b from-cyan-400 to-cyan-600 rounded-b-sm shadow-sm"></div>
+                            <div class="w-2 h-3.5 -mt-0.5 bg-gradient-to-b from-neutral-300 via-neutral-500 to-neutral-700 rounded-b-sm shadow-sm"></div>
                         </div>
 
                         <!-- The Hanging Photo Card (Foto Haikal dengan Rounded Corners & Reactive Spotlight Glow) -->
-                        <div class="hanging-photo-card group relative z-10 w-56 aspect-[4/5] rounded-2xl p-1.5 -mt-1 shadow-2xl backdrop-blur-md transition-all duration-300" id="hanging-photo-card" data-glow>
+                        <div class="hanging-photo-card group relative z-10 w-60 aspect-[3/4.2] rounded-2xl p-2.5 shadow-2xl backdrop-blur-xl transition-all duration-300" id="hanging-photo-card" data-glow>
                             <div data-glow></div>
                             
-                            <!-- Top metal eyelet / punch hole for the clip -->
-                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 z-20 w-4 h-4 rounded-full bg-space-950 border-2 border-cyan-400 shadow-md flex items-center justify-center pointer-events-none">
-                                <div class="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
-                            </div>
+                            <!-- Integrated Precision Badge Punch Slot -->
+                            <div class="w-6 h-1.5 mx-auto -mt-0.5 mb-2 rounded-full bg-neutral-950 border border-neutral-800 shadow-inner pointer-events-none"></div>
 
                             <!-- Photo Container -->
-                            <div class="w-full h-full rounded-xl overflow-hidden relative shadow-inner z-10">
+                            <div class="w-full h-[calc(100%-1rem)] rounded-xl overflow-hidden relative shadow-inner z-10 border border-neutral-800/60">
                                 <img src="./Images/About Me.jpeg" alt="Haikal Riyadh Romadhon"
-                                    class="w-full h-full object-cover select-none pointer-events-none group-hover:scale-105 transition-transform duration-600 ease-out"
+                                    class="w-full h-full object-cover object-top select-none pointer-events-none group-hover:scale-105 transition-transform duration-600 ease-out"
                                     onerror="this.src='https://placehold.co/400x500/0F172A/06B6D4?text=Haikal'">
+
+                                <!-- Subtle depth vignette at bottom -->
+                                <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
 
                                 <!-- Gradient Beam Sweep Layer (Only active on Click/Tap) -->
                                 <div class="photo-holo-overlay">
@@ -2522,31 +2521,25 @@ ${message}`;
             });
         })();
 
-        // --- Spotlight Card (GlowCard) Pointer Tracking: Strictly Scoped to the Photo Card ---
+        // --- Spotlight Card (GlowCard) Pointer Tracking Synchronization ---
         (function () {
-            const card = document.getElementById('hanging-photo-card');
-            if (!card) return;
+            const glowCards = document.querySelectorAll('[data-glow]');
+            if (!glowCards.length) return;
 
-            card.addEventListener('pointerenter', () => {
-                card.style.setProperty('--outer', '1');
-            });
+            const syncPointer = (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+                const xp = (x / window.innerWidth).toFixed(2);
+                const yp = (y / window.innerHeight).toFixed(2);
+                glowCards.forEach((card) => {
+                    card.style.setProperty('--x', x.toFixed(2));
+                    card.style.setProperty('--xp', xp);
+                    card.style.setProperty('--y', y.toFixed(2));
+                    card.style.setProperty('--yp', yp);
+                });
+            };
 
-            card.addEventListener('pointerleave', () => {
-                card.style.setProperty('--outer', '0');
-            });
-
-            card.addEventListener('pointermove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const xp = Math.max(0, Math.min(1, x / rect.width)).toFixed(2);
-                const yp = Math.max(0, Math.min(1, y / rect.height)).toFixed(2);
-
-                card.style.setProperty('--x', x.toFixed(2));
-                card.style.setProperty('--xp', xp);
-                card.style.setProperty('--y', y.toFixed(2));
-                card.style.setProperty('--yp', yp);
-            }, { passive: true });
+            document.addEventListener('pointermove', syncPointer, { passive: true });
         })();
     </script>
 </body>
