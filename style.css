@@ -10,23 +10,23 @@
     --font-sans: 'Instrument Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     color-scheme: dark;
-    
+
     /* Permanent Pure Obsidian Dark Tokens */
     --bg-base: #000000;
     --bg-surface: rgba(14, 14, 18, 0.88);
     --border-subtle: rgba(255, 255, 255, 0.09);
     --border-hover: rgba(6, 182, 212, 0.45);
-    
+
     --text-primary: #f8fafc;
     --text-muted: #94a3b8;
-    
+
     --accent-cyan: #06b6d4;
     --accent-indigo: #6366f1;
-    
+
     --depth-shadow-near: 0 2px 8px -2px rgba(0, 0, 0, 0.70);
     --depth-shadow-mid: 0 8px 24px -4px rgba(0, 0, 0, 0.85);
     --depth-shadow-far: 0 16px 40px -8px rgba(0, 0, 0, 0.95);
-    
+
     --card-transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -36,13 +36,13 @@ html.dark {
     --bg-surface: rgba(14, 14, 18, 0.88);
     --border-subtle: rgba(255, 255, 255, 0.09);
     --border-hover: rgba(255, 255, 255, 0.22);
-    
+
     --text-primary: #f8fafc;
     --text-muted: #94a3b8;
-    
+
     --accent-cyan: #06b6d4;
     --accent-indigo: #6366f1;
-    
+
     --depth-shadow-near: 0 2px 8px -2px rgba(0, 0, 0, 0.70);
     --depth-shadow-mid: 0 8px 24px -4px rgba(0, 0, 0, 0.85);
     --depth-shadow-far: 0 16px 40px -8px rgba(0, 0, 0, 0.95);
@@ -51,8 +51,13 @@ html.dark {
 /* --------------------------------------------------------------------------
    1. Base Reset & Typography
    -------------------------------------------------------------------------- */
-*, *::before, *::after { box-sizing: border-box; }
-html { 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
     scroll-behavior: smooth;
     color-scheme: dark;
     background-color: #000000;
@@ -62,7 +67,10 @@ html {
 /* --------------------------------------------------------------------------
    Typographic Refinements (Non-AI Editorial Craft on Dark Background)
    -------------------------------------------------------------------------- */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-family: var(--font-sans);
     letter-spacing: -0.022em;
     text-wrap: balance;
@@ -72,13 +80,16 @@ p {
     text-wrap: pretty;
 }
 
-code, pre, .font-mono, [class*="font-mono"] {
+code,
+pre,
+.font-mono,
+[class*="font-mono"] {
     font-family: var(--font-mono);
 }
 
 body {
     background-color: #000000;
-    background: 
+    background:
         radial-gradient(ellipse 90% 50% at 50% -10%, rgba(255, 255, 255, 0.03) 0%, transparent 60%),
         #000000;
     color: var(--text-primary);
@@ -92,12 +103,19 @@ body {
 /* --------------------------------------------------------------------------
    2. Clean Minimal Scrollbar
    -------------------------------------------------------------------------- */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+
 ::-webkit-scrollbar-thumb {
     background: rgba(100, 116, 139, 0.3);
     border-radius: 9999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(6, 182, 212, 0.5);
 }
@@ -166,13 +184,13 @@ body {
 html.dark .glass-card {
     background: rgba(12, 12, 14, 0.82);
     border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 
+    box-shadow:
         var(--depth-shadow-mid),
         inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.glass-card:hover { 
-    border-color: var(--border-hover); 
+.glass-card:hover {
+    border-color: var(--border-hover);
     transform: translateY(-3px);
 }
 
@@ -201,8 +219,8 @@ html.dark .gradient-text {
     background-clip: text;
 }
 
-.gradient-border-glow { 
-    position: relative; 
+.gradient-border-glow {
+    position: relative;
     border: 1px solid var(--border-subtle);
 }
 
@@ -225,7 +243,7 @@ html.dark .gradient-border-glow {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(255,255,255,0.13) 0%, transparent 45%, transparent 65%, rgba(6,182,212,0.12) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.13) 0%, transparent 45%, transparent 65%, rgba(6, 182, 212, 0.12) 100%);
     pointer-events: none;
     z-index: 2;
 }
@@ -237,14 +255,16 @@ html.dark .gradient-border-glow {
     left: -80%;
     width: 50%;
     height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
     transform: skewX(-20deg);
     transition: left 0.9s cubic-bezier(0.23, 1, 0.32, 1);
     pointer-events: none;
     z-index: 20;
 }
 
-#hero-tilt-card:hover::before { left: 130%; }
+#hero-tilt-card:hover::before {
+    left: 130%;
+}
 
 /* Permanent Dark Obsidian Hero Avatar Card Ambient Background */
 .hero-card-bg {
@@ -252,8 +272,8 @@ html.dark .gradient-border-glow {
     inset: 0;
     z-index: 0;
     background: radial-gradient(circle at 35% 30%, rgba(6, 182, 212, 0.30) 0%, transparent 60%),
-                radial-gradient(circle at 75% 25%, rgba(99, 102, 241, 0.24) 0%, transparent 60%),
-                linear-gradient(180deg, #050b14 0%, #0d1527 55%, #050b14 100%);
+        radial-gradient(circle at 75% 25%, rgba(99, 102, 241, 0.24) 0%, transparent 60%),
+        linear-gradient(180deg, #050b14 0%, #0d1527 55%, #050b14 100%);
 }
 
 /* --------------------------------------------------------------------------
@@ -286,15 +306,19 @@ html.dark .gradient-border-glow {
         transform: translateY(-135%);
         opacity: 0;
     }
+
     40% {
         opacity: 1;
     }
+
     70% {
         transform: translateY(14px) rotate(2.5deg);
     }
+
     85% {
         transform: translateY(-6px) rotate(-1.5deg);
     }
+
     100% {
         transform: translateY(0) rotate(0deg);
         opacity: 1;
@@ -307,9 +331,17 @@ html.dark .gradient-border-glow {
 }
 
 @keyframes lanyardIdleSwing {
-    0%   { transform: rotate(-2.8deg); }
-    50%  { transform: rotate(2.8deg); }
-    100% { transform: rotate(-2.8deg); }
+    0% {
+        transform: rotate(-2.8deg);
+    }
+
+    50% {
+        transform: rotate(2.8deg);
+    }
+
+    100% {
+        transform: rotate(-2.8deg);
+    }
 }
 
 /* Realistic Physics Tap Sway (TIDAK NAIK KE ATAS, BERAYUN ALAMI DI POROS GANTUNGAN) */
@@ -321,21 +353,27 @@ html.dark .gradient-border-glow {
     0% {
         transform: rotate(0deg) scale(0.975);
     }
+
     18% {
         transform: rotate(7deg) scale(1.02);
     }
+
     38% {
         transform: rotate(-5.2deg) scale(1.01);
     }
+
     58% {
         transform: rotate(3deg) scale(1.005);
     }
+
     76% {
         transform: rotate(-1.5deg) scale(1);
     }
+
     90% {
         transform: rotate(0.8deg);
     }
+
     100% {
         transform: rotate(0deg);
     }
@@ -361,7 +399,7 @@ html.dark .gradient-border-glow {
     padding: 0.625rem;
     background: rgba(14, 16, 22, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
+    box-shadow:
         0 24px 50px -12px rgba(0, 0, 0, 0.85),
         0 0 0 1px rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(16px);
@@ -376,7 +414,7 @@ html.dark .gradient-border-glow {
 html.dark .hanging-photo-card {
     background: rgba(10, 11, 15, 0.95);
     border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 
+    box-shadow:
         0 28px 60px -15px rgba(0, 0, 0, 0.9),
         0 0 0 1px rgba(255, 255, 255, 0.06);
 }
@@ -401,7 +439,7 @@ html.dark .hanging-photo-card {
 /* Refined Subtle Flash on Click / Tap (Designer-Grade Editorial Accent) */
 .hanging-photo-card.is-shining {
     border-color: rgba(255, 255, 255, 0.4) !important;
-    box-shadow: 
+    box-shadow:
         0 28px 60px -10px rgba(0, 0, 0, 0.9),
         0 0 25px -2px rgba(255, 255, 255, 0.18),
         inset 0 0 15px rgba(255, 255, 255, 0.08) !important;
@@ -450,12 +488,15 @@ html.dark .hanging-photo-card {
         transform: rotate(-18deg) translateY(-140%);
         opacity: 0;
     }
+
     20% {
         opacity: 1;
     }
+
     80% {
         opacity: 0.8;
     }
+
     100% {
         transform: rotate(-18deg) translateY(140%);
         opacity: 0;
@@ -485,6 +526,7 @@ html.dark .hanging-photo-card {
         transform: translate(-50%, -50%) scale(0);
         opacity: 1;
     }
+
     100% {
         transform: translate(-50%, -50%) scale(2.8);
         opacity: 0;
@@ -505,7 +547,7 @@ html.dark .hanging-photo-card {
 html.dark .nav-3d {
     background: rgba(0, 0, 0, 0.88);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 
+    box-shadow:
         0 4px 30px -5px rgba(0, 0, 0, 0.85),
         inset 0 -1px 0 rgba(255, 255, 255, 0.04);
 }
@@ -551,7 +593,9 @@ html.dark .nav-3d {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.project-card:hover .img-zoom { transform: scale(1.03); }
+.project-card:hover .img-zoom {
+    transform: scale(1.03);
+}
 
 /* Browser Mockup Window Header (Authentic Human Engineer Touch) */
 .browser-frame-header {
@@ -566,8 +610,13 @@ html.dark .nav-3d {
 }
 
 /* Filter Buttons */
-.filter-btn-3d { transition: all 0.2s ease; }
-.filter-btn-3d:hover { transform: translateY(-1px); }
+.filter-btn-3d {
+    transition: all 0.2s ease;
+}
+
+.filter-btn-3d:hover {
+    transform: translateY(-1px);
+}
 
 .filter-btn-3d.active {
     background: var(--text-primary) !important;
@@ -609,8 +658,8 @@ html.dark .nav-3d {
     -webkit-user-select: none;
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.15),
-                0px 8px 18px -4px rgba(0, 0, 0, 0.75),
-                0px 2px 4px rgba(0, 0, 0, 0.5);
+        0px 8px 18px -4px rgba(0, 0, 0, 0.75),
+        0px 2px 4px rgba(0, 0, 0, 0.5);
     background: transparent;
     border: none;
     outline: none;
@@ -640,15 +689,26 @@ html.dark .nav-3d {
     pointer-events: none;
     z-index: 5;
     background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.22), transparent 70%),
-                linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(10, 10, 10, 0.9) 50%, rgba(255, 255, 255, 0.14) 100%);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(10, 10, 10, 0.9) 50%, rgba(255, 255, 255, 0.14) 100%);
     background-size: 200% 200%;
     animation: liquidMetalFlow 7s ease-in-out infinite alternate;
 }
 
 @keyframes liquidMetalFlow {
-    0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-    50% { background-position: 100% 50%; filter: hue-rotate(30deg); }
-    100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+    0% {
+        background-position: 0% 50%;
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        background-position: 100% 50%;
+        filter: hue-rotate(30deg);
+    }
+
+    100% {
+        background-position: 0% 50%;
+        filter: hue-rotate(0deg);
+    }
 }
 
 .btn-liquid-metal .liquid-inner-core {
@@ -674,8 +734,8 @@ html.dark .nav-3d {
 .btn-liquid-metal:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.35),
-                0px 14px 28px -4px rgba(0, 0, 0, 0.85),
-                0px 0px 24px rgba(6, 182, 212, 0.3);
+        0px 14px 28px -4px rgba(0, 0, 0, 0.85),
+        0px 0px 24px rgba(6, 182, 212, 0.3);
 }
 
 .btn-liquid-metal:hover::before {
@@ -702,8 +762,15 @@ html.dark .nav-3d {
 }
 
 @keyframes liquidRippleAnim {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; }
-    100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(5);
+        opacity: 0;
+    }
 }
 
 .btn-primary {
@@ -730,7 +797,9 @@ html.dark .btn-primary {
     filter: brightness(1.05);
 }
 
-.btn-primary:active { transform: translateY(0) scale(0.98); }
+.btn-primary:active {
+    transform: translateY(0) scale(0.98);
+}
 
 .btn-glass {
     background: var(--bg-surface);
@@ -750,7 +819,9 @@ html.dark .btn-primary {
     color: var(--accent-cyan);
 }
 
-.btn-glass:active { transform: translateY(0); }
+.btn-glass:active {
+    transform: translateY(0);
+}
 
 /* WhatsApp Submit Button */
 .btn-whatsapp {
@@ -764,18 +835,25 @@ html.dark .btn-primary {
     box-shadow: 0 6px 20px -4px rgba(16, 185, 129, 0.35) !important;
 }
 
-.btn-whatsapp:active { transform: translateY(0) scale(0.98); }
+.btn-whatsapp:active {
+    transform: translateY(0) scale(0.98);
+}
 
 .btn-ripple-wave {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
     transform: scale(0);
     animation: btnRippleAnim 0.65s ease-out forwards;
     pointer-events: none;
 }
 
-@keyframes btnRippleAnim { to { transform: scale(4.5); opacity: 0; } }
+@keyframes btnRippleAnim {
+    to {
+        transform: scale(4.5);
+        opacity: 0;
+    }
+}
 
 .sparkle-particle {
     position: absolute;
@@ -788,8 +866,15 @@ html.dark .btn-primary {
 }
 
 @keyframes sparkleFly {
-    0%   { transform: translate(0, 0) scale(1.2); opacity: 1; }
-    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+    0% {
+        transform: translate(0, 0) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
 }
 
 .checkmark-draw {
@@ -798,7 +883,11 @@ html.dark .btn-primary {
     animation: checkmarkStroke 0.5s ease-in-out forwards;
 }
 
-@keyframes checkmarkStroke { 100% { stroke-dashoffset: 0; } }
+@keyframes checkmarkStroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
 
 /* --------------------------------------------------------------------------
    13. Contact Info Cards Accents
@@ -835,7 +924,9 @@ html.dark .btn-primary {
     color: var(--text-primary);
 }
 
-.input-3d::placeholder { color: var(--text-muted); }
+.input-3d::placeholder {
+    color: var(--text-muted);
+}
 
 .input-3d:focus {
     outline: none;
@@ -864,13 +955,30 @@ html.dark .input-3d:focus {
     transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal-3d.revealed { opacity: 1; transform: translateY(0); }
+.reveal-3d.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
-.reveal-delay-4 { transition-delay: 0.32s; }
-.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-1 {
+    transition-delay: 0.08s;
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.16s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.24s;
+}
+
+.reveal-delay-4 {
+    transition-delay: 0.32s;
+}
+
+.reveal-delay-5 {
+    transition-delay: 0.40s;
+}
 
 /* --------------------------------------------------------------------------
    17. Status Indicator Pulse
@@ -893,7 +1001,14 @@ html.dark .input-3d:focus {
     opacity: 0.75;
 }
 
-@keyframes pingDot { 75%, 100% { transform: scale(2.4); opacity: 0; } }
+@keyframes pingDot {
+
+    75%,
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+}
 
 /* --------------------------------------------------------------------------
    18. Dark Mode Text Color Overrides for Readability
@@ -927,7 +1042,7 @@ spline-viewer::part(canvas) {
     background-color: rgba(0, 0, 0, 0.96);
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.95),
-                0 0 45px -10px rgba(255, 255, 255, 0.08);
+        0 0 45px -10px rgba(255, 255, 255, 0.08);
 }
 
 #spline-spotlight {
@@ -941,6 +1056,7 @@ spline-viewer::part(canvas) {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-50%);
     }
@@ -950,6 +1066,7 @@ spline-viewer::part(canvas) {
     0% {
         transform: translateX(-50%);
     }
+
     100% {
         transform: translateX(0);
     }
@@ -1015,6 +1132,7 @@ spline-viewer::part(canvas) {
         transform: translateY(14px);
         filter: blur(4px);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -1037,12 +1155,8 @@ spline-viewer::part(canvas) {
     --border-size: calc(var(--border, 2) * 1px);
     --spotlight-size: calc(var(--size, 150) * 1px);
     --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
-    background-image: radial-gradient(
-        var(--spotlight-size) var(--spotlight-size) at
-        calc(var(--x, 0) * 1px)
-        calc(var(--y, 0) * 1px),
-        hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 70) * 1%) / var(--bg-spot-opacity, 0.12)), transparent
-    );
+    background-image: radial-gradient(var(--spotlight-size) var(--spotlight-size) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+            hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 70) * 1%) / var(--bg-spot-opacity, 0.12)), transparent);
     background-color: var(--backdrop, transparent);
     background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
     background-position: 50% 50%;
@@ -1074,22 +1188,14 @@ spline-viewer::part(canvas) {
 }
 
 [data-glow]::before {
-    background-image: radial-gradient(
-        calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
-        calc(var(--x, 0) * 1px)
-        calc(var(--y, 0) * 1px),
-        hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 50) * 1%) / var(--border-spot-opacity, 1)), transparent 100%
-    );
+    background-image: radial-gradient(calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+            hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 50) * 1%) / var(--border-spot-opacity, 1)), transparent 100%);
     filter: brightness(2);
 }
 
 [data-glow]::after {
-    background-image: radial-gradient(
-        calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
-        calc(var(--x, 0) * 1px)
-        calc(var(--y, 0) * 1px),
-        hsl(0 100% 100% / var(--border-light-opacity, 1)), transparent 100%
-    );
+    background-image: radial-gradient(calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+            hsl(0 100% 100% / var(--border-light-opacity, 1)), transparent 100%);
 }
 
 [data-glow] [data-glow] {
@@ -1106,12 +1212,7 @@ spline-viewer::part(canvas) {
     z-index: 5;
 }
 
-[data-glow] > [data-glow]::before {
+[data-glow]>[data-glow]::before {
     inset: -10px;
     border-width: 10px;
 }
-
-
-
-
-
