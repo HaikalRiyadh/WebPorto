@@ -2,6 +2,7 @@ import { SplineSceneBasic } from "@/components/ui/demo";
 import IntegrationHero from "@/components/ui/integration-hero";
 import CircularTestimonialsDemo from "@/components/ui/circular-testimonials-demo";
 import { Default as GlowCardDemo } from "@/components/ui/spotlight-card-demo";
+import FloatInputDemo from "@/components/ui/float-input-demo";
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
       </div>
       <div className="w-full max-w-6xl">
         <GlowCardDemo />
+      </div>
+      <div className="w-full max-w-6xl">
+        <FloatInputDemo />
       </div>
     </main>
   );
