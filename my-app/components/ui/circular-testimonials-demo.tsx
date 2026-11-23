@@ -62,11 +62,11 @@ export const CircularTestimonialsDemo = () => (
           autoplay={true}
           colors={{
             name: "#f7f7ff",
-            designation: "#38bdf8",
+            designation: "#a1a1aa",
             testimony: "#cbd5e1",
-            arrowBackground: "#0891b2",
+            arrowBackground: "#18181b",
             arrowForeground: "#ffffff",
-            arrowHoverBackground: "#06b6d4",
+            arrowHoverBackground: "#27272a",
           }}
           fontSizes={{
             name: "28px",
