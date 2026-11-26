@@ -46,5 +46,89 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+.loader {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid rgba(255, 255, 255, 0.18);
+  border-top-color: #ffffff;
+  border-radius: 9999px;
+  animation: spinLoader 0.8s linear infinite;
+}
+
+@keyframes spinLoader {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.liquid-shader-mount canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 9999px !important;
+}
+
+.liquid-metal-css-bg::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(155%, 96px);
+  aspect-ratio: 1 / 1;
+  background: conic-gradient(
+    from 0deg,
+    #18181b 0deg,
+    #52525b 20deg,
+    #ffffff 44deg,
+    #d4d4d8 64deg,
+    #27272a 90deg,
+    #09090b 124deg,
+    #71717a 156deg,
+    #f8fafc 182deg,
+    #a1a1aa 206deg,
+    #18181b 238deg,
+    #09090b 268deg,
+    #e4e4e7 296deg,
+    #ffffff 320deg,
+    #3f3f46 342deg,
+    #18181b 360deg
+  );
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: liquidConicSpin 3.6s linear infinite;
+  will-change: transform;
+}
+
+.liquid-metal-paused::before {
+  animation-play-state: paused;
+}
+
+@keyframes liquidConicSpin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes liquid-ripple-expand {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-metal-css-bg::before {
+    animation: none;
+  }
 }

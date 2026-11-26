@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { useId, useRef, useState } from "react";
+import { useId, useState } from "react";
 
 const EASE_IN_OUT_CUBIC_X1 = 0.4;
 const EASE_IN_OUT_CUBIC_Y1 = 0;
@@ -46,7 +46,6 @@ export default function FloatInput({
   const [internalValue, setInternalValue] = useState(defaultValue);
   const isControlled = value !== undefined;
   const val = isControlled ? value : internalValue;
-  const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const isFloating = !!val || isFocused;
   const shouldReduceMotion = useReducedMotion();
@@ -97,7 +96,7 @@ export default function FloatInput({
       ) : null}
       <input
         aria-label={label}
-        className={`peer w-full rounded-sm border bg-background px-3 py-2 text-sm outline-none transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${icon ? "pl-10" : ""} ${inputClassName}`}
+        className={`w-full rounded-sm border bg-background px-3 py-2 text-sm outline-none transition focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${icon ? "pl-10" : ""} ${inputClassName}`}
         disabled={disabled}
         id={inputId}
         onBlur={() => setIsFocused(false)}
@@ -109,13 +108,12 @@ export default function FloatInput({
         }}
         onFocus={() => setIsFocused(true)}
         placeholder={isFloating ? placeholder : ""}
-        ref={inputRef}
         type="text"
         value={val}
       />
       <motion.label
         animate={getLabelAnimation()}
-        className={`pointer-events-none absolute top-1/2 left-3 origin-left -translate-y-1/2 rounded-sm border border-transparent bg-background px-1 text-foreground transition-all ${labelClassName}`}
+        className={`pointer-events-none absolute top-1/2 ${icon ? "left-9" : "left-3"} origin-left -translate-y-1/2 rounded-sm border border-transparent bg-background px-1 text-foreground ${labelClassName}`}
         htmlFor={inputId}
         style={{
           zIndex: 2,

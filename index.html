@@ -206,14 +206,14 @@
 
                 <div class="flex items-center gap-3">
                     <!-- Quick CV Button (Liquid Metal Architecture) -->
-                    <button type="button" id="nav-cv-btn" class="btn-liquid-metal group">
-                        <div class="liquid-shader-layer"></div>
-                        <div class="liquid-inner-core !py-1.5 !px-3.5 !text-xs font-semibold">
+                    <button type="button" id="nav-cv-btn" class="btn-liquid-metal btn-liquid-metal--sm group">
+                        <span class="liquid-shader-layer" aria-hidden="true"></span>
+                        <span class="liquid-inner-core">
                             <svg class="w-3.5 h-3.5 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
                             <span>CV Preview</span>
-                        </div>
+                        </span>
                     </button>
 
                     </div>
@@ -221,12 +221,15 @@
 
             <!-- Mobile Controls (Menu Trigger) -->
             <div class="flex items-center space-x-2 md:hidden">
-                <button id="mobile-menu-btn" aria-label="Open Menu" aria-expanded="false"
-                    class="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-slate-200 focus:outline-none hover:text-white transition-colors shadow-sm">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                <button type="button" id="mobile-menu-btn" aria-label="Open Menu" aria-expanded="false"
+                    class="btn-liquid-metal btn-liquid-metal--icon-sm group">
+                    <span class="liquid-shader-layer" aria-hidden="true"></span>
+                    <span class="liquid-inner-core">
+                        <svg class="w-5 h-5 text-slate-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </span>
                 </button>
             </div>
         </div>
@@ -318,22 +321,22 @@
                 <!-- Action Buttons (Liquid Metal Architecture) -->
                 <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-3">
                     <a href="#projects" class="btn-liquid-metal group">
-                        <div class="liquid-shader-layer"></div>
-                        <div class="liquid-inner-core">
+                        <span class="liquid-shader-layer" aria-hidden="true"></span>
+                        <span class="liquid-inner-core">
                             <span>Explore Portfolio</span>
                             <svg class="w-4 h-4 text-neutral-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                             </svg>
-                        </div>
+                        </span>
                     </a>
                     <a href="#contact" class="btn-liquid-metal group">
-                        <div class="liquid-shader-layer"></div>
-                        <div class="liquid-inner-core">
+                        <span class="liquid-shader-layer" aria-hidden="true"></span>
+                        <span class="liquid-inner-core">
                             <span>Get in Touch</span>
                             <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                             </svg>
-                        </div>
+                        </span>
                     </a>
                 </div>
             </div>
@@ -387,7 +390,7 @@
                     </div>
 
                     <!-- Hanging Lanyard Assembly (Satu Tali Tunggal & Foto Haikal) -->
-                    <div class="hanging-lanyard-assembly is-hidden group relative flex flex-col items-center select-none cursor-pointer pt-0.5" id="hanging-lanyard-assembly">
+                    <div class="hanging-lanyard-assembly is-hidden group relative flex flex-col items-center select-none cursor-pointer pt-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-2xl" id="hanging-lanyard-assembly" role="button" tabindex="0" aria-label="Toggle portrait zoom">
                         
                         <!-- Single Vertical Strap / Lanyard Ribbon (Matte Fabric Finish) -->
                         <div class="lanyard-strap relative w-3.5 h-10 flex items-center justify-center z-20">
@@ -418,7 +421,7 @@
                             <div class="w-full h-[calc(100%-1rem)] rounded-xl overflow-hidden relative shadow-inner z-10 border border-neutral-800/60">
                                 <img src="./Images/About Me.jpeg" alt="Haikal Riyadh Romadhon"
                                     class="w-full h-full object-cover object-top select-none pointer-events-none group-hover:scale-105 transition-transform duration-600 ease-out"
-                                    onerror="this.src='https://placehold.co/400x500/0F172A/06B6D4?text=Haikal'">
+                                    onerror="this.onerror=null;this.src='https://placehold.co/400x500/0F172A/06B6D4?text=Haikal'">
 
                                 <!-- Subtle depth vignette at bottom -->
                                 <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
@@ -522,15 +525,15 @@
 
                     <!-- CV Hub Action Bar (Liquid Metal Architecture) -->
                     <div class="pt-4 border-t border-neutral-800 flex flex-wrap items-center justify-end gap-4">
-                        <button type="button" id="open-cv-modal-btn" class="btn-liquid-metal group">
-                            <div class="liquid-shader-layer"></div>
-                            <div class="liquid-inner-core !py-2 !px-4 !text-xs font-semibold">
+                        <button type="button" id="open-cv-modal-btn" class="btn-liquid-metal btn-liquid-metal--sm group">
+                            <span class="liquid-shader-layer" aria-hidden="true"></span>
+                            <span class="liquid-inner-core">
                                 <svg class="w-4 h-4 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                 </svg>
                                 <span>Preview CV</span>
-                            </div>
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -550,17 +553,20 @@
                 <p class="mt-4 text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
                     Battle-tested frameworks, modern languages, and cloud developer tools integrated seamlessly into high-performance software.
                 </p>
-                <a href="#projects" class="inline-flex items-center gap-2 mt-7 px-6 py-3 rounded-lg bg-white text-black font-semibold text-sm hover:bg-slate-200 transition-all duration-200 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer">
-                    <span>Explore Featured Projects</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                    </svg>
+                <a href="#projects" class="btn-liquid-metal mt-7 group">
+                    <span class="liquid-shader-layer" aria-hidden="true"></span>
+                    <span class="liquid-inner-core">
+                        <span>Explore Featured Projects</span>
+                        <svg class="w-4 h-4 text-neutral-300 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </span>
                 </a>
 
                 <!-- Carousel -->
                 <div class="mt-14 overflow-hidden relative pb-4">
                     <!-- Row 1: Frontend, Mobile & Core Languages -->
-                    <div class="flex gap-4 sm:gap-6 whitespace-nowrap animate-scroll-left py-2">
+                    <div class="flex gap-4 sm:gap-6 pr-4 sm:pr-6 whitespace-nowrap animate-scroll-left py-2">
 
                         <div class="h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm shadow-sm flex flex-col items-center justify-center p-2.5 gap-1.5 transition-all duration-200 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08] group cursor-pointer">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -579,20 +585,20 @@
                         <div class="h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm shadow-sm flex flex-col items-center justify-center p-2.5 gap-1.5 transition-all duration-200 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08] group cursor-pointer">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <svg class="w-7 h-7 sm:w-8 sm:h-8 fill-current text-white" viewBox="0 0 180 180">
-            <mask height="180" id="mask-next" maskUnits="userSpaceOnUse" width="180" x="0" y="0" style="mask-type:alpha">
+            <mask height="180" id="mask-next-dup" maskUnits="userSpaceOnUse" width="180" x="0" y="0" style="mask-type:alpha">
                 <circle cx="90" cy="90" fill="black" r="90"></circle>
             </mask>
-            <g mask="url(#mask-next)">
+            <g mask="url(#mask-next-dup)">
                 <circle cx="90" cy="90" fill="black" r="90" stroke="white" stroke-width="6"></circle>
-                <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="url(#paint0_linear_next)"></path>
-                <rect fill="url(#paint1_linear_next)" height="72" width="12" x="115" y="54"></rect>
+                <path d="M149.508 157.52L69.142 54H54V125.97H66.1136V69.3836L139.999 164.845C143.333 162.614 146.509 160.165 149.508 157.52Z" fill="url(#paint0_linear_next_dup)"></path>
+                <rect fill="url(#paint1_linear_next_dup)" height="72" width="12" x="115" y="54"></rect>
             </g>
             <defs>
-                <linearGradient id="paint0_linear_next" x1="109" x2="144.5" y1="116.5" y2="160.5" gradientUnits="userSpaceOnUse">
+                <linearGradient id="paint0_linear_next_dup" x1="109" x2="144.5" y1="116.5" y2="160.5" gradientUnits="userSpaceOnUse">
                     <stop stop-color="white"></stop>
                     <stop offset="1" stop-color="white" stop-opacity="0"></stop>
                 </linearGradient>
-                <linearGradient id="paint1_linear_next" x1="121" x2="120.799" y1="54" y2="106.875" gradientUnits="userSpaceOnUse">
+                <linearGradient id="paint1_linear_next_dup" x1="121" x2="120.799" y1="54" y2="106.875" gradientUnits="userSpaceOnUse">
                     <stop stop-color="white"></stop>
                     <stop offset="1" stop-color="white" stop-opacity="0"></stop>
                 </linearGradient>
@@ -818,7 +824,7 @@
                     </div>
 
                     <!-- Row 2: Backend, Databases & Engineering Tools -->
-                    <div class="flex gap-4 sm:gap-6 whitespace-nowrap mt-4 sm:mt-6 animate-scroll-right py-2">
+                    <div class="flex gap-4 sm:gap-6 pr-4 sm:pr-6 whitespace-nowrap mt-4 sm:mt-6 animate-scroll-right py-2">
 
                         <div class="h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm shadow-sm flex flex-col items-center justify-center p-2.5 gap-1.5 transition-all duration-200 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08] group cursor-pointer">
                             <div class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -1068,12 +1074,12 @@
                             <div class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                                 <svg class="w-7 h-7 sm:w-8 sm:h-8" viewBox="0 0 100 100" fill="none">
             <defs>
-                <linearGradient id="sqlite-blue-tile-marquee" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="sqlite-blue-tile-marquee-dup" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stop-color="#38BDF8" />
                     <stop offset="100%" stop-color="#0284C7" />
                 </linearGradient>
             </defs>
-            <rect x="14" y="14" width="72" height="72" rx="16" fill="url(#sqlite-blue-tile-marquee)" />
+            <rect x="14" y="14" width="72" height="72" rx="16" fill="url(#sqlite-blue-tile-marquee-dup)" />
             <path fill="#072B4A" d="M30 84c-1.5 1-2.5 1.5-3.5 1.5.5-3 2.5-8 5-13 4-8 10-18 17-26 7-8 15-16 23-23 2-2 4.5-4 6.5-5.5 2-1.5 4-2.5 5-2.5-.5 2-2 5-4.5 8.5C70 30 63 39 56 47c-7 8-14 17-20 25-3 4-5 8-6 12z" />
             <path fill="#072B4A" d="M83 15c-1 3-3 7-6 11-4 6-9 12-14 17-6 6-12 11-18 16-4 3-7 5-9 6.5 2-5 5-11 9-17 5-7 11-14 17-20 4-4 8-8 12-11 3-2 6-3 9-2.5z" />
             <path stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" d="M29 83C45 62 62 40 82 16" />
@@ -1150,7 +1156,7 @@
                 <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
                     
                     <!-- Left Column: 3D Perspective Image Carousel -->
-                    <div class="circular-carousel-images relative w-full h-[22rem] sm:h-[26rem] flex items-center justify-center cursor-grab active:cursor-grabbing" id="circular-project-images">
+                    <div class="circular-carousel-images relative w-full h-[22rem] sm:h-[26rem] flex items-center justify-center" id="circular-project-images">
                         <!-- Populated by JavaScript with 3D styles -->
                     </div>
 
@@ -1163,11 +1169,17 @@
                         <!-- Navigation Controls -->
                         <div class="flex items-center justify-between pt-6 border-t border-slate-800/80">
                             <div class="flex items-center gap-3">
-                                <button id="circular-prev-btn" aria-label="Previous project" class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-slate-900 border border-slate-700/80 text-white flex items-center justify-center hover:bg-white hover:border-white hover:text-black hover:scale-105 active:scale-95 transition-all duration-200 shadow-md">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                                <button type="button" id="circular-prev-btn" aria-label="Previous project" class="btn-liquid-metal btn-liquid-metal--icon group">
+                                    <span class="liquid-shader-layer" aria-hidden="true"></span>
+                                    <span class="liquid-inner-core">
+                                        <svg class="w-5 h-5 text-neutral-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+                                    </span>
                                 </button>
-                                <button id="circular-next-btn" aria-label="Next project" class="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-slate-900 border border-slate-700/80 text-white flex items-center justify-center hover:bg-white hover:border-white hover:text-black hover:scale-105 active:scale-95 transition-all duration-200 shadow-md">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                                <button type="button" id="circular-next-btn" aria-label="Next project" class="btn-liquid-metal btn-liquid-metal--icon group">
+                                    <span class="liquid-shader-layer" aria-hidden="true"></span>
+                                    <span class="liquid-inner-core">
+                                        <svg class="w-5 h-5 text-neutral-200 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                                    </span>
                                 </button>
                             </div>
 
@@ -1432,8 +1444,8 @@
 
                         <!-- Submit Button (Liquid Metal Architecture) -->
                         <button type="submit" id="submit-btn" class="btn-liquid-metal w-full group">
-                            <div class="liquid-shader-layer"></div>
-                            <div class="liquid-inner-core w-full !py-3.5 !text-sm font-semibold flex items-center justify-center gap-2">
+                            <span class="liquid-shader-layer" aria-hidden="true"></span>
+                            <span class="liquid-inner-core w-full !py-3.5 !text-sm font-semibold flex items-center justify-center gap-2">
                                 <span id="btn-content" class="flex items-center justify-center gap-2 pointer-events-none transition-all duration-300">
                                     <svg id="btn-icon" class="w-4 h-4 fill-emerald-400 transition-transform duration-300" viewBox="0 0 24 24">
                                         <path
@@ -1441,7 +1453,7 @@
                                     </svg>
                                     <span>Send Message via WhatsApp</span>
                                 </span>
-                            </div>
+                            </span>
                         </button>
                         <p class="text-[11px] text-slate-400 text-center flex items-center justify-center gap-1.5 pt-1">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -1466,7 +1478,12 @@
                 <span>© 2026 All Rights Reserved.</span>
             </div>
             <div class="flex items-center space-x-6 font-medium">
-                <a href="#hero" class="hover:text-white transition-colors">Back to Top ↑</a>
+                <a href="#hero" class="btn-liquid-metal btn-liquid-metal--sm group">
+                    <span class="liquid-shader-layer" aria-hidden="true"></span>
+                    <span class="liquid-inner-core">
+                        <span>Back to Top ↑</span>
+                    </span>
+                </a>
             </div>
         </div>
     </footer>
@@ -1506,28 +1523,34 @@
                 <!-- Right Actions -->
                 <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
                     <a href="./cv/CV-Haikal.pdf" target="_blank" rel="noopener noreferrer"
-                        class="px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-neutral-800 transition-all flex items-center gap-1.5 text-xs font-medium border border-transparent">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                        <span class="hidden sm:inline">New Tab</span>
+                        class="btn-liquid-metal btn-liquid-metal--sm group">
+                        <span class="liquid-shader-layer" aria-hidden="true"></span>
+                        <span class="liquid-inner-core">
+                            <svg class="w-4 h-4 text-neutral-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                            <span class="hidden sm:inline">New Tab</span>
+                        </span>
                     </a>
 
-                    <a href="./cv/CV-Haikal.pdf" download="CV-Haikal.pdf" id="modal-download-cv-btn" class="btn-liquid-metal group">
-                        <div class="liquid-shader-layer"></div>
-                        <div class="liquid-inner-core !py-1.5 !px-3.5 !text-xs font-semibold">
+                    <a href="./cv/CV-Haikal.pdf" download="CV-Haikal.pdf" id="modal-download-cv-btn" class="btn-liquid-metal btn-liquid-metal--sm group">
+                        <span class="liquid-shader-layer" aria-hidden="true"></span>
+                        <span class="liquid-inner-core">
                             <svg class="w-4 h-4 stroke-current text-neutral-300" fill="none" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
                             <span>Download</span>
-                        </div>
+                        </span>
                     </a>
 
                     <button type="button" id="close-cv-modal-btn" aria-label="Close Preview"
-                        class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-neutral-800 transition-all cursor-pointer">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        class="btn-liquid-metal btn-liquid-metal--icon-sm group">
+                        <span class="liquid-shader-layer" aria-hidden="true"></span>
+                        <span class="liquid-inner-core">
+                            <svg class="w-4 h-4 text-slate-300 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </span>
                     </button>
                 </div>
             </div>
@@ -1538,7 +1561,7 @@
                 
                 <div class="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-neutral-900/95 backdrop-blur-md border border-neutral-800 px-4 py-2 rounded-xl text-xs text-slate-300 shadow-xl flex items-center gap-3">
                     <span class="text-slate-400">Options:</span>
-                    <a href="./cv/CV-Haikal.pdf" target="_blank" class="text-white hover:underline font-semibold">Open Full Tab</a>
+                    <a href="./cv/CV-Haikal.pdf" target="_blank" rel="noopener noreferrer" class="text-white hover:underline font-semibold">Open Full Tab</a>
                     <span class="text-slate-400">&bull;</span>
                     <a href="./cv/CV-Haikal.pdf" download="CV-Haikal.pdf" class="text-white hover:underline font-semibold" id="fallback-download-btn">Download PDF</a>
                 </div>
@@ -1556,10 +1579,14 @@
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
             toast.className = 'pointer-events-auto px-4 py-3 rounded-xl bg-neutral-900/95 border border-white/20 text-white text-xs font-semibold shadow-2xl backdrop-blur-md transition-all duration-300 transform translate-y-2 opacity-0 flex items-center gap-2';
-            toast.innerHTML = `
-                <span class="w-2 h-2 rounded-full bg-white status-dot-pulse"></span>
-                <span>${message}</span>
-            `;
+
+            const dot = document.createElement('span');
+            dot.className = 'w-2 h-2 rounded-full bg-white status-dot-pulse';
+
+            const text = document.createElement('span');
+            text.textContent = message;
+
+            toast.append(dot, text);
             container.appendChild(toast);
 
             requestAnimationFrame(() => {
@@ -1577,6 +1604,12 @@
         const mobileMenu = document.getElementById('mobile-menu');
 
         if (mobileBtn && mobileMenu) {
+            const closeMobileMenu = (restoreFocus) => {
+                mobileMenu.classList.add('hidden');
+                mobileBtn.setAttribute('aria-expanded', 'false');
+                if (restoreFocus) mobileBtn.focus();
+            };
+
             mobileBtn.addEventListener('click', () => {
                 const isExpanded = !mobileMenu.classList.contains('hidden');
                 mobileMenu.classList.toggle('hidden');
@@ -1584,10 +1617,13 @@
             });
 
             mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileBtn.setAttribute('aria-expanded', 'false');
-                });
+                link.addEventListener('click', () => closeMobileMenu(false));
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    closeMobileMenu(true);
+                }
             });
         }
 
@@ -1603,9 +1639,13 @@
         const modalDownloadBtn = document.getElementById('modal-download-cv-btn');
         const fallbackDownloadBtn = document.getElementById('fallback-download-btn');
         const cvPdfPath = './cv/CV-Haikal.pdf';
+        let lastFocusedBeforeModal = null;
+        let closeModalTimer = null;
 
         function openCvModal() {
             if (!cvModal) return;
+            clearTimeout(closeModalTimer);
+            lastFocusedBeforeModal = document.activeElement;
             if (cvIframe && !cvIframe.getAttribute('src')) {
                 cvIframe.setAttribute('src', cvPdfPath);
             }
@@ -1616,20 +1656,25 @@
                     cvModalContent.classList.remove('scale-95');
                     cvModalContent.classList.add('scale-100');
                 }
+                if (closeCvBtn) closeCvBtn.focus();
             });
             document.body.style.overflow = 'hidden';
         }
 
         function closeCvModal() {
             if (!cvModal) return;
+            clearTimeout(closeModalTimer);
             cvModal.classList.add('opacity-0');
             if (cvModalContent) {
                 cvModalContent.classList.remove('scale-100');
                 cvModalContent.classList.add('scale-95');
             }
-            setTimeout(() => {
+            closeModalTimer = setTimeout(() => {
                 cvModal.classList.add('hidden');
                 document.body.style.overflow = '';
+                if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === 'function') {
+                    lastFocusedBeforeModal.focus();
+                }
             }, 300);
         }
 
@@ -1722,13 +1767,15 @@
 
             // Render Images
             container.innerHTML = projects.map((p, i) => `
-                <img src="${p.src}" alt="${p.name}" class="circular-project-img" data-index="${i}" onerror="this.src='${p.fallback}'" />
+                <img src="${p.src}" alt="${p.name}" class="circular-project-img" data-index="${i}" onerror="this.onerror=null;this.src='${p.fallback}'" />
             `).join('');
 
             // Render Dots
             if (dotsBox) {
                 dotsBox.innerHTML = projects.map((_, i) => `
-                    <button aria-label="Go to project ${i + 1}" data-dot="${i}" class="w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === 0 ? 'bg-white w-6' : 'bg-slate-700 hover:bg-slate-500'}"></button>
+                    <button aria-label="Go to project ${i + 1}" data-dot="${i}" class="p-2 -mx-1 flex items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60">
+                        <span class="h-2.5 rounded-full transition-all duration-300 ${i === 0 ? 'bg-white w-6' : 'bg-slate-700 hover:bg-slate-500 w-2.5'}"></span>
+                    </button>
                 `).join('');
                 dotsBox.querySelectorAll('button').forEach(btn => {
                     btn.addEventListener('click', () => {
@@ -1788,37 +1835,60 @@
                 });
             }
 
+            let isHoverPaused = false;
+            const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (ch) => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            })[ch]);
+
             function updateContent() {
                 const p = projects[activeIndex];
+                if (typeof window.unobserveLiquidMetalButtons === 'function') {
+                    window.unobserveLiquidMetalButtons(contentBox);
+                }
+
+                contentBox.classList.remove('circular-text-fade');
+                void contentBox.offsetWidth;
                 contentBox.className = 'space-y-4 min-h-[220px] circular-text-fade';
-                
+
                 contentBox.innerHTML = `
                     <div class="space-y-1.5">
-                        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 block">${p.designation}</span>
-                        <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">${p.name}</h3>
+                        <span class="text-xs font-semibold uppercase tracking-wider text-neutral-400 block">${escapeHtml(p.designation)}</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug">${escapeHtml(p.name)}</h3>
                     </div>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${p.quote}</p>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${escapeHtml(p.quote)}</p>
                     <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
-                        ${p.tech.map(t => `<span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-neutral-200 font-medium">${t}</span>`).join('')}
+                        ${p.tech.map(t => `<span class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-neutral-200 font-medium">${escapeHtml(t)}</span>`).join('')}
                     </div>
                     <div class="pt-3">
-                        <a href="${p.repo}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-white hover:text-neutral-300 transition-colors group">
-                            <span>View GitHub Repository</span>
-                            <span class="group-hover:translate-x-1 transition-transform duration-200">↗</span>
+                        <a href="${escapeHtml(p.repo)}" target="_blank" rel="noopener noreferrer" class="btn-liquid-metal btn-liquid-metal--sm group">
+                            <span class="liquid-shader-layer" aria-hidden="true"></span>
+                            <span class="liquid-inner-core">
+                                <span>View GitHub Repository</span>
+                                <span class="group-hover:translate-x-1 transition-transform duration-200">↗</span>
+                            </span>
                         </a>
                     </div>
                 `;
+                if (typeof window.observeLiquidMetalButtons === 'function') {
+                    window.observeLiquidMetalButtons(contentBox);
+                }
 
                 if (counter) {
                     counter.textContent = `${activeIndex + 1} / ${total}`;
                 }
 
                 if (dotsBox) {
-                    dotsBox.querySelectorAll('button').forEach((dot, idx) => {
+                    dotsBox.querySelectorAll('button').forEach((dotBtn, idx) => {
+                        const pill = dotBtn.querySelector('span');
+                        if (!pill) return;
                         if (idx === activeIndex) {
-                            dot.className = 'w-6 h-2.5 rounded-full bg-white transition-all duration-300';
+                            pill.className = 'w-6 h-2.5 rounded-full bg-white transition-all duration-300';
                         } else {
-                            dot.className = 'w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-500 transition-all duration-300';
+                            pill.className = 'w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-500 transition-all duration-300';
                         }
                     });
                 }
@@ -1852,8 +1922,11 @@
                 });
             }
 
-            // Keyboard navigation
+            // Keyboard navigation (ignore when typing in inputs or modal is open)
             window.addEventListener('keydown', (e) => {
+                const activeEl = document.activeElement;
+                if (activeEl && (/^(INPUT|TEXTAREA|SELECT)$/.test(activeEl.tagName) || activeEl.isContentEditable)) return;
+                if (cvModal && !cvModal.classList.contains('hidden')) return;
                 const projectsSection = document.getElementById('projects');
                 if (!projectsSection) return;
                 const rect = projectsSection.getBoundingClientRect();
@@ -1871,6 +1944,10 @@
             // Autoplay
             function startAutoplay() {
                 if (autoplayTimer) clearInterval(autoplayTimer);
+                if (isHoverPaused) {
+                    autoplayTimer = null;
+                    return;
+                }
                 autoplayTimer = setInterval(() => {
                     setActive(activeIndex + 1);
                 }, 5500);
@@ -1879,43 +1956,31 @@
             function resetAutoplay() {
                 if (autoplayTimer) {
                     clearInterval(autoplayTimer);
-                    startAutoplay();
+                    autoplayTimer = null;
                 }
+                if (!isHoverPaused) startAutoplay();
             }
 
             container.addEventListener('mouseenter', () => {
-                if (autoplayTimer) clearInterval(autoplayTimer);
+                isHoverPaused = true;
+                if (autoplayTimer) {
+                    clearInterval(autoplayTimer);
+                    autoplayTimer = null;
+                }
             });
             container.addEventListener('mouseleave', () => {
+                isHoverPaused = false;
                 startAutoplay();
             });
 
             window.addEventListener('resize', () => {
                 update3DPositions();
-            });
+            }, { passive: true });
 
             // Initial render
             setActive(0);
             startAutoplay();
         })();
-
-        // --- 7. Hero Card 3D Magnetic Tilt Effect ---
-        const tiltCard = document.getElementById('hero-tilt-card');
-        if (tiltCard) {
-            tiltCard.addEventListener('mousemove', (e) => {
-                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-                const rect = tiltCard.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                const rotateX = (-y / rect.height) * 12;
-                const rotateY = (x / rect.width) * 12;
-                tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            });
-
-            tiltCard.addEventListener('mouseleave', () => {
-                tiltCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            });
-        }
 
         // --- 8. Scroll-Reveal Observer ---
         (function () {
@@ -2058,9 +2123,15 @@
                 }
             }
 
-            // Bind click & pointer to the lanyard assembly (Laptop & HP)
+            // Bind click, keyboard & pointer to the lanyard assembly (Laptop & HP)
             lanyardAssembly.addEventListener('click', (e) => {
                 triggerPhotoInteract(e);
+            });
+            lanyardAssembly.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    triggerPhotoInteract(e);
+                }
             });
 
             // Click outside to smoothly unzoom
@@ -2073,11 +2144,13 @@
             });
 
             // 1. Trigger entrance when scrolling down into viewport
+            let dropTimer = null;
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
+                    clearTimeout(dropTimer);
                     if (entry.isIntersecting) {
                         if (!isDropped) {
-                            setTimeout(triggerDrop, 200);
+                            dropTimer = setTimeout(triggerDrop, 200);
                         }
                     } else {
                         // Reset when completely scrolled away
@@ -2134,22 +2207,81 @@
             }
         }
 
-        // Liquid Metal Buttons Ripple Wave Handler
-        document.querySelectorAll('.btn-liquid-metal').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+        // Liquid Metal Buttons: Delegated Ripple Wave & Offscreen Performance Controller
+        (function initLiquidMetalButtons() {
+            const observedButtons = new WeakSet();
+            let liquidObserver = null;
+
+            if ('IntersectionObserver' in window) {
+                liquidObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const isVisible = entry.isIntersecting && document.visibilityState === 'visible';
+                        entry.target.classList.toggle('is-offscreen', !isVisible);
+                    });
+                }, { rootMargin: '80px' });
+            }
+
+            window.observeLiquidMetalButtons = function (scope) {
+                if (!liquidObserver) return;
+                const root = scope || document;
+                root.querySelectorAll('.btn-liquid-metal').forEach(btn => {
+                    if (!observedButtons.has(btn)) {
+                        observedButtons.add(btn);
+                        liquidObserver.observe(btn);
+                    }
+                });
+            };
+
+            window.unobserveLiquidMetalButtons = function (scope) {
+                if (!liquidObserver || !scope) return;
+                scope.querySelectorAll('.btn-liquid-metal').forEach(btn => {
+                    liquidObserver.unobserve(btn);
+                });
+            };
+
+            window.observeLiquidMetalButtons(document);
+
+            function refreshLiquidVisibility() {
+                const isTabVisible = document.visibilityState === 'visible';
+                document.querySelectorAll('.btn-liquid-metal').forEach(btn => {
+                    if (!isTabVisible) {
+                        btn.classList.add('is-offscreen');
+                        return;
+                    }
+                    const rect = btn.getBoundingClientRect();
+                    const inViewport = rect.width > 0 && rect.height > 0 && rect.bottom >= -80 && rect.top <= (window.innerHeight + 80);
+                    btn.classList.toggle('is-offscreen', !inViewport);
+                });
+            }
+
+            document.addEventListener('visibilitychange', refreshLiquidVisibility);
+
+            document.addEventListener('click', (e) => {
+                const btn = e.target && e.target.closest ? e.target.closest('.btn-liquid-metal') : null;
+                if (!btn) return;
                 const rect = btn.getBoundingClientRect();
+                const isKeyboard = e.clientX === 0 && e.clientY === 0;
                 const ripple = document.createElement('span');
                 ripple.className = 'liquid-ripple';
-                ripple.style.left = `${e.clientX - rect.left}px`;
-                ripple.style.top = `${e.clientY - rect.top}px`;
+                ripple.style.left = `${isKeyboard ? rect.width / 2 : e.clientX - rect.left}px`;
+                ripple.style.top = `${isKeyboard ? rect.height / 2 : e.clientY - rect.top}px`;
                 btn.appendChild(ripple);
                 setTimeout(() => ripple.remove(), 600);
             });
-        });
+        })();
 
         if (contactForm && submitBtn) {
+            let editedDuringSubmit = false;
+            contactForm.addEventListener('input', () => {
+                editedDuringSubmit = true;
+            });
+
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
+                if (submitBtn.disabled) return;
+                submitBtn.disabled = true;
+                editedDuringSubmit = false;
+
                 const name = document.getElementById('contact-name').value.trim();
                 const email = document.getElementById('contact-email').value.trim();
                 const message = document.getElementById('contact-message').value.trim();
@@ -2166,11 +2298,14 @@ ${message}`;
                 const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
                 const waUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(formattedMessage)}`;
 
-                triggerButtonSparkles(submitBtn);
-                submitBtn.classList.add('is-submitting');
+                // Trigger new-tab open synchronously inside submit gesture on desktop to bypass popup blockers
+                if (!isMobile) {
+                    window.open(waUrl, '_blank', 'noopener,noreferrer');
+                }
 
+                triggerButtonSparkles(submitBtn);
                 btnContent.innerHTML = `
-                    <svg class="animate-spin h-4 w-4 text-slate-950" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -2178,7 +2313,6 @@ ${message}`;
                 `;
 
                 setTimeout(() => {
-                    submitBtn.classList.remove('is-submitting');
                     submitBtn.classList.add('is-success');
                     triggerButtonSparkles(submitBtn);
 
@@ -2191,27 +2325,28 @@ ${message}`;
 
                     showToast(`Thank you, ${name}! Redirecting to WhatsApp...`);
 
-                    setTimeout(() => {
-                        if (isMobile) {
+                    if (isMobile) {
+                        setTimeout(() => {
                             window.location.href = waUrl;
-                        } else {
-                            window.open(waUrl, '_blank', 'noopener,noreferrer');
-                        }
-                    }, 500);
+                        }, 450);
+                    }
 
                     setTimeout(() => {
                         submitBtn.classList.remove('is-success');
+                        submitBtn.disabled = false;
                         btnContent.innerHTML = `
-                            <svg id="btn-icon" class="w-4 h-4 fill-current transition-transform duration-300" viewBox="0 0 24 24">
+                            <svg id="btn-icon" class="w-4 h-4 fill-emerald-400 transition-transform duration-300" viewBox="0 0 24 24">
                                 <path
                                     d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.275-.1-.475-.15-.675.15-.2.3-.775.98-.95 1.18-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.49-1.077-.96-1.804-2.148-2.016-2.51-.212-.363-.023-.558.128-.707.135-.134.301-.35.451-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.244-.583-.492-.504-.675-.513l-.575-.01c-.2 0-.525.075-.8.375s-1.05 1.025-1.05 2.5 1.075 2.9 1.225 3.1c.15.2 2.115 3.23 5.124 4.53 3.01 1.3 3.01.867 3.56.813.55-.054 1.78-.727 2.03-1.43.25-.703.25-1.303.175-1.43-.075-.127-.275-.202-.575-.352zm-5.419 7.426h-.004c-1.82 0-3.605-.489-5.163-1.413l-.37-.22-3.839 1.007 1.025-3.742-.242-.385a10.024 10.024 0 0 1-1.536-5.36c0-5.55 4.516-10.065 10.071-10.065 2.689 0 5.216 1.048 7.118 2.95 1.902 1.903 2.95 4.43 2.95 7.12 0 5.553-4.516 10.068-10.01 10.068zM20.52 3.449C18.243 1.171 15.213-.001 11.996 0 5.437 0 .092 5.345.09 11.906c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.742.95 3.699 1.45 5.661 1.45h.005c6.554 0 11.9-5.345 11.902-11.907 0-3.177-1.237-6.166-3.383-8.432z" />
                             </svg>
                             <span>Send Message via WhatsApp</span>
                         `;
-                        contactForm.reset();
+                        if (!editedDuringSubmit) {
+                            contactForm.reset();
+                        }
                     }, 3500);
 
-                }, 850);
+                }, 650);
             });
         }
 
@@ -2298,7 +2433,6 @@ ${message}`;
                     speed: 0.12,
                     count: 5,
                     colorDark: 'rgba(12, 12, 15, 0.45)',
-                    colorLight: 'rgba(219, 234, 254, 0.55)',
                     clouds: []
                 },
                 {
@@ -2306,7 +2440,6 @@ ${message}`;
                     speed: 0.25,
                     count: 6,
                     colorDark: 'rgba(18, 18, 22, 0.40)',
-                    colorLight: 'rgba(241, 245, 249, 0.75)',
                     clouds: []
                 },
                 {
@@ -2314,7 +2447,6 @@ ${message}`;
                     speed: 0.42,
                     count: 4,
                     colorDark: 'rgba(255, 255, 255, 0.03)',
-                    colorLight: 'rgba(255, 255, 255, 0.85)',
                     clouds: []
                 }
             ];
@@ -2350,7 +2482,6 @@ ${message}`;
             }
 
             let cachedSkyGradDark = null;
-            let cachedSkyGradLight = null;
 
             function updateGradients() {
                 if (!height) return;
@@ -2358,11 +2489,6 @@ ${message}`;
                 cachedSkyGradDark.addColorStop(0, '#000000');
                 cachedSkyGradDark.addColorStop(0.55, '#040405');
                 cachedSkyGradDark.addColorStop(1, '#000000');
-
-                cachedSkyGradLight = ctx.createLinearGradient(0, 0, 0, height);
-                cachedSkyGradLight.addColorStop(0, '#f0f7ff');
-                cachedSkyGradLight.addColorStop(0.55, '#e5f0fc');
-                cachedSkyGradLight.addColorStop(1, '#f8fafc');
             }
 
             // High-DPI Canvas Resizing (Protects against jump on mobile navigation scroll)
@@ -2403,16 +2529,24 @@ ${message}`;
                 targetScrollY = window.scrollY || 0;
             }, { passive: true });
 
+            let cloudRafId = 0;
+
             // Battery Optimization via Page Visibility API
             document.addEventListener('visibilitychange', () => {
                 isVisible = !document.hidden;
+                if (isVisible && !cloudRafId) {
+                    cloudRafId = requestAnimationFrame(animate);
+                } else if (!isVisible && cloudRafId) {
+                    cancelAnimationFrame(cloudRafId);
+                    cloudRafId = 0;
+                }
             });
 
             // Smooth 60fps Animation Loop
             let time = 0;
             function animate() {
                 if (!isVisible) {
-                    requestAnimationFrame(animate);
+                    cloudRafId = 0;
                     return;
                 }
 
@@ -2424,28 +2558,24 @@ ${message}`;
                 mouse.y += (mouse.targetY - mouse.y) * lerpSpeed;
                 scrollY += (targetScrollY - scrollY) * 0.08;
 
-                const isDark = document.documentElement.classList.contains('dark');
-
                 // Clear Canvas
                 ctx.clearRect(0, 0, width, height);
 
                 // 1. Subtle Deep Sky Gradient Base (Cached zero-allocation)
-                ctx.fillStyle = isDark ? cachedSkyGradDark : cachedSkyGradLight;
+                ctx.fillStyle = cachedSkyGradDark;
                 ctx.fillRect(0, 0, width, height);
 
-                // 2. Faint Starlight Glimmer in Dark Mode (Single Batched Draw Call)
-                if (isDark) {
-                    ctx.fillStyle = 'rgba(224, 242, 254, 0.35)';
-                    ctx.beginPath();
-                    for (let s = 0; s < 30; s++) {
-                        const sx = (s * 61 + 25) % width;
-                        const sy = (s * 37 + Math.sin(time * 0.8 + s) * 2) % (height * 0.55);
-                        const radius = (s % 4 === 0) ? 1.2 : 0.75;
-                        ctx.moveTo(sx + radius, sy);
-                        ctx.arc(sx, sy, radius, 0, Math.PI * 2);
-                    }
-                    ctx.fill();
+                // 2. Faint Starlight Glimmer (Single Batched Draw Call)
+                ctx.fillStyle = 'rgba(224, 242, 254, 0.35)';
+                ctx.beginPath();
+                for (let s = 0; s < 30; s++) {
+                    const sx = (s * 61 + 25) % width;
+                    const sy = (s * 37 + Math.sin(time * 0.8 + s) * 2) % (height * 0.55);
+                    const radius = (s % 4 === 0) ? 1.2 : 0.75;
+                    ctx.moveTo(sx + radius, sy);
+                    ctx.arc(sx, sy, radius, 0, Math.PI * 2);
                 }
+                ctx.fill();
 
                 // 3. Render 3D Cloud Layers with Continuous Parallax Offset
                 cloudLayers.forEach((layer) => {
@@ -2453,7 +2583,7 @@ ${message}`;
                     const parallaxY = isReducedMotion ? 0 : mouse.y * 22 * layer.z;
                     const scrollShift = scrollY * 0.08 * layer.z;
 
-                    ctx.fillStyle = isDark ? layer.colorDark : layer.colorLight;
+                    ctx.fillStyle = layer.colorDark;
 
                     layer.clouds.forEach((cloud) => {
                         // Gentle horizontal drift
@@ -2479,10 +2609,10 @@ ${message}`;
                     });
                 });
 
-                requestAnimationFrame(animate);
+                cloudRafId = requestAnimationFrame(animate);
             }
 
-            requestAnimationFrame(animate);
+            cloudRafId = requestAnimationFrame(animate);
         })();
 
         // --- 3D Spline Robot Card Spotlight & Controller ---
@@ -2491,17 +2621,34 @@ ${message}`;
             const spotlight = document.getElementById('spline-spotlight');
             if (card && spotlight) {
                 let isHovered = false;
+                let rafId = null;
                 let mouseX = 0, mouseY = 0;
                 let currentX = 0, currentY = 0;
+
+                function animateSpotlight() {
+                    if (!isHovered) {
+                        rafId = null;
+                        return;
+                    }
+                    currentX += (mouseX - currentX) * 0.15;
+                    currentY += (mouseY - currentY) * 0.15;
+                    spotlight.style.transform = 'translate(' + (currentX - 190) + 'px, ' + (currentY - 190) + 'px)';
+                    rafId = requestAnimationFrame(animateSpotlight);
+                }
 
                 card.addEventListener('mouseenter', () => {
                     isHovered = true;
                     spotlight.style.opacity = '1';
+                    if (!rafId) rafId = requestAnimationFrame(animateSpotlight);
                 });
 
                 card.addEventListener('mouseleave', () => {
                     isHovered = false;
                     spotlight.style.opacity = '0';
+                    if (rafId) {
+                        cancelAnimationFrame(rafId);
+                        rafId = null;
+                    }
                 });
 
                 card.addEventListener('mousemove', (e) => {
@@ -2509,16 +2656,6 @@ ${message}`;
                     mouseX = e.clientX - rect.left;
                     mouseY = e.clientY - rect.top;
                 }, { passive: true });
-
-                function animateSpotlight() {
-                    if (isHovered) {
-                        currentX += (mouseX - currentX) * 0.15;
-                        currentY += (mouseY - currentY) * 0.15;
-                        spotlight.style.transform = 'translate(' + (currentX - 190) + 'px, ' + (currentY - 190) + 'px)';
-                    }
-                    requestAnimationFrame(animateSpotlight);
-                }
-                animateSpotlight();
             }
 
             // Prevent accidental mouse-wheel zooming on the 3D robot while scrolling the page
@@ -2528,71 +2665,341 @@ ${message}`;
                     if (!e.ctrlKey && !e.metaKey) {
                         e.stopPropagation();
                     }
-                }, { capture: true, passive: false });
+                }, { capture: true, passive: true });
             }
 
-            // Spline Watermark Cleaner & Studio Visor Tuning
-            const eyeImg = new Image();
-            eyeImg.src = './Images/robot-eyes-led.png';
-
-            function tuneSplineVisor() {
+            // Spline Watermark Cleaner & Lifelike Mipmapped LED Eye Blink Controller
+            // Preserves authentic native 3D studio visor reflections while upgrading the
+            // high-res NPOT VideoTexture into a mipmapped 1024x512 white LED canvas with
+            // smooth eyelid blinking and natural double-blink cadence.
+            function hideSplineWatermark() {
                 const viewer = document.querySelector('spline-viewer');
-                if (!viewer) return;
+                if (!viewer || !viewer.shadowRoot) return false;
 
-                // 1. Clean Spline watermark logo from Shadow DOM
-                if (viewer.shadowRoot && !viewer.shadowRoot.querySelector('#hide-spline-logo-style')) {
+                if (!viewer.shadowRoot.querySelector('#hide-spline-logo-style')) {
                     const style = document.createElement('style');
                     style.id = 'hide-spline-logo-style';
                     style.textContent = '#logo, a#logo, [href*="spline.design"] { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }';
                     viewer.shadowRoot.appendChild(style);
                 }
-
-                const app = viewer._spline || viewer.spline;
-                if (!app || !app._scene) return;
-
-                let headMesh = null;
-                app._scene.traverse((o) => {
-                    if (o.name === 'Head 2') headMesh = o;
-                });
-                if (!headMesh || !headMesh.material || !headMesh.material.layers) return;
-
-                const mat = headMesh.material;
-                const eyeLayer = mat.layers[1];
-                const tex = eyeLayer?.uniforms?.f3_texture?.value;
-
-                // Reduce reflection glare for obsidian glass look matching the studio render
-                if (mat.layers[2]?.uniforms?.f2_alpha) mat.layers[2].uniforms.f2_alpha.value = 0.08;
-                if (mat.layers[3]?.uniforms?.f1_alpha) mat.layers[3].uniforms.f1_alpha.value = 0.02;
-                if (mat.layers[4]?.uniforms?.f0_alpha) mat.layers[4].uniforms.f0_alpha.value = 0.02;
-
-                if (tex && eyeImg.complete && eyeImg.naturalWidth > 0) {
-                    if (tex.image && tex.image.tagName === 'VIDEO') {
-                        try { tex.image.pause(); } catch (e) {}
-                    }
-                    tex.image = eyeImg;
-                    if (tex.source) {
-                        tex.source.data = eyeImg;
-                        tex.source.needsUpdate = true;
-                    }
-                    tex.isVideoTexture = false;
-                    tex.update = function () {};
-                    tex.minFilter = 1006;
-                    tex.magFilter = 1006;
-                    tex.generateMipmaps = false;
-                    tex.needsUpdate = true;
-                }
+                return true;
             }
 
-            let pollTicks = 0;
-            const visorPoll = setInterval(() => {
-                pollTicks++;
-                tuneSplineVisor();
-                if (pollTicks > 120) clearInterval(visorPoll);
-            }, 300);
+            function startEyeBlinkController(app, tex, openCanvas, displayCanvas, eyeTop, eyeBottom) {
+                const dCtx = displayCanvas.getContext('2d');
+                if (!dCtx || tex.userData.blinkControllerActive) return;
+                tex.userData.blinkControllerActive = true;
 
-            ['load', 'pointermove', 'pointerdown'].forEach((evt) => {
-                window.addEventListener(evt, tuneSplineVisor, { passive: true });
-            });
+                const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+                const eyeHeight = Math.max(24, eyeBottom - eyeTop);
+                const closeLineY = eyeTop + eyeHeight * 0.6;
+                const pad = 6;
+                let lastUploadedOpenness = 1;
+                let isBlinking = false;
+                let rafId = 0;
+                let timerId = 0;
+                let cardInView = true;
+
+                function drawOpenness(openness) {
+                    const clamped = Math.max(0, Math.min(1, openness));
+                    if ((clamped === 0 && lastUploadedOpenness === 0) || (clamped === 1 && lastUploadedOpenness === 1)) {
+                        return;
+                    }
+                    lastUploadedOpenness = clamped;
+                    tex.userData.blinkOpenness = clamped;
+
+                    dCtx.fillStyle = '#000000';
+                    dCtx.fillRect(0, 0, 1024, 512);
+
+                    if (clamped >= 0.999) {
+                        dCtx.drawImage(openCanvas, 0, 0);
+                    } else if (clamped > 0.015) {
+                        const scaleY = 0.84 + 0.16 * clamped;
+                        const scaledTop = closeLineY - (closeLineY - (eyeTop - pad)) * scaleY;
+                        const scaledBottom = closeLineY + ((eyeBottom + pad) - closeLineY) * scaleY;
+                        const visibleTop = closeLineY - (closeLineY - scaledTop) * clamped;
+                        const visibleBottom = closeLineY + (scaledBottom - closeLineY) * clamped;
+                        const clipHeight = Math.max(0, visibleBottom - visibleTop);
+
+                        if (clipHeight > 0.5) {
+                            dCtx.save();
+                            dCtx.beginPath();
+                            dCtx.rect(0, visibleTop, 1024, clipHeight);
+                            dCtx.clip();
+                            dCtx.drawImage(openCanvas, 0, closeLineY - closeLineY * scaleY, 1024, 512 * scaleY);
+                            dCtx.restore();
+                        }
+                    }
+
+                    if (tex.source) tex.source.needsUpdate = true;
+                    tex.needsUpdate = true;
+                    if (typeof app.requestRender === 'function') app.requestRender();
+                }
+
+                function canAnimate() {
+                    return document.visibilityState === 'visible' && cardInView && !(reducedMotion && reducedMotion.matches);
+                }
+
+                function scheduleNextBlink(delayMs) {
+                    clearTimeout(timerId);
+                    if (!canAnimate()) return;
+                    const wait = typeof delayMs === 'number' ? delayMs : (2200 + Math.random() * 3200);
+                    timerId = setTimeout(() => {
+                        if (!canAnimate() || isBlinking) return;
+                        const roll = Math.random();
+                        if (roll < 0.26) {
+                            triggerBlink({ double: true, relaxed: false });
+                        } else if (roll < 0.38) {
+                            triggerBlink({ double: false, relaxed: true });
+                        } else {
+                            triggerBlink({ double: false, relaxed: false });
+                        }
+                    }, wait);
+                }
+
+                function triggerBlink(options) {
+                    const opts = options || {};
+                    if (!canAnimate()) {
+                        drawOpenness(1);
+                        isBlinking = false;
+                        return;
+                    }
+                    isBlinking = true;
+                    cancelAnimationFrame(rafId);
+
+                    const closeMs = opts.relaxed ? (125 + Math.random() * 25) : (82 + Math.random() * 18);
+                    const holdMs = opts.relaxed ? (65 + Math.random() * 20) : (42 + Math.random() * 18);
+                    const openMs = opts.relaxed ? (155 + Math.random() * 30) : (108 + Math.random() * 24);
+                    let elapsed = 0;
+                    let prevNow = null;
+
+                    function tick(now) {
+                        if (!canAnimate()) {
+                            drawOpenness(1);
+                            isBlinking = false;
+                            return;
+                        }
+                        if (prevNow !== null) {
+                            elapsed += Math.min(40, Math.max(0, now - prevNow));
+                        }
+                        prevNow = now;
+
+                        if (elapsed < closeMs) {
+                            const p = elapsed / closeMs;
+                            drawOpenness(1 - Math.pow(p, 2.2));
+                            rafId = requestAnimationFrame(tick);
+                        } else if (elapsed < closeMs + holdMs) {
+                            drawOpenness(0);
+                            rafId = requestAnimationFrame(tick);
+                        } else if (elapsed < closeMs + holdMs + openMs) {
+                            const p = (elapsed - closeMs - holdMs) / openMs;
+                            drawOpenness(1 - Math.pow(1 - p, 2.6));
+                            rafId = requestAnimationFrame(tick);
+                        } else {
+                            drawOpenness(1);
+                            isBlinking = false;
+                            if (opts.double) {
+                                scheduleNextBlink(95);
+                            } else {
+                                scheduleNextBlink();
+                            }
+                        }
+                    }
+
+                    rafId = requestAnimationFrame(tick);
+                }
+
+                function handleVisibilityOrPause() {
+                    if (canAnimate()) {
+                        if (!isBlinking) scheduleNextBlink(900);
+                    } else {
+                        clearTimeout(timerId);
+                        cancelAnimationFrame(rafId);
+                        isBlinking = false;
+                        drawOpenness(1);
+                    }
+                }
+
+                document.addEventListener('visibilitychange', handleVisibilityOrPause);
+                if (reducedMotion && typeof reducedMotion.addEventListener === 'function') {
+                    reducedMotion.addEventListener('change', handleVisibilityOrPause);
+                }
+
+                const card = document.getElementById('spline-card');
+                if (card) {
+                    if ('IntersectionObserver' in window) {
+                        const io = new IntersectionObserver((entries) => {
+                            cardInView = !!entries[0]?.isIntersecting;
+                            handleVisibilityOrPause();
+                        }, { threshold: 0.05 });
+                        io.observe(card);
+                    }
+                    card.addEventListener('pointerenter', () => {
+                        if (!canAnimate() || isBlinking) return;
+                        clearTimeout(timerId);
+                        triggerBlink({ double: false, relaxed: false });
+                    }, { passive: true });
+                    card.addEventListener('pointerdown', () => {
+                        if (!canAnimate() || isBlinking) return;
+                        clearTimeout(timerId);
+                        triggerBlink({ double: Math.random() < 0.45, relaxed: false });
+                    }, { passive: true });
+                }
+
+                tex.userData.triggerBlink = () => {
+                    if (!canAnimate() || isBlinking) return;
+                    clearTimeout(timerId);
+                    triggerBlink({ double: false, relaxed: false });
+                };
+
+                scheduleNextBlink(900);
+            }
+
+            function enhanceSplineEyes() {
+                const viewer = document.querySelector('spline-viewer');
+                const app = viewer && (viewer._spline || viewer.spline);
+                if (!app || !app._scene) return false;
+
+                let head = null;
+                app._scene.traverse((obj) => {
+                    if (!head && obj.name === 'Head 2') head = obj;
+                });
+                const eyeLayer = head && head.material && head.material.layers && head.material.layers[1];
+                const tex = eyeLayer && eyeLayer.uniforms && eyeLayer.uniforms.f3_texture && eyeLayer.uniforms.f3_texture.value;
+                if (!eyeLayer || !tex) return false;
+                if (tex.userData && tex.userData.eyeEnhanced) return true;
+
+                const vid = tex.image;
+                if (!vid || !vid.videoWidth || !vid.videoHeight || (vid.readyState !== undefined && vid.readyState < 2)) {
+                    return false;
+                }
+
+                // Threshold native video frame and require an open-eyes frame while locating eye vertical bounds
+                const vw = vid.videoWidth;
+                const vh = vid.videoHeight;
+                const tmp = document.createElement('canvas');
+                tmp.width = vw;
+                tmp.height = vh;
+                const tctx = tmp.getContext('2d', { willReadFrequently: true });
+                if (!tctx) return false;
+
+                let rawMinY = vh;
+                let rawMaxY = 0;
+                try {
+                    tctx.drawImage(vid, 0, 0, vw, vh);
+                    const imgData = tctx.getImageData(0, 0, vw, vh);
+                    const d = imgData.data;
+                    let brightCount = 0;
+                    for (let i = 0; i < d.length; i += 4) {
+                        const lum = Math.max(d[i], d[i + 1], d[i + 2]);
+                        if (lum > 140) {
+                            d[i] = 255;
+                            d[i + 1] = 255;
+                            d[i + 2] = 255;
+                            d[i + 3] = 255;
+                            brightCount++;
+                            const y = Math.floor((i / 4) / vw);
+                            if (y < rawMinY) rawMinY = y;
+                            if (y > rawMaxY) rawMaxY = y;
+                        } else {
+                            d[i] = 0;
+                            d[i + 1] = 0;
+                            d[i + 2] = 0;
+                            d[i + 3] = 255;
+                        }
+                    }
+
+                    const minOpenPixels = Math.floor(vw * vh * 0.0085);
+                    if (brightCount < minOpenPixels) return false;
+
+                    tctx.putImageData(imgData, 0, 0);
+                } catch {
+                    return false;
+                }
+
+                // Build clean crisp white POT open-eyes master canvas (1024x512) + display canvas for blinking
+                const openCanvas = document.createElement('canvas');
+                openCanvas.width = 1024;
+                openCanvas.height = 512;
+                const oCtx = openCanvas.getContext('2d');
+                if (!oCtx) return false;
+
+                oCtx.fillStyle = '#000000';
+                oCtx.fillRect(0, 0, 1024, 512);
+                oCtx.globalCompositeOperation = 'lighter';
+                oCtx.filter = 'blur(1.4px)';
+                oCtx.drawImage(tmp, 0, 0, 1024, 512);
+                oCtx.filter = 'none';
+                const offsets = [[0, 0], [-1.6, 0], [1.6, 0], [0, -1.2], [0, 1.2]];
+                for (const [ox, oy] of offsets) {
+                    oCtx.drawImage(tmp, ox, oy, 1024, 512);
+                }
+                oCtx.globalCompositeOperation = 'source-over';
+
+                const displayCanvas = document.createElement('canvas');
+                displayCanvas.width = 1024;
+                displayCanvas.height = 512;
+                const dCtx = displayCanvas.getContext('2d');
+                if (!dCtx) return false;
+                dCtx.drawImage(openCanvas, 0, 0);
+
+                if (typeof vid.pause === 'function') {
+                    try { vid.pause(); } catch {}
+                }
+
+                tex.image = displayCanvas;
+                if (tex.source) {
+                    tex.source.data = displayCanvas;
+                    tex.source.needsUpdate = true;
+                }
+                tex.isVideoTexture = false;
+                tex.update = function () {};
+                tex.generateMipmaps = true;
+                tex.minFilter = 1008; // THREE.LinearMipmapLinearFilter
+                tex.magFilter = 1006; // THREE.LinearFilter
+                tex.anisotropy = 8;
+                tex.userData = Object.assign({}, tex.userData, { eyeEnhanced: true, blinkOpenness: 1 });
+                tex.needsUpdate = true;
+
+                if (eyeLayer.uniforms.f3_textureSize && eyeLayer.uniforms.f3_textureSize.value) {
+                    eyeLayer.uniforms.f3_textureSize.value.set(1024, 512, 1);
+                }
+                if (eyeLayer.uniforms.f3_alpha) {
+                    eyeLayer.uniforms.f3_alpha.value = 1.9;
+                }
+
+                const eyeTop = rawMaxY > rawMinY ? (rawMinY / vh) * 512 : 200;
+                const eyeBottom = rawMaxY > rawMinY ? (rawMaxY / vh) * 512 : 294;
+                startEyeBlinkController(app, tex, openCanvas, displayCanvas, eyeTop, eyeBottom);
+
+                if (typeof app.requestRender === 'function') {
+                    app.requestRender();
+                    requestAnimationFrame(() => {
+                        if (typeof app.requestRender === 'function') app.requestRender();
+                    });
+                }
+                return true;
+            }
+
+            let splineInitTicks = 0;
+            let watermarkDone = false;
+            let eyesDone = false;
+            const trySplineInit = () => {
+                if (!watermarkDone) watermarkDone = hideSplineWatermark();
+                if (!eyesDone) eyesDone = enhanceSplineEyes();
+                return watermarkDone && eyesDone;
+            };
+            const splineInitPoll = setInterval(() => {
+                splineInitTicks++;
+                if (trySplineInit() || splineInitTicks > 120) {
+                    clearInterval(splineInitPoll);
+                }
+            }, 250);
+            const splineEl = document.querySelector('spline-viewer');
+            if (splineEl) {
+                splineEl.addEventListener('load-complete', trySplineInit, { once: true });
+            }
+            window.addEventListener('load', trySplineInit, { once: true, passive: true });
         })();
 
         // --- Spotlight Card (GlowCard) Pointer Tracking Synchronization ---

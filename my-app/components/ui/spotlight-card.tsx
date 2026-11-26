@@ -65,7 +65,7 @@ const GlowCard: React.FC<GlowCardProps> = ({
   };
 
   const getInlineStyles = () => {
-    const baseStyles: React.CSSProperties & Record<string, any> = {
+    const baseStyles: React.CSSProperties & Record<`--${string}`, string | number> = {
       '--base': base,
       '--spread': spread,
       '--radius': '14',
@@ -116,12 +116,10 @@ const GlowCard: React.FC<GlowCardProps> = ({
       background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
       background-repeat: no-repeat;
       background-position: 50% 50%;
-      mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-      mask-clip: padding-box, border-box;
-      mask-composite: intersect;
-      -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-      -webkit-mask-clip: padding-box, border-box;
-      -webkit-mask-composite: source-out;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
     }
     
     [data-glow]::before {

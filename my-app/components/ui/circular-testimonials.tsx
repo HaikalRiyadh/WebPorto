@@ -7,7 +7,8 @@ import React, {
   useCallback,
 } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 export interface Testimonial {
   quote: string;
@@ -61,18 +62,15 @@ export const CircularTestimonials = ({
   const colorName = colors.name ?? "#000";
   const colorDesignation = colors.designation ?? "#6b7280";
   const colorTestimony = colors.testimony ?? "#4b5563";
-  const colorArrowBg = colors.arrowBackground ?? "#141414";
   const colorArrowFg = colors.arrowForeground ?? "#f1f1f7";
-  const colorArrowHoverBg = colors.arrowHoverBackground ?? "#00a6fb";
   const fontSizeName = fontSizes.name ?? "1.5rem";
   const fontSizeDesignation = fontSizes.designation ?? "0.925rem";
   const fontSizeQuote = fontSizes.quote ?? "1.125rem";
 
   // State
   const [activeIndex, setActiveIndex] = useState(0);
-  const [hoverPrev, setHoverPrev] = useState(false);
-  const [hoverNext, setHoverNext] = useState(false);
   const [containerWidth, setContainerWidth] = useState(1200);
+  const prefersReducedMotion = useReducedMotion();
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -107,16 +105,6 @@ export const CircularTestimonials = ({
     };
   }, [autoplay, testimonialsLength]);
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") handlePrev();
-      if (e.key === "ArrowRight") handleNext();
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [activeIndex, testimonialsLength]);
-
   // Navigation handlers
   const handleNext = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % testimonialsLength);
@@ -127,6 +115,20 @@ export const CircularTestimonials = ({
     setActiveIndex((prev) => (prev - 1 + testimonialsLength) % testimonialsLength);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [testimonialsLength]);
+
+  // Keyboard navigation (ignore when typing in form controls)
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && (/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName) || target.isContentEditable)) {
+        return;
+      }
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [handleNext, handlePrev]);
 
   // Compute transforms for each image (always show 3: left, center, right)
   function getImageStyle(index: number): React.CSSProperties {
@@ -178,6 +180,10 @@ export const CircularTestimonials = ({
     exit: { opacity: 0, y: -20 },
   };
 
+  if (!testimonials || testimonials.length === 0 || !activeTestimonial) {
+    return null;
+  }
+
   return (
     <div className="testimonial-container">
       <div className="testimonial-grid">
@@ -221,57 +227,53 @@ export const CircularTestimonials = ({
                 className="quote"
                 style={{ color: colorTestimony, fontSize: fontSizeQuote }}
               >
-                {activeTestimonial.quote.split(" ").map((word, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{
-                      filter: "blur(10px)",
-                      opacity: 0,
-                      y: 5,
-                    }}
-                    animate={{
-                      filter: "blur(0px)",
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{
-                      duration: 0.22,
-                      ease: "easeInOut",
-                      delay: 0.025 * i,
-                    }}
-                    style={{ display: "inline-block" }}
-                  >
-                    {word}&nbsp;
-                  </motion.span>
-                ))}
+                {prefersReducedMotion ? (
+                  activeTestimonial.quote
+                ) : (
+                  activeTestimonial.quote.split(" ").map((word, i) => (
+                    <motion.span
+                      key={i}
+                      initial={{
+                        filter: "blur(10px)",
+                        opacity: 0,
+                        y: 5,
+                      }}
+                      animate={{
+                        filter: "blur(0px)",
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      transition={{
+                        duration: 0.22,
+                        ease: "easeInOut",
+                        delay: 0.025 * i,
+                      }}
+                      style={{ display: "inline-block" }}
+                    >
+                      {word}&nbsp;
+                    </motion.span>
+                  ))
+                )}
               </motion.p>
             </motion.div>
           </AnimatePresence>
           <div className="arrow-buttons">
-            <button
-              className="arrow-button prev-button"
+            <LiquidMetalButton
+              viewMode="icon"
+              shaderMode="css"
+              size="icon"
               onClick={handlePrev}
-              style={{
-                backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg,
-              }}
-              onMouseEnter={() => setHoverPrev(true)}
-              onMouseLeave={() => setHoverPrev(false)}
               aria-label="Previous testimonial"
-            >
-              <FaArrowLeft size={28} color={colorArrowFg} />
-            </button>
-            <button
-              className="arrow-button next-button"
+              icon={<FaArrowLeft size={18} color={colorArrowFg} />}
+            />
+            <LiquidMetalButton
+              viewMode="icon"
+              shaderMode="css"
+              size="icon"
               onClick={handleNext}
-              style={{
-                backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg,
-              }}
-              onMouseEnter={() => setHoverNext(true)}
-              onMouseLeave={() => setHoverNext(false)}
               aria-label="Next testimonial"
-            >
-              <FaArrowRight size={28} color={colorArrowFg} />
-            </button>
+              icon={<FaArrowRight size={18} color={colorArrowFg} />}
+            />
           </div>
         </div>
       </div>
@@ -316,19 +318,8 @@ export const CircularTestimonials = ({
         }
         .arrow-buttons {
           display: flex;
-          gap: 1.5rem;
+          gap: 1rem;
           padding-top: 3rem;
-        }
-        .arrow-button {
-          width: 2.7rem;
-          height: 2.7rem;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: background-color 0.3s;
-          border: none;
         }
         .word {
           display: inline-block;

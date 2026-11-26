@@ -1,12 +1,20 @@
 import test from "node:test";
 import assert from "node:assert";
-import FloatInput from "../components/ui/float-input";
-import { FloatInputDemo } from "../components/ui/float-input-demo";
+import fs from "node:fs";
+import path from "node:path";
 
-test("FloatInput component is defined and is a callable component function", () => {
-  assert.strictEqual(typeof FloatInput, "function");
+const floatInputPath = path.resolve(process.cwd(), "components/ui/float-input.tsx");
+const floatInputDemoPath = path.resolve(process.cwd(), "components/ui/float-input-demo.tsx");
+
+test("FloatInput component exists and exports default function with accessible attributes", () => {
+  const source = fs.readFileSync(floatInputPath, "utf8");
+  assert.match(source, /export default function FloatInput\(/);
+  assert.match(source, /aria-label=\{label\}/);
+  assert.match(source, /htmlFor=\{inputId\}/);
 });
 
-test("FloatInputDemo component is defined and is a callable function", () => {
-  assert.strictEqual(typeof FloatInputDemo, "function");
+test("FloatInputDemo component exists and exports FloatInputDemo", () => {
+  const source = fs.readFileSync(floatInputDemoPath, "utf8");
+  assert.match(source, /export function FloatInputDemo\(/);
+  assert.match(source, /import FloatInput from "@\/components\/ui\/float-input"/);
 });

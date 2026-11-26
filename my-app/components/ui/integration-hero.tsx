@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { ArrowRight } from "lucide-react";
 import React from "react";
 
 const ICONS_ROW1 = [
@@ -40,26 +41,30 @@ export default function IntegrationHero() {
         <p className="mt-4 text-lg text-gray-500 dark:text-gray-300 max-w-xl mx-auto">
           250+ top apps are available to integrate seamlessly with your workflow.
         </p>
-        <Button variant="default" className="mt-8 px-6 py-3 rounded-lg bg-black dark:bg-white text-white dark:text-black font-medium hover:bg-gray-800 dark:hover:bg-gray-200 transition">
-          Get started
-        </Button>
+        <div className="mt-8 flex justify-center">
+          <LiquidMetalButton
+            label="Get started"
+            size="lg"
+            icon={<ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />}
+          />
+        </div>
 
         {/* Carousel */}
         <div className="mt-12 overflow-hidden relative pb-2">
           {/* Row 1 */}
-          <div className="flex gap-10 whitespace-nowrap animate-scroll-left">
+          <div className="flex gap-10 whitespace-nowrap animate-scroll-left pr-10">
             {repeatedIcons(ICONS_ROW1, 4).map((src, i) => (
               <div key={i} className="h-16 w-16 flex-shrink-0 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center">
-                <img src={src} alt="icon" className="h-10 w-10 object-contain" />
+                <img src={src} alt="" aria-hidden="true" className="h-10 w-10 object-contain" />
               </div>
             ))}
           </div>
 
           {/* Row 2 */}
-          <div className="flex gap-10 whitespace-nowrap mt-6 animate-scroll-right">
+          <div className="flex gap-10 whitespace-nowrap mt-6 animate-scroll-right pr-10">
             {repeatedIcons(ICONS_ROW2, 4).map((src, i) => (
               <div key={i} className="h-16 w-16 flex-shrink-0 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center">
-                <img src={src} alt="icon" className="h-10 w-10 object-contain" />
+                <img src={src} alt="" aria-hidden="true" className="h-10 w-10 object-contain" />
               </div>
             ))}
           </div>
@@ -92,6 +97,12 @@ export default function IntegrationHero() {
         .animate-scroll-left:hover,
         .animate-scroll-right:hover {
           animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-scroll-left,
+          .animate-scroll-right {
+            animation: none;
+          }
         }
       `}</style>
     </section>

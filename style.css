@@ -223,64 +223,8 @@ html.dark .gradient-text {
     background-clip: text;
 }
 
-.gradient-border-glow {
-    position: relative;
-    border: 1px solid var(--border-subtle);
-}
-
-html.dark .gradient-border-glow {
-    border-color: rgba(255, 255, 255, 0.08);
-}
-
 /* --------------------------------------------------------------------------
-   6. Hero Showcase Card
-   -------------------------------------------------------------------------- */
-#hero-tilt-card {
-    transform-style: preserve-3d;
-    will-change: transform;
-    position: relative;
-    border-radius: 1.75rem;
-}
-
-#hero-tilt-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.13) 0%, transparent 50%, rgba(255, 255, 255, 0.04) 100%);
-    pointer-events: none;
-    z-index: 2;
-}
-
-#hero-tilt-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -80%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
-    transform: skewX(-20deg);
-    transition: left 0.9s cubic-bezier(0.23, 1, 0.32, 1);
-    pointer-events: none;
-    z-index: 20;
-}
-
-#hero-tilt-card:hover::before {
-    left: 130%;
-}
-
-/* Permanent Dark Obsidian Hero Avatar Card Ambient Background */
-.hero-card-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.06) 0%, transparent 60%),
-        linear-gradient(180deg, #090a0d 0%, #050608 100%);
-}
-
-/* --------------------------------------------------------------------------
-   7. Hanging Lanyard Photo (Satu Tali & Drop-down Entrance)
+   6. Hanging Lanyard Photo (Satu Tali & Drop-down Entrance)
    -------------------------------------------------------------------------- */
 .hanging-lanyard-assembly {
     display: flex;
@@ -382,10 +326,6 @@ html.dark .gradient-border-glow {
     }
 }
 
-.hanging-lanyard-assembly.is-tapped {
-    animation: lanyardTapPhysics 1.35s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
-}
-
 /* Lanyard Strap (Satu Tali Tunggal) */
 .lanyard-strap {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
@@ -400,7 +340,7 @@ html.dark .gradient-border-glow {
 .hanging-photo-card {
     border-radius: 1.25rem;
     padding: 0.625rem;
-    background: rgba(14, 16, 22, 0.92);
+    background-color: rgba(14, 16, 22, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
         0 24px 50px -12px rgba(0, 0, 0, 0.85),
@@ -415,7 +355,7 @@ html.dark .gradient-border-glow {
 }
 
 html.dark .hanging-photo-card {
-    background: rgba(10, 11, 15, 0.95);
+    background-color: rgba(10, 11, 15, 0.95);
     border-color: rgba(255, 255, 255, 0.12);
     box-shadow:
         0 28px 60px -15px rgba(0, 0, 0, 0.9),
@@ -563,157 +503,140 @@ html.dark .nav-3d {
 }
 
 /* --------------------------------------------------------------------------
-   9. Theme Toggle Button
+   9. Buttons & Micro-interactions (Crisp & Tactile)
    -------------------------------------------------------------------------- */
-.theme-toggle-btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* --------------------------------------------------------------------------
-   10. Project Showcase Cards & Browser Mockup Headers
-   -------------------------------------------------------------------------- */
-.project-card {
-    transition: transform var(--card-transition), box-shadow var(--card-transition), border-color var(--card-transition);
-    position: relative;
-    border-radius: 1.25rem;
-    background: rgba(14, 14, 18, 0.82);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.project-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.15);
-}
-
-.project-card .img-zoom {
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.project-card:hover .img-zoom {
-    transform: scale(1.03);
-}
-
-/* Browser Mockup Window Header (Authentic Human Engineer Touch) */
-.browser-frame-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0.85rem;
-    background: rgba(15, 15, 20, 0.95);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    z-index: 10;
-}
-
-/* Filter Buttons */
-.filter-btn-3d {
-    transition: all 0.2s ease;
-}
-
-.filter-btn-3d:hover {
-    transform: translateY(-1px);
-}
-
-.filter-btn-3d.active {
-    background: var(--text-primary) !important;
-    color: var(--bg-base) !important;
-    border-color: transparent !important;
-}
-
-/* --------------------------------------------------------------------------
-   11. Skills Cards Hover & Precision
-   -------------------------------------------------------------------------- */
-.skill-card-3d {
-    transition: transform var(--card-transition), border-color var(--card-transition), background-color var(--card-transition);
-    position: relative;
-    overflow: hidden;
-    border-radius: 0.85rem;
-}
-
-.skill-card-3d:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.25);
-}
-
-/* --------------------------------------------------------------------------
-   12. Buttons & Micro-interactions (Crisp & Tactile)
-   -------------------------------------------------------------------------- */
-/* Liquid Metal Button Architecture (Paper-Design Shaders Aesthetic) */
+/* Liquid Metal Button Architecture (Pure CSS Rotating Conic Metallic Border) */
 .btn-liquid-metal {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 100px;
-    padding: 1.5px;
+    border-radius: 9999px;
+    padding: 2px;
     perspective: 1000px;
-    transform-style: preserve-3d;
     cursor: pointer;
     text-decoration: none;
     user-select: none;
     -webkit-user-select: none;
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.15),
-        0px 8px 18px -4px rgba(0, 0, 0, 0.75),
-        0px 2px 4px rgba(0, 0, 0, 0.5);
-    background: transparent;
+    isolation: isolate;
+    transition: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.14),
+        0px 10px 22px -6px rgba(0, 0, 0, 0.8),
+        0px 2px 5px rgba(0, 0, 0, 0.55);
+    background: #0a0a0c;
     border: none;
     outline: none;
     overflow: hidden;
+    vertical-align: middle;
 }
 
+.btn-liquid-metal--icon {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.btn-liquid-metal--icon-sm {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    padding: 2px;
+    flex-shrink: 0;
+}
+
+.btn-liquid-metal:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 3px;
+}
+
+.btn-liquid-metal:disabled {
+    opacity: 0.85;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-liquid-metal.is-success .liquid-inner-core {
+    color: #34d399;
+}
+
+/* Masked metallic specular rim + hover sheen overlay */
 .btn-liquid-metal::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 100px;
+    border-radius: 9999px;
     padding: 1.5px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.45) 75%, rgba(255, 255, 255, 0.2) 100%);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.35) 80%, rgba(255, 255, 255, 0.15) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-    transition: all 0.4s ease;
+    opacity: 0.65;
+    transition: opacity 0.3s ease;
     z-index: 15;
 }
 
+/* Compositor-only rotating conic-gradient chrome field visible around the 2px rim */
 .btn-liquid-metal .liquid-shader-layer {
     position: absolute;
     inset: 0;
-    border-radius: 100px;
+    border-radius: 9999px;
     overflow: hidden;
     pointer-events: none;
     z-index: 5;
-    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.22), transparent 70%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(10, 10, 10, 0.9) 50%, rgba(255, 255, 255, 0.14) 100%);
-    background-size: 200% 200%;
-    animation: liquidMetalFlow 7s ease-in-out infinite alternate;
 }
 
-@keyframes liquidMetalFlow {
-    0% {
-        background-position: 0% 50%;
-        filter: hue-rotate(0deg);
-    }
+.btn-liquid-metal .liquid-shader-layer::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(155%, 96px);
+    aspect-ratio: 1 / 1;
+    background: conic-gradient(
+        from 0deg,
+        #18181b 0deg,
+        #52525b 20deg,
+        #ffffff 44deg,
+        #d4d4d8 64deg,
+        #27272a 90deg,
+        #09090b 124deg,
+        #71717a 156deg,
+        #f8fafc 182deg,
+        #a1a1aa 206deg,
+        #18181b 238deg,
+        #09090b 268deg,
+        #e4e4e7 296deg,
+        #ffffff 320deg,
+        #3f3f46 342deg,
+        #18181b 360deg
+    );
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: liquidConicSpin 3.8s linear infinite;
+    will-change: transform;
+}
 
-    50% {
-        background-position: 100% 50%;
-        filter: hue-rotate(30deg);
+.btn-liquid-metal.is-offscreen .liquid-shader-layer::before {
+    animation-play-state: paused;
+}
+
+@keyframes liquidConicSpin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 
     100% {
-        background-position: 0% 50%;
-        filter: hue-rotate(0deg);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
 .btn-liquid-metal .liquid-inner-core {
     position: relative;
-    border-radius: 100px;
+    border-radius: 9999px;
     background: linear-gradient(180deg, #222222 0%, #000000 100%);
     width: 100%;
     height: 100%;
@@ -721,33 +644,54 @@ html.dark .nav-3d {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 0.65rem 1.6rem;
-    color: #ffffff;
+    padding: 0.65rem 1.55rem;
+    color: #e4e4e7;
     font-size: 0.875rem;
     font-weight: 500;
+    line-height: 1.2;
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.85);
     z-index: 20;
-    transform: translateZ(20px);
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: color 0.2s ease,
+        background 0.25s ease,
+        box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-liquid-metal--sm .liquid-inner-core {
+    padding: 0.44rem 0.95rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    gap: 6px;
+}
+
+.btn-liquid-metal--icon .liquid-inner-core,
+.btn-liquid-metal--icon-sm .liquid-inner-core {
+    padding: 0;
+    gap: 0;
 }
 
 .btn-liquid-metal:hover {
-    transform: translateY(-2px) scale(1.02);
+    transform: translateY(-1.5px) scale(1.02);
     box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.35),
-        0px 14px 28px -4px rgba(0, 0, 0, 0.85),
-        0px 0px 20px rgba(255, 255, 255, 0.12);
+        0px 14px 28px -6px rgba(0, 0, 0, 0.9),
+        0px 0px 18px rgba(255, 255, 255, 0.14);
 }
 
 .btn-liquid-metal:hover::before {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 45%, rgba(200, 200, 200, 0.5) 80%, rgba(255, 255, 255, 0.8) 100%);
+    opacity: 1;
+}
+
+.btn-liquid-metal:hover .liquid-inner-core {
+    color: #ffffff;
 }
 
 .btn-liquid-metal:active {
     transform: translateY(1px) scale(0.98);
+    box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.22),
+        0px 2px 6px rgba(0, 0, 0, 0.7);
 }
 
 .btn-liquid-metal:active .liquid-inner-core {
-    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.6), inset 0px 1px 2px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.7), inset 0px 1px 2px rgba(0, 0, 0, 0.45);
 }
 
 .btn-liquid-metal .liquid-ripple {
@@ -755,10 +699,21 @@ html.dark .nav-3d {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%);
     pointer-events: none;
     animation: liquidRippleAnim 0.6s ease-out forwards;
     z-index: 35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-liquid-metal .liquid-shader-layer::before {
+        animation: none;
+    }
+
+    .btn-liquid-metal:hover,
+    .btn-liquid-metal:active {
+        transform: none;
+    }
 }
 
 @keyframes liquidRippleAnim {
@@ -769,88 +724,6 @@ html.dark .nav-3d {
 
     100% {
         transform: translate(-50%, -50%) scale(5);
-        opacity: 0;
-    }
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 0.85rem;
-    box-shadow: 0 2px 10px -2px rgba(2, 132, 199, 0.40);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.01em;
-}
-
-html.dark .btn-primary {
-    background: #ffffff;
-    color: #040812;
-    font-weight: 700;
-    box-shadow: 0 4px 14px -3px rgba(255, 255, 255, 0.25);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.05);
-}
-
-.btn-primary:active {
-    transform: translateY(0) scale(0.98);
-}
-
-.btn-glass {
-    background: var(--bg-surface);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-primary);
-    font-weight: 600;
-    border-radius: 0.85rem;
-    box-shadow: var(--depth-shadow-near);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-glass:hover {
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #ffffff;
-}
-
-.btn-glass:active {
-    transform: translateY(0);
-}
-
-/* WhatsApp Submit Button */
-.btn-whatsapp {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-whatsapp:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px -4px rgba(16, 185, 129, 0.35) !important;
-}
-
-.btn-whatsapp:active {
-    transform: translateY(0) scale(0.98);
-}
-
-.btn-ripple-wave {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
-    transform: scale(0);
-    animation: btnRippleAnim 0.65s ease-out forwards;
-    pointer-events: none;
-}
-
-@keyframes btnRippleAnim {
-    to {
-        transform: scale(4.5);
         opacity: 0;
     }
 }
@@ -893,10 +766,8 @@ html.dark .btn-primary {
    13. Contact Info Cards Accents
    -------------------------------------------------------------------------- */
 .card-glow-neutral:hover,
-.card-glow-cyan:hover,
 .card-glow-blue:hover,
-.card-glow-indigo:hover,
-.card-glow-sky:hover {
+.card-glow-indigo:hover {
     border-color: rgba(255, 255, 255, 0.35) !important;
     transform: translateY(-3px);
     box-shadow: var(--depth-shadow-mid);
@@ -916,39 +787,7 @@ html.dark .btn-primary {
 }
 
 /* --------------------------------------------------------------------------
-   15. Form Inputs Focus Glow
-   -------------------------------------------------------------------------- */
-.input-3d {
-    transition: all 0.25s ease;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-primary);
-}
-
-.input-3d::placeholder {
-    color: var(--text-muted);
-}
-
-.input-3d:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12), 0 4px 14px -2px rgba(0, 0, 0, 0.5);
-    transform: translateY(-1px);
-}
-
-html.dark .input-3d {
-    background: rgba(14, 14, 18, 0.82);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: #f8fafc;
-}
-
-html.dark .input-3d:focus {
-    border-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12), 0 4px 16px -2px rgba(0, 0, 0, 0.6);
-}
-
-/* --------------------------------------------------------------------------
-   16. Scroll-Reveal Animations
+   15. Scroll-Reveal Animations
    -------------------------------------------------------------------------- */
 .reveal-3d {
     opacity: 0;
@@ -1009,15 +848,6 @@ html.dark .input-3d:focus {
         transform: scale(2.4);
         opacity: 0;
     }
-}
-
-/* --------------------------------------------------------------------------
-   18. Dark Mode Text Color Overrides for Readability
-   -------------------------------------------------------------------------- */
-html.dark .bg-slate-100\/80,
-html.dark .dark\:bg-space-900\/60 {
-    background-color: rgba(14, 14, 18, 0.75) !important;
-    border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1092,6 +922,13 @@ spline-viewer::part(canvas) {
     animation-play-state: paused;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .animate-scroll-left,
+    .animate-scroll-right {
+        animation: none;
+    }
+}
+
 /* ==========================================================================
    Circular 3D Carousel Showcase (Featured Projects)
    ========================================================================== */
@@ -1164,7 +1001,7 @@ spline-viewer::part(canvas) {
     background-attachment: fixed;
     border: var(--border-size) solid var(--backup-border) !important;
     position: relative;
-    touch-action: none;
+    touch-action: pan-y;
 }
 
 [data-glow]::before,
@@ -1179,12 +1016,10 @@ spline-viewer::part(canvas) {
     background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-    mask-clip: padding-box, border-box;
-    mask-composite: intersect;
-    -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
-    -webkit-mask-clip: padding-box, border-box;
-    -webkit-mask-composite: source-out;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
     z-index: 15;
 }
 

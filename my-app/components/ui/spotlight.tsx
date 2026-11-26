@@ -14,7 +14,7 @@ export function Spotlight({
   className,
   size = 200,
   springOptions = { bounce: 0 },
-  fill,
+  fill: _fill,
 }: SpotlightProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -50,16 +50,17 @@ export function Spotlight({
   useEffect(() => {
     if (!parentElement) return;
 
+    const handleMouseEnter = () => setIsHovered(true);
+    const handleMouseLeave = () => setIsHovered(false);
+
     parentElement.addEventListener('mousemove', handleMouseMove);
-    parentElement.addEventListener('mouseenter', () => setIsHovered(true));
-    parentElement.addEventListener('mouseleave', () => setIsHovered(false));
+    parentElement.addEventListener('mouseenter', handleMouseEnter);
+    parentElement.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       parentElement.removeEventListener('mousemove', handleMouseMove);
-      parentElement.removeEventListener('mouseenter', () => setIsHovered(true));
-      parentElement.removeEventListener('mouseleave', () =>
-        setIsHovered(false)
-      );
+      parentElement.removeEventListener('mouseenter', handleMouseEnter);
+      parentElement.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [parentElement, handleMouseMove]);
 

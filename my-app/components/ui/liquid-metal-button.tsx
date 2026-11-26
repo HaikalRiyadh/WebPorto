@@ -3,349 +3,402 @@
 import { liquidMetalFragmentShader, ShaderMount } from "@paper-design/shaders";
 import { Sparkles } from "lucide-react";
 import type React from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
-interface LiquidMetalButtonProps {
-  label?: string;
-  onClick?: () => void;
-  viewMode?: "text" | "icon";
+const MAX_ACTIVE_WEBGL_SHADERS = 4;
+let activeWebGLShaderCount = 0;
+
+interface ShaderHandle {
+  destroy?: () => void;
+  setSpeed?: (speed: number) => void;
 }
 
-export function LiquidMetalButton({
-  label = "Get Started",
-  onClick,
-  viewMode = "text",
-}: LiquidMetalButtonProps) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
-  const [ripples, setRipples] = useState<
-    Array<{ x: number; y: number; id: number }>
-  >([]);
-  const shaderRef = useRef<HTMLDivElement>(null);
-  // biome-ignore lint/suspicious/noExplicitAny: External library without types
-  const shaderMount = useRef<any>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const rippleId = useRef(0);
+export interface LiquidMetalButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
+  label?: string;
+  children?: React.ReactNode;
+  icon?: React.ReactNode;
+  viewMode?: "text" | "icon";
+  size?: "sm" | "md" | "lg" | "icon";
+  shaderMode?: "auto" | "webgl" | "css";
+  href?: string;
+  target?: string;
+  rel?: string;
+  fullWidth?: boolean;
+}
 
-  const dimensions = useMemo(() => {
-    if (viewMode === "icon") {
-      return {
-        width: 46,
-        height: 46,
-        innerWidth: 42,
-        innerHeight: 42,
-        shaderWidth: 46,
-        shaderHeight: 46,
+const SIZE_CLASSES: Record<NonNullable<LiquidMetalButtonProps["size"]>, string> = {
+  sm: "px-3.5 py-1.5 text-xs",
+  md: "px-5 py-2.5 text-sm",
+  lg: "px-6 py-3 text-sm",
+  icon: "w-[42px] h-[42px] p-0",
+};
+
+/**
+ * Animated metallic liquid border button backed by @paper-design/shaders WebGL
+ * within an active context budget, with a seamless GPU conic-gradient CSS fallback
+ * for offscreen/reduced-motion/overflow instances.
+ */
+export const LiquidMetalButton = forwardRef<HTMLButtonElement, LiquidMetalButtonProps>(
+  function LiquidMetalButton(
+    {
+      label = "Get Started",
+      children,
+      icon,
+      viewMode = "text",
+      size,
+      shaderMode = "auto",
+      href,
+      target,
+      rel,
+      fullWidth = false,
+      className,
+      disabled = false,
+      type = "button",
+      onClick,
+      onMouseEnter,
+      onMouseLeave,
+      onMouseDown,
+      onMouseUp,
+      ...rest
+    },
+    forwardedRef,
+  ) {
+    const resolvedSize: NonNullable<LiquidMetalButtonProps["size"]> =
+      size ?? (viewMode === "icon" ? "icon" : "md");
+
+    const [isHovered, setIsHovered] = useState(false);
+    const [isPressed, setIsPressed] = useState(false);
+    const [inView, setInView] = useState(true);
+    const [tabVisible, setTabVisible] = useState(true);
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+    const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([]);
+
+    const rootRef = useRef<HTMLDivElement>(null);
+    const cssLayerRef = useRef<HTMLSpanElement>(null);
+    const shaderRef = useRef<HTMLSpanElement>(null);
+    const shaderMount = useRef<ShaderHandle | null>(null);
+    const hasSlotRef = useRef(false);
+    const isHoveredRef = useRef(false);
+    const rippleId = useRef(0);
+    const timeoutsRef = useRef<Set<ReturnType<typeof setTimeout>>>(new Set());
+
+    const scheduleTimeout = (fn: () => void, delayMs: number) => {
+      const id = setTimeout(() => {
+        timeoutsRef.current.delete(id);
+        fn();
+      }, delayMs);
+      timeoutsRef.current.add(id);
+    };
+
+    useEffect(() => {
+      const currentTimeouts = timeoutsRef.current;
+      return () => {
+        currentTimeouts.forEach((id) => clearTimeout(id));
+        currentTimeouts.clear();
       };
-    } else {
-      return {
-        width: 142,
-        height: 46,
-        innerWidth: 138,
-        innerHeight: 42,
-        shaderWidth: 142,
-        shaderHeight: 46,
+    }, []);
+
+    useEffect(() => {
+      const mql = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+      if (!mql) return;
+      const syncMotion = () => setPrefersReducedMotion(mql.matches);
+      const raf = requestAnimationFrame(syncMotion);
+      mql.addEventListener("change", syncMotion);
+      return () => {
+        cancelAnimationFrame(raf);
+        mql.removeEventListener("change", syncMotion);
       };
-    }
-  }, [viewMode]);
+    }, []);
 
-  useEffect(() => {
-    const styleId = "shader-canvas-style-exploded";
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement("style");
-      style.id = styleId;
-      style.textContent = `
-        .shader-container-exploded canvas {
-          width: 100% !important;
-          height: 100% !important;
-          display: block !important;
-          position: absolute !important;
-          top: 0 !important;
-          left: 0 !important;
-          border-radius: 100px !important;
-        }
-        @keyframes ripple-animation {
-          0% {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0.6;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(4);
-            opacity: 0;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    }
+    useEffect(() => {
+      const node = rootRef.current;
+      if (!node || typeof IntersectionObserver === "undefined") return;
+      const io = new IntersectionObserver(
+        (entries) => {
+          setInView(Boolean(entries[0]?.isIntersecting));
+        },
+        { rootMargin: "120px" },
+      );
+      io.observe(node);
+      return () => io.disconnect();
+    }, []);
 
-    const loadShader = async () => {
-      try {
+    useEffect(() => {
+      const handleVisibilityChange = () => {
+        setTabVisible(document.visibilityState === "visible");
+      };
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+    }, []);
+
+    useEffect(() => {
+      const setLayerState = (isShaderLive: boolean) => {
         if (shaderRef.current) {
-          if (shaderMount.current?.destroy) {
-            shaderMount.current.destroy();
-          }
-
-          shaderMount.current = new ShaderMount(
-            shaderRef.current,
-            liquidMetalFragmentShader,
-            {
-              u_repetition: 4,
-              u_softness: 0.5,
-              u_shiftRed: 0.3,
-              u_shiftBlue: 0.3,
-              u_distortion: 0,
-              u_contour: 0,
-              u_angle: 45,
-              u_scale: 8,
-              u_shape: 1,
-              u_offsetX: 0.1,
-              u_offsetY: -0.1,
-            },
-            undefined,
-            0.6,
+          shaderRef.current.style.opacity = isShaderLive ? "1" : "0";
+        }
+        if (cssLayerRef.current) {
+          cssLayerRef.current.classList.toggle(
+            "liquid-metal-paused",
+            !inView || !tabVisible || prefersReducedMotion || isShaderLive,
           );
         }
-      } catch (error) {
-        console.error("[v0] Failed to load shader:", error);
-      }
-    };
+      };
 
-    loadShader();
-
-    return () => {
-      if (shaderMount.current?.destroy) {
-        shaderMount.current.destroy();
-        shaderMount.current = null;
-      }
-    };
-  }, []);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    shaderMount.current?.setSpeed?.(1);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setIsPressed(false);
-    shaderMount.current?.setSpeed?.(0.6);
-  };
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (shaderMount.current?.setSpeed) {
-      shaderMount.current.setSpeed(2.4);
-      setTimeout(() => {
-        if (isHovered) {
-          shaderMount.current?.setSpeed?.(1);
-        } else {
-          shaderMount.current?.setSpeed?.(0.6);
+      const releaseShader = () => {
+        if (shaderMount.current?.destroy) {
+          shaderMount.current.destroy();
+          shaderMount.current = null;
         }
-      }, 300);
-    }
+        if (hasSlotRef.current) {
+          activeWebGLShaderCount = Math.max(0, activeWebGLShaderCount - 1);
+          hasSlotRef.current = false;
+        }
+        setLayerState(false);
+      };
 
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const ripple = { x, y, id: rippleId.current++ };
+      const wantsWebGL =
+        shaderMode !== "css" &&
+        inView &&
+        tabVisible &&
+        !prefersReducedMotion &&
+        (shaderMode === "webgl" || activeWebGLShaderCount < MAX_ACTIVE_WEBGL_SHADERS);
 
-      setRipples((prev) => [...prev, ripple]);
-      setTimeout(() => {
-        setRipples((prev) => prev.filter((r) => r.id !== ripple.id));
+      if (!wantsWebGL || !shaderRef.current) {
+        releaseShader();
+        return;
+      }
+
+      if (!hasSlotRef.current) {
+        activeWebGLShaderCount += 1;
+        hasSlotRef.current = true;
+      }
+
+      try {
+        shaderMount.current = new ShaderMount(
+          shaderRef.current,
+          liquidMetalFragmentShader,
+          {
+            u_repetition: 4,
+            u_softness: 0.5,
+            u_shiftRed: 0.3,
+            u_shiftBlue: 0.3,
+            u_distortion: 0,
+            u_contour: 0,
+            u_angle: 45,
+            u_scale: 8,
+            u_shape: 1,
+            u_offsetX: 0.1,
+            u_offsetY: -0.1,
+          },
+          undefined,
+          0.6,
+        );
+        setLayerState(true);
+      } catch {
+        releaseShader();
+      }
+
+      let resizeObserver: ResizeObserver | null = null;
+      if (typeof ResizeObserver !== "undefined" && shaderRef.current) {
+        resizeObserver = new ResizeObserver(() => {
+          const mountWithResize = shaderMount.current as (ShaderHandle & {
+            handleResize?: () => void;
+          }) | null;
+          mountWithResize?.handleResize?.();
+        });
+        resizeObserver.observe(shaderRef.current);
+      }
+
+      return () => {
+        resizeObserver?.disconnect();
+        releaseShader();
+      };
+    }, [inView, tabVisible, prefersReducedMotion, shaderMode]);
+
+    const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
+      isHoveredRef.current = true;
+      setIsHovered(true);
+      shaderMount.current?.setSpeed?.(1);
+      onMouseEnter?.(e);
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+      isHoveredRef.current = false;
+      setIsHovered(false);
+      setIsPressed(false);
+      shaderMount.current?.setSpeed?.(0.6);
+      onMouseLeave?.(e);
+    };
+
+    const triggerInteraction = (clientX: number, clientY: number, rect: DOMRect) => {
+      if (disabled) return;
+      if (shaderMount.current?.setSpeed) {
+        shaderMount.current.setSpeed(2.4);
+        scheduleTimeout(() => {
+          shaderMount.current?.setSpeed?.(isHoveredRef.current ? 1 : 0.6);
+        }, 300);
+      }
+
+      const x = clientX === 0 && clientY === 0 ? rect.width / 2 : clientX - rect.left;
+      const y = clientX === 0 && clientY === 0 ? rect.height / 2 : clientY - rect.top;
+      const id = rippleId.current++;
+      setRipples((prev) => [...prev, { x, y, id }]);
+      scheduleTimeout(() => {
+        setRipples((prev) => prev.filter((r) => r.id !== id));
       }, 600);
-    }
+    };
 
-    onClick?.();
-  };
+    const contentNode =
+      children ??
+      (viewMode === "icon" ? (
+        icon ?? <Sparkles size={16} className="shrink-0 text-zinc-200" />
+      ) : (
+        <span className="inline-flex items-center gap-2 whitespace-nowrap">
+          {icon}
+          <span>{label}</span>
+        </span>
+      ));
 
-  return (
-    <div className="relative inline-block">
-      <div
-        style={{
-          perspective: "1000px",
-          perspectiveOrigin: "50% 50%",
-        }}
-      >
-        <div
+    const sharedWrapperStyle: React.CSSProperties = {
+      perspective: "1000px",
+    };
+
+    const outerPillClasses = cn(
+      "group relative inline-flex items-center justify-center rounded-full p-[2px] overflow-hidden isolate select-none transition-all duration-300",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/85 focus-visible:ring-offset-2 focus-visible:ring-offset-black",
+      disabled && "opacity-75 pointer-events-none cursor-not-allowed",
+      isPressed ? "translate-y-[1px] scale-[0.98]" : isHovered ? "-translate-y-[1.5px] scale-[1.02]" : "",
+      fullWidth && "w-full",
+      className,
+    );
+
+    const innerCoreClasses = cn(
+      "relative z-20 flex items-center justify-center gap-2 rounded-full w-full h-full font-medium transition-colors duration-200",
+      "text-zinc-200 group-hover:text-white",
+      SIZE_CLASSES[resolvedSize],
+    );
+
+    const innerElements = (
+      <>
+        {/* Pure CSS conic-gradient fallback / active ring */}
+        <span
+          ref={cssLayerRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-full overflow-hidden z-[5] liquid-metal-css-bg"
+        />
+        {/* Paper Design WebGL shader layer when slot active */}
+        <span
+          ref={shaderRef}
+          aria-hidden="true"
+          className="liquid-shader-mount pointer-events-none absolute inset-0 rounded-full overflow-hidden z-10 opacity-0 transition-opacity duration-300"
+        />
+        {/* Specular rim bevel */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 rounded-full z-[15] ring-1 ring-inset ring-white/25 group-hover:ring-white/50 transition-all duration-200"
+        />
+        {/* Dark core container */}
+        <span
+          className={innerCoreClasses}
           style={{
-            position: "relative",
-            width: `${dimensions.width}px`,
-            height: `${dimensions.height}px`,
-            transformStyle: "preserve-3d",
-            transition:
-              "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-            transform: "none",
+            background: "linear-gradient(180deg, #222222 0%, #000000 100%)",
+            boxShadow: isPressed
+              ? "inset 0px 2px 4px rgba(0, 0, 0, 0.7), inset 0px 1px 2px rgba(0, 0, 0, 0.45)"
+              : "none",
+            textShadow: "0px 1px 2px rgba(0, 0, 0, 0.85)",
           }}
         >
-          <div
+          {contentNode}
+        </span>
+        {/* Ripples */}
+        {ripples.map((ripple) => (
+          <span
+            key={ripple.id}
+            aria-hidden="true"
+            className="pointer-events-none absolute z-30 h-5 w-5 rounded-full"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "6px",
-              transformStyle: "preserve-3d",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, gap 0.4s ease",
-              transform: "translateZ(20px)",
-              zIndex: 30,
-              pointerEvents: "none",
+              left: `${ripple.x}px`,
+              top: `${ripple.y}px`,
+              background:
+                "radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%)",
+              animation: "liquid-ripple-expand 0.6s ease-out forwards",
             }}
-          >
-            {viewMode === "icon" && (
-              <Sparkles
-                size={16}
-                style={{
-                  color: "#666666",
-                  filter: "drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.5))",
-                  transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                  transform: "scale(1)",
-                }}
-              />
-            )}
-            {viewMode === "text" && (
-              <span
-                style={{
-                  fontSize: "14px",
-                  color: "#666666",
-                  fontWeight: 400,
-                  textShadow: "0px 1px 2px rgba(0, 0, 0, 0.5)",
-                  transition: "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                  transform: "scale(1)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {label}
-              </span>
-            )}
-          </div>
+          />
+        ))}
+      </>
+    );
 
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              transformStyle: "preserve-3d",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(10px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
-              zIndex: 20,
+    const resolvedRel =
+      rel ?? (target === "_blank" ? "noopener noreferrer" : undefined);
+
+    return (
+      <div
+        ref={rootRef}
+        className={cn("relative inline-flex", fullWidth && "w-full")}
+        style={sharedWrapperStyle}
+      >
+        {href ? (
+          <a
+            href={disabled ? undefined : href}
+            target={target}
+            rel={resolvedRel}
+            aria-disabled={disabled || undefined}
+            tabIndex={disabled ? -1 : rest.tabIndex}
+            aria-label={rest["aria-label"] ?? (typeof label === "string" ? label : undefined)}
+            className={outerPillClasses}
+            onMouseEnter={() => {
+              isHoveredRef.current = true;
+              setIsHovered(true);
+              shaderMount.current?.setSpeed?.(1);
             }}
-          >
-            <div
-              style={{
-                width: `${dimensions.innerWidth}px`,
-                height: `${dimensions.innerHeight}px`,
-                margin: "2px",
-                borderRadius: "100px",
-                background: "linear-gradient(180deg, #202020 0%, #000000 100%)",
-                boxShadow: isPressed
-                  ? "inset 0px 2px 4px rgba(0, 0, 0, 0.4), inset 0px 1px 2px rgba(0, 0, 0, 0.3)"
-                  : "none",
-                transition:
-                  "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
-            />
-          </div>
-
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              transformStyle: "preserve-3d",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              transform: `translateZ(0px) ${isPressed ? "translateY(1px) scale(0.98)" : "translateY(0) scale(1)"}`,
-              zIndex: 10,
+            onMouseLeave={() => {
+              isHoveredRef.current = false;
+              setIsHovered(false);
+              setIsPressed(false);
+              shaderMount.current?.setSpeed?.(0.6);
             }}
-          >
-            <div
-              style={{
-                height: `${dimensions.height}px`,
-                width: `${dimensions.width}px`,
-                borderRadius: "100px",
-                boxShadow: isPressed
-                  ? "0px 0px 0px 1px rgba(0, 0, 0, 0.5), 0px 1px 2px 0px rgba(0, 0, 0, 0.3)"
-                  : isHovered
-                    ? "0px 0px 0px 1px rgba(0, 0, 0, 0.4), 0px 12px 6px 0px rgba(0, 0, 0, 0.05), 0px 8px 5px 0px rgba(0, 0, 0, 0.1), 0px 4px 4px 0px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.2)"
-                    : "0px 0px 0px 1px rgba(0, 0, 0, 0.3), 0px 36px 14px 0px rgba(0, 0, 0, 0.02), 0px 20px 12px 0px rgba(0, 0, 0, 0.08), 0px 9px 9px 0px rgba(0, 0, 0, 0.12), 0px 2px 5px 0px rgba(0, 0, 0, 0.15)",
-                transition:
-                  "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease, box-shadow 0.15s cubic-bezier(0.4, 0, 0.2, 1)",
-                background: "rgb(0 0 0 / 0)",
-              }}
-            >
-              <div
-                ref={shaderRef}
-                className="shader-container-exploded"
-                style={{
-                  borderRadius: "100px",
-                  overflow: "hidden",
-                  position: "relative",
-                  width: `${dimensions.shaderWidth}px`,
-                  maxWidth: `${dimensions.shaderWidth}px`,
-                  height: `${dimensions.shaderHeight}px`,
-                  transition: "width 0.4s ease, height 0.4s ease",
-                }}
-              />
-            </div>
-          </div>
-
-          <button
-            ref={buttonRef}
-            onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             onMouseDown={() => setIsPressed(true)}
             onMouseUp={() => setIsPressed(false)}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: `${dimensions.width}px`,
-              height: `${dimensions.height}px`,
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              outline: "none",
-              zIndex: 40,
-              transformStyle: "preserve-3d",
-              transform: "translateZ(25px)",
-              transition:
-                "all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s ease, height 0.4s ease",
-              overflow: "hidden",
-              borderRadius: "100px",
+            onClick={(e) => {
+              if (disabled) {
+                e.preventDefault();
+                return;
+              }
+              triggerInteraction(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
+              onClick?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
             }}
-            aria-label={label}
           >
-            {ripples.map((ripple) => (
-              <span
-                key={ripple.id}
-                style={{
-                  position: "absolute",
-                  left: `${ripple.x}px`,
-                  top: `${ripple.y}px`,
-                  width: "20px",
-                  height: "20px",
-                  borderRadius: "50%",
-                  background:
-                    "radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%)",
-                  pointerEvents: "none",
-                  animation: "ripple-animation 0.6s ease-out",
-                }}
-              />
-            ))}
+            {innerElements}
+          </a>
+        ) : (
+          <button
+            ref={forwardedRef}
+            type={type}
+            disabled={disabled}
+            aria-label={rest["aria-label"] ?? (typeof label === "string" ? label : undefined)}
+            className={outerPillClasses}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onMouseDown={(e) => {
+              setIsPressed(true);
+              onMouseDown?.(e);
+            }}
+            onMouseUp={(e) => {
+              setIsPressed(false);
+              onMouseUp?.(e);
+            }}
+            onClick={(e) => {
+              triggerInteraction(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
+              onClick?.(e);
+            }}
+            {...rest}
+          >
+            {innerElements}
           </button>
-        </div>
+        )}
       </div>
-    </div>
-  );
-}
+    );
+  },
+);
