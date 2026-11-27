@@ -567,7 +567,7 @@ html.dark .nav-3d {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 9999px;
+    border-radius: inherit;
     padding: 1.5px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 45%, rgba(255, 255, 255, 0.35) 80%, rgba(255, 255, 255, 0.15) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -580,11 +580,13 @@ html.dark .nav-3d {
     z-index: 15;
 }
 
-/* Compositor-only rotating conic-gradient chrome field visible around the 2px rim */
+/* Compositor-only rotating conic-gradient chrome field visible around the outer perimeter */
 .btn-liquid-metal .liquid-shader-layer {
     position: absolute;
     inset: 0;
-    border-radius: 9999px;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
     overflow: hidden;
     pointer-events: none;
     z-index: 5;
@@ -595,28 +597,28 @@ html.dark .nav-3d {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: max(155%, 96px);
+    width: max(160%, 104px);
     aspect-ratio: 1 / 1;
     background: conic-gradient(
         from 0deg,
-        #18181b 0deg,
-        #52525b 20deg,
-        #ffffff 44deg,
+        #27272a 0deg,
+        #71717a 20deg,
+        #ffffff 42deg,
         #d4d4d8 64deg,
-        #27272a 90deg,
-        #09090b 124deg,
-        #71717a 156deg,
-        #f8fafc 182deg,
-        #a1a1aa 206deg,
-        #18181b 238deg,
-        #09090b 268deg,
+        #3f3f46 90deg,
+        #18181b 120deg,
+        #a1a1aa 152deg,
+        #ffffff 180deg,
+        #d4d4d8 206deg,
+        #27272a 236deg,
+        #18181b 266deg,
         #e4e4e7 296deg,
-        #ffffff 320deg,
-        #3f3f46 342deg,
-        #18181b 360deg
+        #ffffff 318deg,
+        #52525b 342deg,
+        #27272a 360deg
     );
     transform: translate(-50%, -50%) rotate(0deg);
-    animation: liquidConicSpin 3.8s linear infinite;
+    animation: liquidConicSpin 3.6s linear infinite;
     will-change: transform;
 }
 
@@ -636,7 +638,7 @@ html.dark .nav-3d {
 
 .btn-liquid-metal .liquid-inner-core {
     position: relative;
-    border-radius: 9999px;
+    border-radius: inherit;
     background: linear-gradient(180deg, #222222 0%, #000000 100%);
     width: 100%;
     height: 100%;
@@ -669,14 +671,55 @@ html.dark .nav-3d {
     gap: 0;
 }
 
-.btn-liquid-metal:hover {
+/* HR Brand Badge: Liquid metal acts as true outer frame without any static gray outer rim */
+.btn-liquid-metal--badge {
+    --badge-radius: 0.875rem;
+    --badge-border: 2.5px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: var(--badge-radius);
+    padding: var(--badge-border);
+    background: transparent;
+    box-shadow: 0px 8px 20px -4px rgba(0, 0, 0, 0.85);
+    flex-shrink: 0;
+}
+
+.btn-liquid-metal--badge::before {
+    content: none;
+}
+
+.btn-liquid-metal--badge .liquid-shader-layer {
+    inset: 0;
+    border-radius: var(--badge-radius);
+}
+
+.btn-liquid-metal--badge .liquid-inner-core {
+    border-radius: calc(var(--badge-radius) - var(--badge-border));
+    background: linear-gradient(180deg, #16161a 0%, #050507 100%);
+    padding: 0;
+    gap: 0;
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+}
+
+.btn-liquid-metal:hover,
+.group:hover .btn-liquid-metal--badge {
     transform: translateY(-1.5px) scale(1.02);
     box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.35),
         0px 14px 28px -6px rgba(0, 0, 0, 0.9),
         0px 0px 18px rgba(255, 255, 255, 0.14);
 }
 
-.btn-liquid-metal:hover::before {
+.group:hover .btn-liquid-metal--badge {
+    box-shadow: 0px 12px 24px -4px rgba(0, 0, 0, 0.9),
+        0px 0px 18px rgba(255, 255, 255, 0.2);
+}
+
+.btn-liquid-metal:hover::before,
+.group:hover .btn-liquid-metal--badge::before {
     opacity: 1;
 }
 
@@ -684,13 +727,15 @@ html.dark .nav-3d {
     color: #ffffff;
 }
 
-.btn-liquid-metal:active {
+.btn-liquid-metal:active,
+.group:active .btn-liquid-metal--badge {
     transform: translateY(1px) scale(0.98);
     box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.22),
         0px 2px 6px rgba(0, 0, 0, 0.7);
 }
 
-.btn-liquid-metal:active .liquid-inner-core {
+.btn-liquid-metal:active .liquid-inner-core,
+.group:active .btn-liquid-metal--badge .liquid-inner-core {
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.7), inset 0px 1px 2px rgba(0, 0, 0, 0.45);
 }
 
@@ -711,7 +756,9 @@ html.dark .nav-3d {
     }
 
     .btn-liquid-metal:hover,
-    .btn-liquid-metal:active {
+    .btn-liquid-metal:active,
+    .group:hover .btn-liquid-metal--badge,
+    .group:active .btn-liquid-metal--badge {
         transform: none;
     }
 }
