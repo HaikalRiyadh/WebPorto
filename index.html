@@ -2271,7 +2271,28 @@
             });
         })();
 
-        if (contactForm && submitBtn) {
+        if (contactForm && submitBtn && btnContent) {
+            const idleButtonMarkup = btnContent.innerHTML;
+            const preparingButtonMarkup = `
+                <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Preparing WhatsApp...</span>
+            `;
+            const readyButtonMarkup = `
+                <svg class="w-5 h-5 fill-none stroke-current" stroke-width="3" viewBox="0 0 24 24">
+                    <path class="checkmark-draw" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>Ready! Opening WhatsApp...</span>
+            `;
+
+            function buildWhatsAppUrl(name, email, message) {
+                const phoneNumber = '6285210579025';
+                const formattedMessage = `Hello Haikal, I am reaching out to you via your portfolio website:\n\n*Name:* ${name}\n*Email:* ${email}\n\n*Message:*\n${message}`;
+                return `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(formattedMessage)}`;
+            }
+
             let editedDuringSubmit = false;
             contactForm.addEventListener('input', () => {
                 editedDuringSubmit = true;
@@ -2286,44 +2307,20 @@
                 const name = document.getElementById('contact-name').value.trim();
                 const email = document.getElementById('contact-email').value.trim();
                 const message = document.getElementById('contact-message').value.trim();
-
-                const phoneNumber = '6285210579025';
-                const formattedMessage = `Hello Haikal, I am reaching out to you via your portfolio website:
-
-*Name:* ${name}
-*Email:* ${email}
-
-*Message:*
-${message}`;
-
                 const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-                const waUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(formattedMessage)}`;
+                const waUrl = buildWhatsAppUrl(name, email, message);
 
-                // Trigger new-tab open synchronously inside submit gesture on desktop to bypass popup blockers
                 if (!isMobile) {
                     window.open(waUrl, '_blank', 'noopener,noreferrer');
                 }
 
                 triggerButtonSparkles(submitBtn);
-                btnContent.innerHTML = `
-                    <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>Preparing WhatsApp...</span>
-                `;
+                btnContent.innerHTML = preparingButtonMarkup;
 
                 setTimeout(() => {
                     submitBtn.classList.add('is-success');
                     triggerButtonSparkles(submitBtn);
-
-                    btnContent.innerHTML = `
-                        <svg class="w-5 h-5 fill-none stroke-current" stroke-width="3" viewBox="0 0 24 24">
-                            <path class="checkmark-draw" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                        <span>Ready! Opening WhatsApp...</span>
-                    `;
-
+                    btnContent.innerHTML = readyButtonMarkup;
                     showToast(`Thank you, ${name}! Redirecting to WhatsApp...`);
 
                     if (isMobile) {
@@ -2335,18 +2332,11 @@ ${message}`;
                     setTimeout(() => {
                         submitBtn.classList.remove('is-success');
                         submitBtn.disabled = false;
-                        btnContent.innerHTML = `
-                            <svg id="btn-icon" class="w-4 h-4 fill-emerald-400 transition-transform duration-300" viewBox="0 0 24 24">
-                                <path
-                                    d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.275-.1-.475-.15-.675.15-.2.3-.775.98-.95 1.18-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.414-1.49-1.077-.96-1.804-2.148-2.016-2.51-.212-.363-.023-.558.128-.707.135-.134.301-.35.451-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.244-.583-.492-.504-.675-.513l-.575-.01c-.2 0-.525.075-.8.375s-1.05 1.025-1.05 2.5 1.075 2.9 1.225 3.1c.15.2 2.115 3.23 5.124 4.53 3.01 1.3 3.01.867 3.56.813.55-.054 1.78-.727 2.03-1.43.25-.703.25-1.303.175-1.43-.075-.127-.275-.202-.575-.352zm-5.419 7.426h-.004c-1.82 0-3.605-.489-5.163-1.413l-.37-.22-3.839 1.007 1.025-3.742-.242-.385a10.024 10.024 0 0 1-1.536-5.36c0-5.55 4.516-10.065 10.071-10.065 2.689 0 5.216 1.048 7.118 2.95 1.902 1.903 2.95 4.43 2.95 7.12 0 5.553-4.516 10.068-10.01 10.068zM20.52 3.449C18.243 1.171 15.213-.001 11.996 0 5.437 0 .092 5.345.09 11.906c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.742.95 3.699 1.45 5.661 1.45h.005c6.554 0 11.9-5.345 11.902-11.907 0-3.177-1.237-6.166-3.383-8.432z" />
-                            </svg>
-                            <span>Send Message via WhatsApp</span>
-                        `;
+                        btnContent.innerHTML = idleButtonMarkup;
                         if (!editedDuringSubmit) {
                             contactForm.reset();
                         }
                     }, 3500);
-
                 }, 650);
             });
         }
@@ -2856,128 +2846,152 @@ ${message}`;
                 scheduleNextBlink(900);
             }
 
+            const EYE_CANVAS_WIDTH = 1024;
+            const EYE_CANVAS_HEIGHT = 512;
+            const EYE_LUMA_THRESHOLD = 140;
+            const MIN_OPEN_EYE_PIXEL_RATIO = 0.0085;
+            const FILTER_LINEAR = 1006;
+            const FILTER_LINEAR_MIPMAP_LINEAR = 1008;
+
+            function findHeadEyeLayer(app) {
+                let head = null;
+                app._scene.traverse((obj) => {
+                    if (!head && obj.name === 'Head 2') head = obj;
+                });
+                const eyeLayer = head?.material?.layers?.[1];
+                const texture = eyeLayer?.uniforms?.f3_texture?.value;
+                return eyeLayer && texture ? { eyeLayer, texture } : null;
+            }
+
+            function extractOpenEyeMask(video) {
+                const videoWidth = video.videoWidth;
+                const videoHeight = video.videoHeight;
+                const frameCanvas = document.createElement('canvas');
+                frameCanvas.width = videoWidth;
+                frameCanvas.height = videoHeight;
+                const frameCtx = frameCanvas.getContext('2d', { willReadFrequently: true });
+                if (!frameCtx) return null;
+
+                let minY = videoHeight;
+                let maxY = 0;
+                try {
+                    frameCtx.drawImage(video, 0, 0, videoWidth, videoHeight);
+                    const imageData = frameCtx.getImageData(0, 0, videoWidth, videoHeight);
+                    const pixels = imageData.data;
+                    let brightPixelCount = 0;
+
+                    for (let i = 0; i < pixels.length; i += 4) {
+                        const luminance = Math.max(pixels[i], pixels[i + 1], pixels[i + 2]);
+                        const isBrightDot = luminance > EYE_LUMA_THRESHOLD;
+                        const channelValue = isBrightDot ? 255 : 0;
+                        pixels[i] = channelValue;
+                        pixels[i + 1] = channelValue;
+                        pixels[i + 2] = channelValue;
+                        pixels[i + 3] = 255;
+
+                        if (isBrightDot) {
+                            brightPixelCount++;
+                            const rowY = Math.floor((i / 4) / videoWidth);
+                            if (rowY < minY) minY = rowY;
+                            if (rowY > maxY) maxY = rowY;
+                        }
+                    }
+
+                    if (brightPixelCount < Math.floor(videoWidth * videoHeight * MIN_OPEN_EYE_PIXEL_RATIO)) {
+                        return null;
+                    }
+                    frameCtx.putImageData(imageData, 0, 0);
+                } catch {
+                    return null;
+                }
+
+                return {
+                    maskCanvas: frameCanvas,
+                    eyeTop: maxY > minY ? (minY / videoHeight) * EYE_CANVAS_HEIGHT : 200,
+                    eyeBottom: maxY > minY ? (maxY / videoHeight) * EYE_CANVAS_HEIGHT : 294
+                };
+            }
+
+            function buildLedEyeCanvases(maskCanvas) {
+                const masterCanvas = document.createElement('canvas');
+                masterCanvas.width = EYE_CANVAS_WIDTH;
+                masterCanvas.height = EYE_CANVAS_HEIGHT;
+                const masterCtx = masterCanvas.getContext('2d');
+                if (!masterCtx) return null;
+
+                masterCtx.fillStyle = '#000000';
+                masterCtx.fillRect(0, 0, EYE_CANVAS_WIDTH, EYE_CANVAS_HEIGHT);
+                masterCtx.globalCompositeOperation = 'lighter';
+                masterCtx.filter = 'blur(1.4px)';
+                masterCtx.drawImage(maskCanvas, 0, 0, EYE_CANVAS_WIDTH, EYE_CANVAS_HEIGHT);
+                masterCtx.filter = 'none';
+
+                const dilationOffsets = [[0, 0], [-1.6, 0], [1.6, 0], [0, -1.2], [0, 1.2]];
+                for (const [offsetX, offsetY] of dilationOffsets) {
+                    masterCtx.drawImage(maskCanvas, offsetX, offsetY, EYE_CANVAS_WIDTH, EYE_CANVAS_HEIGHT);
+                }
+                masterCtx.globalCompositeOperation = 'source-over';
+
+                const displayCanvas = document.createElement('canvas');
+                displayCanvas.width = EYE_CANVAS_WIDTH;
+                displayCanvas.height = EYE_CANVAS_HEIGHT;
+                const displayCtx = displayCanvas.getContext('2d');
+                if (!displayCtx) return null;
+                displayCtx.drawImage(masterCanvas, 0, 0);
+
+                return { masterCanvas, displayCanvas };
+            }
+
             function enhanceSplineEyes() {
                 const viewer = document.querySelector('spline-viewer');
                 const app = viewer && (viewer._spline || viewer.spline);
                 if (!app || !app._scene) return false;
 
-                let head = null;
-                app._scene.traverse((obj) => {
-                    if (!head && obj.name === 'Head 2') head = obj;
-                });
-                const eyeLayer = head && head.material && head.material.layers && head.material.layers[1];
-                const tex = eyeLayer && eyeLayer.uniforms && eyeLayer.uniforms.f3_texture && eyeLayer.uniforms.f3_texture.value;
-                if (!eyeLayer || !tex) return false;
-                if (tex.userData && tex.userData.eyeEnhanced) return true;
+                const target = findHeadEyeLayer(app);
+                if (!target) return false;
 
-                const vid = tex.image;
-                if (!vid || !vid.videoWidth || !vid.videoHeight || (vid.readyState !== undefined && vid.readyState < 2)) {
+                const { eyeLayer, texture } = target;
+                if (texture.userData?.eyeEnhanced) return true;
+
+                const video = texture.image;
+                if (!video?.videoWidth || !video?.videoHeight || (video.readyState !== undefined && video.readyState < 2)) {
                     return false;
                 }
 
-                // Threshold native video frame and require an open-eyes frame while locating eye vertical bounds
-                const vw = vid.videoWidth;
-                const vh = vid.videoHeight;
-                const tmp = document.createElement('canvas');
-                tmp.width = vw;
-                tmp.height = vh;
-                const tctx = tmp.getContext('2d', { willReadFrequently: true });
-                if (!tctx) return false;
+                const extracted = extractOpenEyeMask(video);
+                if (!extracted) return false;
 
-                let rawMinY = vh;
-                let rawMaxY = 0;
-                try {
-                    tctx.drawImage(vid, 0, 0, vw, vh);
-                    const imgData = tctx.getImageData(0, 0, vw, vh);
-                    const d = imgData.data;
-                    let brightCount = 0;
-                    for (let i = 0; i < d.length; i += 4) {
-                        const lum = Math.max(d[i], d[i + 1], d[i + 2]);
-                        if (lum > 140) {
-                            d[i] = 255;
-                            d[i + 1] = 255;
-                            d[i + 2] = 255;
-                            d[i + 3] = 255;
-                            brightCount++;
-                            const y = Math.floor((i / 4) / vw);
-                            if (y < rawMinY) rawMinY = y;
-                            if (y > rawMaxY) rawMaxY = y;
-                        } else {
-                            d[i] = 0;
-                            d[i + 1] = 0;
-                            d[i + 2] = 0;
-                            d[i + 3] = 255;
-                        }
-                    }
+                const canvases = buildLedEyeCanvases(extracted.maskCanvas);
+                if (!canvases) return false;
 
-                    const minOpenPixels = Math.floor(vw * vh * 0.0085);
-                    if (brightCount < minOpenPixels) return false;
-
-                    tctx.putImageData(imgData, 0, 0);
-                } catch {
-                    return false;
+                if (typeof video.pause === 'function') {
+                    try { video.pause(); } catch {}
                 }
 
-                // Build clean crisp white POT open-eyes master canvas (1024x512) + display canvas for blinking
-                const openCanvas = document.createElement('canvas');
-                openCanvas.width = 1024;
-                openCanvas.height = 512;
-                const oCtx = openCanvas.getContext('2d');
-                if (!oCtx) return false;
-
-                oCtx.fillStyle = '#000000';
-                oCtx.fillRect(0, 0, 1024, 512);
-                oCtx.globalCompositeOperation = 'lighter';
-                oCtx.filter = 'blur(1.4px)';
-                oCtx.drawImage(tmp, 0, 0, 1024, 512);
-                oCtx.filter = 'none';
-                const offsets = [[0, 0], [-1.6, 0], [1.6, 0], [0, -1.2], [0, 1.2]];
-                for (const [ox, oy] of offsets) {
-                    oCtx.drawImage(tmp, ox, oy, 1024, 512);
+                texture.image = canvases.displayCanvas;
+                if (texture.source) {
+                    texture.source.data = canvases.displayCanvas;
+                    texture.source.needsUpdate = true;
                 }
-                oCtx.globalCompositeOperation = 'source-over';
+                texture.isVideoTexture = false;
+                texture.update = function () {};
+                texture.generateMipmaps = true;
+                texture.minFilter = FILTER_LINEAR_MIPMAP_LINEAR;
+                texture.magFilter = FILTER_LINEAR;
+                texture.anisotropy = 8;
+                texture.userData = Object.assign({}, texture.userData, { eyeEnhanced: true, blinkOpenness: 1 });
+                texture.needsUpdate = true;
 
-                const displayCanvas = document.createElement('canvas');
-                displayCanvas.width = 1024;
-                displayCanvas.height = 512;
-                const dCtx = displayCanvas.getContext('2d');
-                if (!dCtx) return false;
-                dCtx.drawImage(openCanvas, 0, 0);
-
-                if (typeof vid.pause === 'function') {
-                    try { vid.pause(); } catch {}
-                }
-
-                tex.image = displayCanvas;
-                if (tex.source) {
-                    tex.source.data = displayCanvas;
-                    tex.source.needsUpdate = true;
-                }
-                tex.isVideoTexture = false;
-                tex.update = function () {};
-                tex.generateMipmaps = true;
-                tex.minFilter = 1008; // THREE.LinearMipmapLinearFilter
-                tex.magFilter = 1006; // THREE.LinearFilter
-                tex.anisotropy = 8;
-                tex.userData = Object.assign({}, tex.userData, { eyeEnhanced: true, blinkOpenness: 1 });
-                tex.needsUpdate = true;
-
-                if (eyeLayer.uniforms.f3_textureSize && eyeLayer.uniforms.f3_textureSize.value) {
-                    eyeLayer.uniforms.f3_textureSize.value.set(1024, 512, 1);
-                }
+                eyeLayer.uniforms.f3_textureSize?.value?.set(EYE_CANVAS_WIDTH, EYE_CANVAS_HEIGHT, 1);
                 if (eyeLayer.uniforms.f3_alpha) {
                     eyeLayer.uniforms.f3_alpha.value = 1.9;
                 }
 
-                const eyeTop = rawMaxY > rawMinY ? (rawMinY / vh) * 512 : 200;
-                const eyeBottom = rawMaxY > rawMinY ? (rawMaxY / vh) * 512 : 294;
-                startEyeBlinkController(app, tex, openCanvas, displayCanvas, eyeTop, eyeBottom);
+                startEyeBlinkController(app, texture, canvases.masterCanvas, canvases.displayCanvas, extracted.eyeTop, extracted.eyeBottom);
 
                 if (typeof app.requestRender === 'function') {
                     app.requestRender();
-                    requestAnimationFrame(() => {
-                        if (typeof app.requestRender === 'function') app.requestRender();
-                    });
+                    requestAnimationFrame(() => app.requestRender?.());
                 }
                 return true;
             }

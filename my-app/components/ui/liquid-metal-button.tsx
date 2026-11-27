@@ -9,6 +9,20 @@ import { cn } from "@/lib/utils";
 const MAX_ACTIVE_WEBGL_SHADERS = 4;
 let activeWebGLShaderCount = 0;
 
+const DEFAULT_SHADER_UNIFORMS = {
+  u_repetition: 4,
+  u_softness: 0.5,
+  u_shiftRed: 0.3,
+  u_shiftBlue: 0.3,
+  u_distortion: 0,
+  u_contour: 0,
+  u_angle: 45,
+  u_scale: 8,
+  u_shape: 1,
+  u_offsetX: 0.1,
+  u_offsetY: -0.1,
+} as const;
+
 interface ShaderHandle {
   destroy?: () => void;
   setSpeed?: (speed: number) => void;
@@ -179,19 +193,7 @@ export const LiquidMetalButton = forwardRef<HTMLButtonElement, LiquidMetalButton
         shaderMount.current = new ShaderMount(
           shaderRef.current,
           liquidMetalFragmentShader,
-          {
-            u_repetition: 4,
-            u_softness: 0.5,
-            u_shiftRed: 0.3,
-            u_shiftBlue: 0.3,
-            u_distortion: 0,
-            u_contour: 0,
-            u_angle: 45,
-            u_scale: 8,
-            u_shape: 1,
-            u_offsetX: 0.1,
-            u_offsetY: -0.1,
-          },
+          DEFAULT_SHADER_UNIFORMS,
           undefined,
           0.6,
         );
@@ -217,19 +219,38 @@ export const LiquidMetalButton = forwardRef<HTMLButtonElement, LiquidMetalButton
       };
     }, [inView, tabVisible, prefersReducedMotion, shaderMode]);
 
-    const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handlePointerEnter = (e: React.MouseEvent<HTMLElement>) => {
       isHoveredRef.current = true;
       setIsHovered(true);
       shaderMount.current?.setSpeed?.(1);
-      onMouseEnter?.(e);
+      if (!href) onMouseEnter?.(e as React.MouseEvent<HTMLButtonElement>);
     };
 
-    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handlePointerLeave = (e: React.MouseEvent<HTMLElement>) => {
       isHoveredRef.current = false;
       setIsHovered(false);
       setIsPressed(false);
       shaderMount.current?.setSpeed?.(0.6);
-      onMouseLeave?.(e);
+      if (!href) onMouseLeave?.(e as React.MouseEvent<HTMLButtonElement>);
+    };
+
+    const handlePointerDown = (e: React.MouseEvent<HTMLElement>) => {
+      setIsPressed(true);
+      if (!href) onMouseDown?.(e as React.MouseEvent<HTMLButtonElement>);
+    };
+
+    const handlePointerUp = (e: React.MouseEvent<HTMLElement>) => {
+      setIsPressed(false);
+      if (!href) onMouseUp?.(e as React.MouseEvent<HTMLButtonElement>);
+    };
+
+    const handleTriggerClick = (e: React.MouseEvent<HTMLElement>) => {
+      if (disabled) {
+        e.preventDefault();
+        return;
+      }
+      triggerInteraction(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
+      onClick?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
     };
 
     const triggerInteraction = (clientX: number, clientY: number, rect: DOMRect) => {
@@ -333,6 +354,19 @@ export const LiquidMetalButton = forwardRef<HTMLButtonElement, LiquidMetalButton
     const resolvedRel =
       rel ?? (target === "_blank" ? "noopener noreferrer" : undefined);
 
+    const sharedAccessibilityLabel =
+      rest["aria-label"] ?? (typeof label === "string" ? label : undefined);
+
+    const sharedPointerProps = {
+      className: outerPillClasses,
+      "aria-label": sharedAccessibilityLabel,
+      onMouseEnter: handlePointerEnter,
+      onMouseLeave: handlePointerLeave,
+      onMouseDown: handlePointerDown,
+      onMouseUp: handlePointerUp,
+      onClick: handleTriggerClick,
+    };
+
     return (
       <div
         ref={rootRef}
@@ -346,29 +380,7 @@ export const LiquidMetalButton = forwardRef<HTMLButtonElement, LiquidMetalButton
             rel={resolvedRel}
             aria-disabled={disabled || undefined}
             tabIndex={disabled ? -1 : rest.tabIndex}
-            aria-label={rest["aria-label"] ?? (typeof label === "string" ? label : undefined)}
-            className={outerPillClasses}
-            onMouseEnter={() => {
-              isHoveredRef.current = true;
-              setIsHovered(true);
-              shaderMount.current?.setSpeed?.(1);
-            }}
-            onMouseLeave={() => {
-              isHoveredRef.current = false;
-              setIsHovered(false);
-              setIsPressed(false);
-              shaderMount.current?.setSpeed?.(0.6);
-            }}
-            onMouseDown={() => setIsPressed(true)}
-            onMouseUp={() => setIsPressed(false)}
-            onClick={(e) => {
-              if (disabled) {
-                e.preventDefault();
-                return;
-              }
-              triggerInteraction(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
-              onClick?.(e as unknown as React.MouseEvent<HTMLButtonElement>);
-            }}
+            {...sharedPointerProps}
           >
             {innerElements}
           </a>
@@ -377,22 +389,7 @@ export const LiquidMetalButton = forwardRef<HTMLButtonElement, LiquidMetalButton
             ref={forwardedRef}
             type={type}
             disabled={disabled}
-            aria-label={rest["aria-label"] ?? (typeof label === "string" ? label : undefined)}
-            className={outerPillClasses}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onMouseDown={(e) => {
-              setIsPressed(true);
-              onMouseDown?.(e);
-            }}
-            onMouseUp={(e) => {
-              setIsPressed(false);
-              onMouseUp?.(e);
-            }}
-            onClick={(e) => {
-              triggerInteraction(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
-              onClick?.(e);
-            }}
+            {...sharedPointerProps}
             {...rest}
           >
             {innerElements}
